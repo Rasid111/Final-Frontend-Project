@@ -1,4 +1,6 @@
+import { useContext } from "react";
 import Swal from "sweetalert2";
+import { LangContext } from "../../contexts/LangContext";
 
 let initialState = {
     auth: null,

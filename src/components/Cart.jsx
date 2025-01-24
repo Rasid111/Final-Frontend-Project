@@ -42,12 +42,12 @@ function Cart() {
             <Container>
                 <Row className="mt-5 text-center">
                     <Col>
-                        <h1>You cart is empty</h1>
+                        <h1>{lang === "en" ? "You cart is empty" : "Səbətiniz boşdur"}</h1>
                     </Col>
                 </Row>
                 <Row className="justify-content-center text-center mt-5">
                     <Col xs={3}>
-                        <Button variant={colorMode === "dark" ? "light" : "dark"} className="w-100" as={Link} to="/products"><p className="h4 m-1">Go For Purchases</p></Button>
+                        <Button variant={colorMode === "dark" ? "light" : "dark"} className="w-100" as={Link} to="/products"><p className="h4 m-1">{lang === "en" ? "Go For Purchases" : "Satınalmalar üçün gedin"}</p></Button>
                     </Col>
                 </Row>
             </Container>
@@ -87,13 +87,13 @@ function Cart() {
                                     </Row>
                                     <Row>
                                         <Col className="text-center mt-4">
-                                            <p>Total: {currency === "usd" ? `${product.price * product.quantity} USD` : `${product.quantity * Math.round(product.price / rate * 100) / 100} AZN`}</p>
+                                            <p>{lang === "en" ? "Total" : "Cəmi"} {currency === "usd" ? `${product.price * product.quantity} USD` : `${product.quantity * Math.round(product.price / rate * 100) / 100} AZN`}</p>
                                         </Col>
                                     </Row>
                                 </Container>
                             </Col>
                             <Col xs={1} className="align-self-center">
-                                <Button variant="danger" onClick={() => dispatch(removeProduct(product.id))}>Remove</Button>
+                                <Button variant="danger" onClick={() => dispatch(removeProduct(product.id))}>{lang === "en" ? "Remove" : "Sil"}</Button>
                             </Col>
                         </Row>
                     ))

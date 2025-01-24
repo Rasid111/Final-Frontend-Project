@@ -1,9 +1,13 @@
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../tools/actions/accountAction";
+import { useContext } from "react";
+import { LangContext } from "../contexts/LangContext";
 
 
 function LoginPage() {
+
+    const lang = useContext(LangContext)[0];
 
     const dispatch = useDispatch();
     const accounts = useSelector((state) => state.accounts);
@@ -18,16 +22,16 @@ function LoginPage() {
                         dispatch(login({ ...userInfo }));
                     }}>
                         <Form.Group className="mb-3">
-                            <Form.Label>Email address</Form.Label>
-                            <Form.Control name="email" type="email" placeholder="Enter email" />
+                            <Form.Label>{lang === "en" ? "Email address" : "E-poçt ünvanı"}</Form.Label>
+                            <Form.Control name="email" type="email" placeholder={lang === "en" ? "Enter email" : "E-poçtu daxil edin"} />
                         </Form.Group>
 
                         <Form.Group className="mb-3">
-                            <Form.Label>Password</Form.Label>
-                            <Form.Control name="password" type="password" placeholder="Password" />
+                            <Form.Label>{lang === "en" ? "Password" : "Parol"}</Form.Label>
+                            <Form.Control name="password" type="password" placeholder={lang === "en" ? "Enter password" : "Parol daxil edin"} />
                         </Form.Group>
                         <Button variant="primary" type="submit">
-                            Login
+                            {lang === "en" ? "Login" : "Daxil ol"}
                         </Button>
                     </Form>
                 </Col>

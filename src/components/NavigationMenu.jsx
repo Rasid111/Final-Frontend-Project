@@ -26,8 +26,8 @@ function NavigationMenu() {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
-                        <Nav.Link as={Link} to="/">Home</Nav.Link>
-                        <Nav.Link as={Link} to="/products">Products</Nav.Link>
+                        <Nav.Link as={Link} to="/">{lang === "en" ? "Home" : "Əsas səhifə"}</Nav.Link>
+                        <Nav.Link as={Link} to="/products">{lang === "en" ? "Products" : "Məhsullar"}</Nav.Link>
                     </Nav>
                     <Nav>
                         <Container>
@@ -43,13 +43,13 @@ function NavigationMenu() {
                                 </Col>
                             </Row>
                         </Container>
-                        <NavDropdown title="Account">
-                            <Nav.Link as={Link} to="/register">Register</Nav.Link>
-                            <Nav.Link as={Link} to="/login">Login</Nav.Link>
-                            <Nav.Link onClick={() => dispatch(logout())}>Logout</Nav.Link>
+                        <NavDropdown title={lang === "en" ? "Account" : "Hesab"}>
+                            <Nav.Link as={Link} to="/register">{lang === "en" ? "Register" : "Qeydiyyat"}</Nav.Link>
+                            <Nav.Link as={Link} to="/login">{lang === "en" ? "Login" : "Giriş"}</Nav.Link>
+                            <Nav.Link onClick={() => dispatch(logout())}>{lang === "en" ? "Logout" : "Çıxış"}</Nav.Link>
                         </NavDropdown>
                         <Nav.Link as={Link} to="/cart">
-                            Cart
+                            {lang === "en" ? "Cart" : "Səbət"}
                         </Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
