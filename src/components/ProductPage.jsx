@@ -61,7 +61,6 @@ function ProductPage() {
                     <Container fluid className="p-0">
                         <Row sm={1} className="g-3">
                             {productInfo.reviews === undefined ? (<></>) : productInfo.reviews.map((review, index) => {
-                                console.log(review)
                                 return (
                                     <Col className="border rounded p-2" key={index}>
                                         <p className="m-0">{review.reviewerName}</p>

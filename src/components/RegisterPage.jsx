@@ -1,18 +1,17 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
-import { AccountContext } from "../contexts/AccountContext";
+import { useDispatch, useSelector } from "react-redux";
+import { createAccount } from "../tools/actions/accountAction";
 
 
 function RegisterPage() {
 
-    const [isDisabled, setIsDisabled] = useState(true);
+    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
 
-    const {
-        account,
-        setAccount,
-        login,
-        register
-    } = useContext(AccountContext);
+    const dispatch = useDispatch();
+
     return (
         <Container className="mt-5">
             <Row className="justify-content-center">
@@ -20,16 +19,16 @@ function RegisterPage() {
                     <Form onSubmit={(ev) => {
                         ev.preventDefault();
                         let userInfo = Object.fromEntries(new FormData(ev.target).entries())
-                        register(userInfo.name, userInfo.email, userInfo.password);
+                        dispatch(createAccount({ ...userInfo }));
                     }}>
                         <Form.Group className="mb-3">
                             <Form.Label>Username</Form.Label>
-                            <Form.Control name="name" type="text" placeholder="Enter username" />
+                            <Form.Control onInput={(ev) => setUsername(ev.target.value)} name="name" type="text" placeholder="Enter username" />
                         </Form.Group>
 
                         <Form.Group className="mb-3">
                             <Form.Label>Email address</Form.Label>
-                            <Form.Control name="email" type="email" placeholder="Enter email" />
+                            <Form.Control onInput={(ev) => setEmail(ev.target.value)} name="email" type="email" placeholder="Enter email" />
                             <Form.Text className="text-muted">
                                 We'll never share your email with anyone else.
                             </Form.Text>
@@ -37,9 +36,9 @@ function RegisterPage() {
 
                         <Form.Group className="mb-3">
                             <Form.Label>Password</Form.Label>
-                            <Form.Control onInput={(ev) => ev.target.value.length >= 6 ? setIsDisabled(false) : setIsDisabled(true)} name="password" type="password" placeholder="Password" />
+                            <Form.Control onInput={(ev) => setPassword(ev.target.value)} name="password" type="password" placeholder="Password" />
                         </Form.Group>
-                        <Button variant="primary" type="submit" disabled={isDisabled}>
+                        <Button variant="primary" type="submit" disabled={!(username.length > 0 && email.length > 0 && password.length >= 6)}>
                             Register
                         </Button>
                         <Form.Text className="d-block">Password must contain at least 6 characters</Form.Text>

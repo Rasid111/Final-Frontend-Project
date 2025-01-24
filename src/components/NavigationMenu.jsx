@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useDebugValue } from 'react';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
@@ -8,12 +8,16 @@ import { Container, Col, Row, Button } from 'react-bootstrap';
 import { FaLightbulb, FaRegLightbulb } from 'react-icons/fa';
 import { CurrencyContext } from '../contexts/CurrencyContext';
 import { LangContext } from '../contexts/LangContext';
+import { useDispatch } from 'react-redux';
+import { logout } from '../tools/actions/accountAction';
 
 function NavigationMenu() {
 
     const [colorMode, switchColorMode] = useContext(ColorModeContext);
     const [lang, switchLang] = useContext(LangContext);
     const { currency, switchCurrency } = useContext(CurrencyContext);
+
+    const dispatch = useDispatch();
 
     return (
         <Navbar expand="lg" className="bg-body-tertiary" style={{ height: "75px" }}>
@@ -42,6 +46,7 @@ function NavigationMenu() {
                         <NavDropdown title="Account">
                             <Nav.Link as={Link} to="/register">Register</Nav.Link>
                             <Nav.Link as={Link} to="/login">Login</Nav.Link>
+                            <Nav.Link onClick={() => dispatch(logout())}>Logout</Nav.Link>
                         </NavDropdown>
                         <Nav.Link as={Link} to="/cart">
                             Cart

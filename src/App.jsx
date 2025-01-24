@@ -6,9 +6,9 @@ import Products from "./components/Products";
 import ProductPage from "./components/ProductPage";
 import Cart from "./components/Cart";
 import RegisterPage from "./components/RegisterPage";
+import LoginPage from "./components/LoginPage";
 
 function App() {
-
   return (
     <>
       <BrowserRouter>
@@ -19,6 +19,7 @@ function App() {
           <Route path='/product/:id' element={<ProductPage></ProductPage>}></Route>
           <Route path="/cart" element={<Cart></Cart>}></Route>
           <Route path="/register" element={<RegisterPage></RegisterPage>}></Route>
+          <Route path="/login" element={<LoginPage></LoginPage>}></Route>
           <Route path="*"></Route>
         </Routes>
       </BrowserRouter>

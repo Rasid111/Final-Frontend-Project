@@ -40,7 +40,7 @@ function Home() {
                             )
                     }
                 </Col>
-                <Col className="text-center" xs={4}>
+                {/* <Col className="text-center" xs={4}>
                     <h2>{lang === "en" ? "Your Cart" : "Səbətiniz"}</h2>
                     {
                         topProducts.length === 0 ?
@@ -53,7 +53,7 @@ function Home() {
                                 <Slide products={topProducts}></Slide>
                             )
                     }
-                </Col>
+                </Col> */}
             </Row>
         </Container>
     )
