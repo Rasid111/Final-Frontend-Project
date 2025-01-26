@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../tools/actions/accountAction";
 
-function ProductCard({ className, product }) {
+function ProductCard({ className, product, cardHeight = 600 }) {
 
     const dispatch = useDispatch();
 
@@ -19,7 +19,7 @@ function ProductCard({ className, product }) {
     } = useContext(CurrencyContext);
 
     return (
-        <Card className={className} style={{ height: 600 }}>
+        <Card className={className} style={{ height: cardHeight }}>
             <Card.Img variant="top" className="h-75 object-fit-contain" src={product.thumbnail} />
             <Card.Body>
                 <Card.Title>{product.title}</Card.Title>

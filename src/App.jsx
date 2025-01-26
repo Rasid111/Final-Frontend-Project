@@ -7,6 +7,7 @@ import ProductPage from "./components/ProductPage";
 import Cart from "./components/Cart";
 import RegisterPage from "./components/RegisterPage";
 import LoginPage from "./components/LoginPage";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -20,8 +21,9 @@ function App() {
           <Route path="/cart" element={<Cart></Cart>}></Route>
           <Route path="/register" element={<RegisterPage></RegisterPage>}></Route>
           <Route path="/login" element={<LoginPage></LoginPage>}></Route>
-          <Route path="*"></Route>
+          <Route path="*" element={404}></Route>
         </Routes>
+        <Footer></Footer>
       </BrowserRouter>
     </>
   )
