@@ -76,13 +76,13 @@ function Cart() {
                                 <Container fluid>
                                     <Row className="justify-content-center text-center">
                                         <Col xs={2}>
-                                            <Button onClick={() => dispatch(decrementProductQuantity(product.id))} variant="danger" className="w-100">-1</Button>
+                                            <Button onClick={() => dispatch(decrementProductQuantity(product.id))} variant="danger" className="w-100">-</Button>
                                         </Col>
                                         <Col xs={2}>
                                             <Form.Control onInput={(ev) => dispatch(changeProductQuantity({ id: product.id, quantity: ev.target.value }))} value={product.quantity} className="w-100"></Form.Control>
                                         </Col>
                                         <Col xs={2}>
-                                            <Button onClick={() => dispatch(incrementProductQuantity(product.id))} variant="success" className="w-100">+1</Button>
+                                            <Button onClick={() => dispatch(incrementProductQuantity(product.id))} variant="success" className="w-100">+</Button>
                                         </Col>
                                     </Row>
                                     <Row>
