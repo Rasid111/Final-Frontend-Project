@@ -1,0 +1,128 @@
+$logoWidth: 102.5px;
+$iconWidth: 40px;
+$smallIconWidth: 36px;
+
+$elementBackground: #6c6cd9;
+$footerBlockBackground: #6464C6;
+$secondaryElementBackground: rgb(88, 85, 172);
+$iconBackground: #7d8bff;
+$mainBackground: #7e7ee5;
+$tertiaryColor: rgb(234, 234, 234);
+
+#navbar {
+    height: 75px;
+}
+
+.input-form {
+    color: black;
+    background-color: white;
+    border: none;
+    font-size: 30px;
+    border-radius: 12px;
+    height: 40px;
+}
+
+.input-form:focus {
+    background-color: white;
+    border: none;
+    outline: none;
+}
+
+.icon {
+    height: $iconWidth;
+}
+
+.small-icon {
+    height: $smallIconWidth;
+}
+
+.backgrounded {
+    border-radius: 30px;
+    background-color: $elementBackground;
+}
+
+body {
+    background-color: $mainBackground;
+}
+
+
+
+.custom-pagination {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.custom-pagination .swiper-pagination-bullet {
+  width: 15px;
+  height: 15px;
+  background-color: $elementBackground;
+  color: white;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 5px;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.custom-pagination .swiper-pagination-bullet-active {
+  background-color: #fff;
+  width: 40px;
+}
+
+.title {
+    >img {
+        height: 100px;
+        object-fit: contain;
+    }
+}
+
+.add-to-cart {
+    color: white;
+    border: none;
+    background-color: $elementBackground;
+}
+
+.add-to-cart:hover {
+    color: white !important;
+    background-color: $secondaryElementBackground !important;
+}
+
+.add-to-cart:active {
+    color: white !important;
+    background-color: $secondaryElementBackground !important;
+}
+
+.more {
+    color: black;
+    border-color: $elementBackground;
+    background-color: white;
+}
+
+.more:hover {
+    color: black !important;
+    border-color: $elementBackground !important;
+    background-color: $tertiaryColor !important;
+}
+
+.more:active {
+    color: black !important;
+    background-color: $tertiaryColor !important;
+}
+
+.footer {
+    background-color: $elementBackground;
+    height: 300px;
+    .btn-link {
+        color: white;
+    }
+    .btn-link:active {
+        color: $tertiaryColor;
+    }
+}
+
+.footer-block {
+    background-color: $footerBlockBackground;
+}

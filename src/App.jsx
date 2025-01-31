@@ -8,6 +8,7 @@ import Cart from "./components/Cart";
 import RegisterPage from "./components/RegisterPage";
 import LoginPage from "./components/LoginPage";
 import Footer from "./components/Footer";
+import './scss/style.scss'
 
 function App() {
   return (

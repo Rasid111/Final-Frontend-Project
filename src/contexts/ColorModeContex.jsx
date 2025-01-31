@@ -1,10 +1,10 @@
 import { createContext, useEffect, useState } from "react";
 
-export const ColorModeContext = createContext(["dark", () => {}]);
+export const ColorModeContext = createContext(["light", () => {}]);
 
 export const ColorModeProvider = ({ children }) => {
 
-    const [colorMode, setColorMode] = useState("dark");
+    const [colorMode, setColorMode] = useState("light");
 
     useEffect(() => {
         const localStorageInfo = localStorage.getItem("colorMode");
@@ -13,7 +13,7 @@ export const ColorModeProvider = ({ children }) => {
             document.querySelector("html").setAttribute("data-bs-theme", localStorageInfo)
             setColorMode(localStorageInfo);
         } else {
-            localStorage.setItem("colorMode", "dark");
+            localStorage.setItem("colorMode", "light");
         }
 
     }, [])
