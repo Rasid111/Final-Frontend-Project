@@ -19,7 +19,7 @@ function ProductCard({ className, product, cardHeight = 300 }) {
     } = useContext(CurrencyContext);
 
     return (
-        <div className="d-flex flex-column m-3 p-2 rounded-3" style={{ backgroundColor: "white" }}>
+        <div className={"d-flex flex-column m-3 p-2 rounded-3" + ` ${className}`} style={{ backgroundColor: "white" }}>
             <img className="rounded-3" src={product.thumbnail} alt="thumbnail" style={{ backgroundColor: "rgb(234, 234, 234)" }} />
             <div className="d-flex flex-wrap text-center flex-row justify-items-center">
                 <Container fluid className="my-2">

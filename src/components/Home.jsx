@@ -6,27 +6,39 @@ import Slide from "./Slider";
 import { LangContext } from "../contexts/LangContext";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination } from "swiper/modules";
+import ProductCard from "./ProductCard";
+import WOW from "wow.js";
+import "animate.css";
+import supabase from "../../utils/supabase";
 
 function Home() {
 
     const lang = useContext(LangContext)[0];
 
     const [topProducts, setTopProducts] = useState([]);
-    const [laptops, setLaptops] = useState([]);
-    const [smartphones, setSmartphones] = useState([]);
+    const [products, setProducts] = useState([]);
+
+    useEffect(() => {
+        if (typeof window !== "undefined") {
+            const wow = new WOW({
+                boxClass: "wow",
+                animateClass: "animate__animated",
+                offset: 0,
+                mobile: true,
+                live: true,
+            });
+            wow.init();
+        }
+    }, []);
 
     useEffect(() => {
         axios.get("https://dummyjson.com/products?sortBy=rating&order=desc&limit=10")
             .then((response) => {
                 setTopProducts(response.data.products);
             });
-        axios.get("https://dummyjson.com/products/category/laptops")
+        axios.get("https://dummyjson.com/products?limit=0")
             .then((response) => {
-                setLaptops(response.data.products);
-            });
-        axios.get("https://dummyjson.com/products/category/smartphones")
-            .then((response) => {
-                setSmartphones(response.data.products);
+                setProducts(response.data.products);
             });
     }, []);
 
@@ -67,7 +79,7 @@ function Home() {
                 </Row>
             </Container >
             <Container className="mt-5">
-                <Row className="justify-content-center text-center">
+                <Row className="justify-content-center text-center wow animate__fadeInLeft">
                     <Col className="title my-3">
                         <img src="./titles/title1.png" alt="title1" />
                     </Col>
@@ -87,22 +99,19 @@ function Home() {
                 </Row>
             </Container>
             <Container className="mt-5">
-                <Row className="justify-content-center text-center">
+                <Row className="justify-content-center text-center wow animate__fadeInRight">
                     <Col className="title my-3">
                         <img src="./titles/title2.png" alt="title2" />
                     </Col>
                 </Row>
-                <Row>
+                <Row xs={4} className='g-4 mt-3 wow'>
                     {
-                        [...laptops, ...smartphones].length === 0 ?
-                            (
-                                <Spinner animation="border" role="status">
-                                    <span className="visually-hidden">Loading...</span>
-                                </Spinner>
-                            ) :
-                            (
-                                <Slide products={[...laptops, ...smartphones]}></Slide>
-                            )
+                        products.length > 0 ? (
+                            products.map((product, index) =>
+                                <Col key={index}>
+                                    <ProductCard data-wow-iteration="infinite" className="border rounded wow animate__bounceInUp" product={product} />
+                                </Col>)
+                        ) : null
                     }
                 </Row>
             </Container>
