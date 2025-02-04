@@ -5,12 +5,13 @@ $smallIconWidth: 36px;
 $elementBackground: #6c6cd9;
 $footerBlockBackground: #6464C6;
 $secondaryElementBackground: rgb(88, 85, 172);
-$iconBackground: #7d8bff;
+$iconBackground: #7D8BE3;
+$iconHoveredBackground: #5D60B7;
 $mainBackground: #7e7ee5;
 $tertiaryColor: rgb(234, 234, 234);
 
 #navbar {
-    height: 75px;
+    height: 90px;
 }
 
 .input-form {
@@ -29,7 +30,15 @@ $tertiaryColor: rgb(234, 234, 234);
 }
 
 .icon {
+    border-radius: 10px;
+    background-color: $iconBackground;
     height: $iconWidth;
+    width: $iconWidth;
+    object-fit: contain; /* Сохраняет пропорции без обрезки */
+}
+
+.icon:hover {
+    background-color: $iconHoveredBackground;
 }
 
 .small-icon {
@@ -42,34 +51,32 @@ $tertiaryColor: rgb(234, 234, 234);
 }
 
 body {
-    background-color: $mainBackground;
+    background-color: white;
 }
 
-
-
 .custom-pagination {
-  text-align: center;
-  margin-top: 15px;
+    text-align: center;
+    margin-top: 15px;
 }
 
 .custom-pagination .swiper-pagination-bullet {
-  width: 15px;
-  height: 15px;
-  background-color: $elementBackground;
-  color: white;
-  font-size: 14px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 5px;
-  border-radius: 100px;
-  cursor: pointer;
-  transition: 0.3s;
+    width: 15px;
+    height: 15px;
+    background-color: $tertiaryColor;
+    color: white;
+    font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 5px;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: 0.3s;
 }
 
 .custom-pagination .swiper-pagination-bullet-active {
-  background-color: #fff;
-  width: 40px;
+    background-color: $elementBackground;
+    width: 40px;
 }
 
 .title {
@@ -83,6 +90,8 @@ body {
     color: white;
     border: none;
     background-color: $elementBackground;
+    font-weight: 500;
+    font-size: large;
 }
 
 .add-to-cart:hover {
@@ -97,8 +106,10 @@ body {
 
 .more {
     color: black;
-    border-color: $elementBackground;
-    background-color: white;
+    border: none;
+    background-color: $tertiaryColor;
+    font-weight: 500;
+    font-size: large;
 }
 
 .more:hover {
@@ -115,14 +126,35 @@ body {
 .footer {
     background-color: $elementBackground;
     height: 300px;
+
     .btn-link {
-        color: white;
+        color: black
     }
+
     .btn-link:active {
-        color: $tertiaryColor;
+        color: $footerBlockBackground;
     }
 }
 
 .footer-block {
-    background-color: $footerBlockBackground;
+    background-color: white;
+    color: $footerBlockBackground;
+}
+
+.zoom-image {
+    transition: transform 0.3s;
+}
+
+.zoom-image:hover {
+    transform: scale(1.1);
+}
+
+.cards-section {
+    background-color: $tertiaryColor;
+    border-radius: 50px;
+}
+
+.product-card {
+    font-weight: 700;
+    font-size: large;
 }

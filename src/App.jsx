@@ -15,11 +15,28 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <NavigationMenu></NavigationMenu>
         <Routes>
-          <Route path="/" element={<Home></Home>}></Route>
-          <Route path="/products" element={<Products></Products>}></Route>
-          <Route path='/product/:id' element={<ProductPage></ProductPage>}></Route>
+          <Route path="/" element={
+            <>
+              <NavigationMenu></NavigationMenu>
+              <Home></Home>
+            </>
+          }>
+          </Route>
+          <Route path="/products" element={
+            <>
+              <NavigationMenu></NavigationMenu>
+              <Products></Products>
+            </>
+          }>
+          </Route>
+          <Route path='/product/:id' element={
+            <>
+              <NavigationMenu></NavigationMenu>
+              <ProductPage></ProductPage>
+            </>
+          }>
+          </Route>
           <Route path="/cart" element={<Cart></Cart>}></Route>
           <Route path="/register" element={<RegisterPage></RegisterPage>}></Route>
           <Route path="/login" element={<LoginPage></LoginPage>}></Route>

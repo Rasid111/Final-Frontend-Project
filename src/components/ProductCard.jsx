@@ -19,25 +19,30 @@ function ProductCard({ className, product, cardHeight = 300 }) {
     } = useContext(CurrencyContext);
 
     return (
-        <div className={"d-flex flex-column m-3 p-2 rounded-3" + ` ${className}`} style={{ backgroundColor: "white" }}>
+        <div className={"product-card d-flex flex-column m-3 p-2 rounded-3" + ` ${className}`} style={{ backgroundColor: "white" }}>
             <img className="rounded-3" src={product.thumbnail} alt="thumbnail" style={{ backgroundColor: "rgb(234, 234, 234)" }} />
             <div className="d-flex flex-wrap text-center flex-row justify-items-center">
-                <Container fluid className="my-2">
-                    <Row className="align-items-center justify-content-between h-100">
-                        <Col className="px-0 rounded-3 h-100 text-center" style={{ backgroundColor: "rgb(234, 234, 234)" }} xs={6}>
-                            <span>
-                                {currency === "usd" ?
-                                    `${product.price} USD` :
-                                    `${Math.round(product.price / rate * 100) / 100} AZN`
-                                }</span>
+                <Container fluid className="my-2 px-0">
+                    <Row className="align-items-center justify-content-between h-100 g-1">
+                        <Col xs={7}>
+                            <div className="py-2 rounded-3 h-100 text-center" style={{ backgroundColor: "rgb(234, 234, 234)" }}>
+                                <span className="text-truncate">
+                                    {currency === "usd" ?
+                                        `${product.price} USD` :
+                                        `${Math.round(product.price / rate * 100) / 100} AZN`
+                                    }
+                                </span>
+                            </div>
                         </Col>
-                        <Col className="px-0 rounded-3 h-100 text-center d-flex align-items-center justify-content-center" style={{ backgroundColor: "rgb(234, 234, 234)" }} xs={5}>
-                            <img src="./icons/star.png" alt="star" className="object-fit-contain" style={{ width: 18 }} />
-                            <span>{`${product.rating} / 5`}</span>
+                        <Col xs={5}>
+                            <div className="py-2 rounded-3 h-100 text-center d-flex align-items-center justify-content-center" style={{ backgroundColor: "rgb(234, 234, 234)" }}>
+                                <img src="./icons/star.png" alt="star" className="object-fit-contain" style={{ width: 18 }} />
+                                <span>{`${product.rating} / 5`}</span>
+                            </div>
                         </Col>
                     </Row>
                 </Container>
-                <div className="d-flex justify-content-center mb-2 aling-items-center w-100" style={{ height: 40 }}>
+                <div className="d-flex justify-content-center mb-2 align-items-center w-100" style={{ height: 40 }}>
                     <span className="d-block align-middle lh-sm">{product.title}</span>
                 </div>
                 <Container fluid className="p-0">

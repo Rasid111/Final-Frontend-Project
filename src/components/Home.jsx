@@ -36,7 +36,7 @@ function Home() {
             .then((response) => {
                 setTopProducts(response.data.products);
             });
-        axios.get("https://dummyjson.com/products?limit=0")
+        axios.get("https://dummyjson.com/products?limit=8")
             .then((response) => {
                 setProducts(response.data.products);
             });
@@ -113,6 +113,20 @@ function Home() {
                                 </Col>)
                         ) : null
                     }
+                </Row>
+            </Container>
+            <Container className="mt-5 cards-section">
+                <Row className="g-5 pb-2">
+                    <Col xs={6} className="mt-2">
+                        <div onClick={() => {}} className="overflow-hidden" style={{backgroundColor: "#6464C6", borderRadius: 50, border: "5px solid white", cursor: "pointer"}}>
+                            <img className="zoom-image w-100 object-fit-contain" src="/banners/homeproducts.png" alt="homeproducts" />
+                        </div>
+                    </Col>
+                    <Col xs={6} className="mt-2">
+                        <div onClick={() => {}} className="overflow-hidden" style={{backgroundColor: "white", borderRadius: 50, border: "5px solid #6464C6", cursor: "pointer"}}>
+                            <img className="zoom-image w-100 object-fit-contain" src="/banners/gamingproducts.png" alt="gamingproducts" />
+                        </div>
+                    </Col>
                 </Row>
             </Container>
         </>

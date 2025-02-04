@@ -22,7 +22,6 @@ function NavigationMenu() {
     const dispatch = useDispatch();
 
     return (
-
         <Container id='navbar' className='my-5 ps-0'>
             <Row className='d-flex h-100 justify-content-between'>
                 <Col className='h-100' xs={"auto"}>
@@ -37,9 +36,21 @@ function NavigationMenu() {
                             <Col xs={10}>
                                 <input type="text" className='input-form w-100 h-100' />
                             </Col>
-                            <Col className="h-100" xs={"auto"}><Link><img className='icon' src="/icons/shipping.png" alt="shipping" /></Link></Col>
-                            <Col className="h-100" xs={"auto"}><Link><img className='icon' src="/icons/cart.png" alt="cart" /></Link></Col>
-                            <Col className="h-100" xs={"auto"}><Link><img className='icon' src="/icons/profile.png" alt="profile" /></Link></Col>
+                            <Col className="h-100" xs={"auto"}>
+                                <Link>
+                                    <img className="icon p-1" src="/icons/shipping.png" alt="shipping" />
+                                </Link>
+                            </Col>
+                            <Col className="h-100" xs={"auto"}>
+                                <Link>
+                                    <img className="icon p-1" src="/icons/cart.png" alt="cart" />
+                                </Link>
+                            </Col>
+                            <Col className="h-100" xs={"auto"}>
+                                <Link to={"/login"}>
+                                    <img className="icon p-1" src="/icons/profile.png" alt="profile" />
+                                </Link>
+                            </Col>
                         </Row>
                     </Container>
                 </Col>
