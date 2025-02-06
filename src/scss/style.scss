@@ -34,7 +34,8 @@ $tertiaryColor: rgb(234, 234, 234);
     background-color: $iconBackground;
     height: $iconWidth;
     width: $iconWidth;
-    object-fit: contain; /* Сохраняет пропорции без обрезки */
+    object-fit: contain;
+    /* Сохраняет пропорции без обрезки */
 }
 
 .icon:hover {
@@ -157,4 +158,158 @@ body {
 .product-card {
     font-weight: 700;
     font-size: large;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 2px 1px rgba(255, 0, 0, 0.7);
+    }
+
+    50% {
+        box-shadow: 0 0 4px 2px rgba(255, 0, 0, 0.5);
+    }
+
+    100% {
+        box-shadow: 0 0 2px 1px rgba(255, 0, 0, 0.7);
+    }
+}
+
+
+#laptop {
+    .red-dot {
+        position: absolute;
+        transform: translate(-50%, -50%);
+        top: 14%;
+        left: 44%;
+        width: 0.9%;
+        height: 1.5%;
+        background-color: red;
+        border-radius: 50%;
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    }
+}
+
+#laptop:hover {
+    .red-dot {
+        opacity: 1;
+        animation: pulse 1.5s infinite;
+    }
+}
+
+.categories {
+    background-color: $elementBackground;
+}
+
+.zoom-category-image {
+    img {
+        transition: transform 0.3s;
+    }
+}
+
+.zoom-category-image:hover {
+    img {
+        transform: scale(1.1);
+    }
+}
+
+@keyframes forWomen {
+    0% {
+        transform: translate(-200%, -50%);
+    }
+
+    25% {
+        transform: translate(-50%, -50%) rotate(-20deg);
+    }
+
+    75% {
+        transform: translate(-50%, -50%) rotate(-20deg);
+    }
+
+    100% {
+        transform: translate(-50%, -50%);
+    }
+}
+
+@keyframes forMen {
+    0% {
+        transform: translate(-200%, -200%) rotate(-45deg);
+    }
+
+    50% {
+        transform: translate(200%, 200%) rotate(-45deg);
+    }
+
+    51% {
+        transform: translate(-50%, -400%);
+    }
+
+    100% {
+        transform: translate(-50%, -50%);
+    }
+}
+
+@keyframes forKids {
+    0% {
+        transform: translate(-50%, -500%);
+    }
+
+    50% {
+        transform: translate(-50%, -35%) scale(1, 0.85);
+    }
+
+    75%{
+        transform: translate(-50%, -35%) scale(1, 0.85);
+    }
+
+    100% {
+        transform: translate(-50%, -50%);
+    }
+}
+
+.for {
+    >a {
+        >div {
+            aspect-ratio: 1 / 1;
+            background-color: #fff;
+
+            >img {
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 80%;
+                height: 80%;
+            }
+        }
+    }
+}
+
+#forWomen {
+    >a {
+        >div:hover {
+            >img {
+                animation: forWomen 0.6s;
+            }
+        }
+    }
+}
+
+#forMen {
+    >a {
+        >div:hover {
+            >img {
+                animation: forMen 0.8s;
+            }
+        }
+    }
+}
+
+#forKids {
+    >a {
+        >div:hover {
+            >img {
+                animation: forKids 0.6s;
+            }
+        }
+    }
 }
