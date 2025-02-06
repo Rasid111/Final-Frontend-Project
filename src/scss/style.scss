@@ -215,15 +215,15 @@ body {
 
 @keyframes forWomen {
     0% {
-        transform: translate(-200%, -50%);
+        transform: translate(-100%, -50%);
     }
 
     25% {
-        transform: translate(-50%, -50%) rotate(-20deg);
+        transform: translate(-25%, -50%) rotate(-20deg) skew(5deg, 0deg);
     }
 
     75% {
-        transform: translate(-50%, -50%) rotate(-20deg);
+        transform: translate(-25%, -50%) rotate(-20deg) skew(5deg, 0deg);
     }
 
     100% {
@@ -233,15 +233,15 @@ body {
 
 @keyframes forMen {
     0% {
-        transform: translate(-200%, -200%) rotate(-45deg);
+        transform: translate(-200%, -200%) rotate(-45deg) scale(1, 1.5);
     }
 
     50% {
-        transform: translate(200%, 200%) rotate(-45deg);
+        transform: translate(200%, 200%) rotate(-45deg) scale(1, 1.5);
     }
 
     51% {
-        transform: translate(-50%, -400%);
+        transform: translate(-50%, -400%) scale(1, 1.5);
     }
 
     100% {
@@ -251,15 +251,19 @@ body {
 
 @keyframes forKids {
     0% {
-        transform: translate(-50%, -500%);
+        transform: translate(-50%, -200%);
     }
 
     50% {
-        transform: translate(-50%, -35%) scale(1, 0.85);
+        transform: translate(-50%, -30%) scale(1, 0.75);
     }
 
-    75%{
-        transform: translate(-50%, -35%) scale(1, 0.85);
+    60% {
+        transform: translate(-50%, -50%) scale(1, 0.9);
+    }
+
+    75% {
+        transform: translate(-50%, -60%);
     }
 
     100% {
@@ -308,7 +312,7 @@ body {
     >a {
         >div:hover {
             >img {
-                animation: forKids 0.6s;
+                animation: forKids 0.5s;
             }
         }
     }
