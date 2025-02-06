@@ -1,6 +1,6 @@
 import { Button, Col, Container, Row, Spinner } from "react-bootstrap";
 import 'swiper/css';
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import axios from "axios";
 import Slide from "./Slider";
 import { LangContext } from "../contexts/LangContext";
@@ -41,6 +41,22 @@ function Home() {
             .then((response) => {
                 setProducts(response.data.products);
             });
+    }, []);
+
+    const [isVisible, setIsVisible] = useState(false);
+    const carRef = useRef(null);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setIsVisible(true);
+                    observer.disconnect();
+                }
+            },
+            { threshold: 0.5 }
+        );
+        observer.observe(carRef.current);
     }, []);
 
     return (
@@ -186,7 +202,7 @@ function Home() {
                 </Row>
             </Container>
             <Container className="categories my-5" fluid>
-                <Row className="justify-content-center text-center pt-3 gx-5" style={{color: "#fff"}}>
+                <Row className="justify-content-center text-center pt-3" style={{ color: "#fff" }}>
                     <Col xs={2}>
                         <h3>for women.</h3>
                     </Col>
@@ -197,7 +213,7 @@ function Home() {
                         <h3>for kids.</h3>
                     </Col>
                 </Row>
-                <Row className="justify-content-center text-center pb-3 g-5">
+                <Row className="justify-content-center text-center pb-3">
                     <Col className="for" xs={2} id="forWomen">
                         <Link className="d-block w-100 h-100">
                             <div className="w-100 h-100 rounded-circle p-5 overflow-hidden position-relative">
@@ -221,58 +237,17 @@ function Home() {
                     </Col>
                 </Row>
             </Container>
+            <Container fluid className="fluid-section">
+                <Row>
+                    <Col xs={4} ref={carRef} className="position-relative ps-0" style={{ height: 250 }}>
+                        <img id="car" className={`${isVisible ? "scrolled " : ""}position-absolute object-fit-cover`} src="/animation_elements/car.png" alt="car" />
+                    </Col>
+                    <Col xs={8} className="align-self-center">
+                        <h1 className="text-white" style={{fontFamily:"Century Gothic", fontSize: 75}}>Explore available vehicles</h1>
+                    </Col>
+                </Row>
+            </Container>
         </>
-        // <Container>
-        //     <Row className="mt-5">
-        //         <Col>
-        //             <h1 className="text-center">{lang === "en" ? "Welcome to RStore!" : "RStore-a xoş gəlmisiniz!"}</h1>
-        //         </Col>
-        //     </Row>
-        //     <Row className="mt-5 justify-content-center g-5">
-        //         <Col className="text-center" xs={12}>
-        //             <h2 className="mb-5">{lang === "en" ? "Most Popular" : "Ən Populyar"}</h2>
-        //             {
-        //                 topProducts.length === 0 ?
-        //                     (
-        //                         <Spinner animation="border" role="status">
-        //                             <span className="visually-hidden">Loading...</span>
-        //                         </Spinner>
-        //                     ) :
-        //                     (
-        //                         <Slide products={topProducts}></Slide>
-        //                     )
-        //             }
-        //         </Col>
-        //         <Col className="text-center" xs={6}>
-        //             <h2 className="mb-5">{lang === "en" ? "The Best Laptop Solutions" : "Ən yaxşı noutbuk həlləri"}</h2>
-        //             {
-        //                 topProducts.length === 0 ?
-        //                     (
-        //                         <Spinner animation="border" role="status">
-        //                             <span className="visually-hidden">Loading...</span>
-        //                         </Spinner>
-        //                     ) :
-        //                     (
-        //                         <Slide slidesPerView={2} products={laptops}></Slide>
-        //                     )
-        //             }
-        //         </Col>
-        //         <Col className="text-center" xs={6}>
-        //             <h2 className="mb-5">{lang === "en" ? "Smarthpones To Be Always Online" : "Həmişə onlayn olmağınız üçün smartfonlar"}</h2>
-        //             {
-        //                 topProducts.length === 0 ?
-        //                     (
-        //                         <Spinner animation="border" role="status">
-        //                             <span className="visually-hidden">Loading...</span>
-        //                         </Spinner>
-        //                     ) :
-        //                     (
-        //                         <Slide slidesPerView={2} products={smartphones}></Slide>
-        //                     )
-        //             }
-        //         </Col>
-        //     </Row>
-        // </Container>
     )
 }
 
