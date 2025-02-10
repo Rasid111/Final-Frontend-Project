@@ -83,8 +83,7 @@ function NavigationMenu() {
                 </Row>
                 <Row className='justify-content-end text-center'>
                     <Col xs={2}>
-                        <div className='d-flex g-0 justify-content-end pe-2'>
-                            <div className='p-1'><Button className='p-0' variant="link"><img className='small-icon' src="/icons/az.png" alt="az" /></Button></div>
+                        <div className='d-flex g-0 justify-content-end pe-4'>
                             <div className='p-1'><Button className='p-0' variant="link"><img className='small-icon' src="/icons/location.png" alt="location" /></Button></div>
                             <div className='p-1'><Button className='p-0' variant="link"><img className='small-icon' src="/icons/dollar.png" alt="dollar" /></Button></div>
                         </div>

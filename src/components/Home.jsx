@@ -18,6 +18,8 @@ function Home() {
 
     const [topProducts, setTopProducts] = useState([]);
     const [products, setProducts] = useState([]);
+    const [cars, setCars] = useState([]);
+    const [motorcycles, setMotorcycles] = useState([]);
 
     useEffect(() => {
         if (typeof window !== "undefined") {
@@ -41,6 +43,14 @@ function Home() {
             .then((response) => {
                 setProducts(response.data.products);
             });
+        axios.get("https://dummyjson.com/products/category/vehicle?limit=4")
+            .then((response) => {
+                setCars(response.data.products);
+            });
+        axios.get("https://dummyjson.com/products/category/motorcycle?limit=4")
+            .then((response) => {
+                setMotorcycles(response.data.products);
+            });
     }, []);
 
     const [isVisible, setIsVisible] = useState(false);
@@ -58,6 +68,16 @@ function Home() {
         );
         observer.observe(carRef.current);
     }, []);
+
+    useEffect(() => {
+        document.getElementById("smartphone").querySelectorAll("img").forEach((img, index) => {
+            if (index !== 1)
+                img.addEventListener("animationcancel", (ev) => {
+                    console.log("sometimes works. idk");
+                    ev.target.classList.toggle("opacity-0");
+                });
+        });
+    });
 
     return (
         <>
@@ -115,7 +135,7 @@ function Home() {
                     }
                 </Row>
             </Container>
-            <Container className="categories mb-5" fluid>
+            <Container className="fluid-section mb-5" fluid>
                 <Row className="justify-content-center text-center">
                     <Col className="title mt-5">
                         <img src="./titles/categories.png" alt="categories" />
@@ -124,36 +144,40 @@ function Home() {
                 <Row className="justify-content-center">
                     <Col style={{ maxWidth: "12.5%" }}>
                         <div className="w-100 my-3 mb-5 rounded-circle" style={{ backgroundColor: "#fff", aspectRatio: "1 / 1" }}>
-                            <Link className="zoom-category-image d-flex rounded-circle justify-content-center w-100 h-100 align-items-center" style={{ backgroundColor: "#fff" }}>
-                                <img className="object-fit-contain" style={{ width: "62.5%", height: "62.5%" }} src="/icons/categories/smartphone.png" alt="smartphone" />
+                            <Link id="smartphone" className="overflow-hidden d-flex position-relative rounded-circle justify-content-center w-100 h-100 align-items-center" style={{ backgroundColor: "#fff" }}>
+                                <img onAnimationStart={(ev) => ev.target.classList.toggle("opacity-0")} onAnimationEnd={(ev) => ev.target.classList.toggle("opacity-0")} className="opacity-0 object-fit-contain position-absolute" style={{ width: "5%" }} src="/animation_elements/smartphonebar.png" alt="smartphone" />
+                                <img className="object-fit-contain position-absolute" style={{ width: "62.5%", height: "62.5%" }} src="/icons/categories/smartphone.png" alt="smartphone" />
+                                <img onAnimationStart={(ev) => ev.target.classList.toggle("opacity-0")} onAnimationEnd={(ev) => ev.target.classList.toggle("opacity-0")} className="opacity-0 object-fit-contain position-absolute" style={{ width: "5%" }} src="/animation_elements/smartphonebar.png" alt="smartphone" />
                             </Link>
                         </div>
                     </Col>
                     <Col style={{ maxWidth: "12.5%" }}>
                         <div className="w-100 my-3 mb-5 rounded-circle" style={{ backgroundColor: "#fff", aspectRatio: "1 / 1" }}>
-                            <Link className="zoom-category-image d-flex rounded-circle justify-content-center w-100 h-100 align-items-center" style={{ backgroundColor: "#fff" }}>
-                                <img className="object-fit-contain" style={{ width: "62.5%", height: "62.5%" }} src="/icons/categories/sport.png" alt="sport" />
+                            <Link id="sport" className="overflow-hidden d-flex position-relative rounded-circle justify-content-center w-100 h-100 align-items-center" style={{ backgroundColor: "#fff" }}>
+                                <img className="object-fit-contain position-absolute" style={{ width: "62.5%", height: "62.5%" }} src="/icons/categories/sport.png" alt="sport" />
                             </Link>
                         </div>
                     </Col>
                     <Col style={{ maxWidth: "12.5%" }}>
                         <div className="w-100 my-3 mb-5 rounded-circle" style={{ backgroundColor: "#fff", aspectRatio: "1 / 1" }}>
-                            <Link className="zoom-category-image d-flex rounded-circle justify-content-center w-100 h-100 align-items-center" style={{ backgroundColor: "#fff" }}>
-                                <img className="object-fit-contain" style={{ width: "62.5%", height: "62.5%" }} src="/icons/categories/grocery.png" alt="grocery" />
+                            <Link id="grocery" className="overflow-hidden d-flex position-relative rounded-circle justify-content-center w-100 h-100 align-items-center" style={{ backgroundColor: "#fff" }}>
+                                <img className="object-fit-contain position-absolute" style={{ width: "62.5%", height: "62.5%" }} src="/icons/categories/grocery.png" alt="grocery" />
                             </Link>
                         </div>
                     </Col>
                     <Col style={{ maxWidth: "12.5%" }}>
                         <div className="w-100 my-3 mb-5 rounded-circle" style={{ backgroundColor: "#fff", aspectRatio: "1 / 1" }}>
-                            <Link className="zoom-category-image d-flex rounded-circle justify-content-center w-100 h-100 align-items-center" style={{ backgroundColor: "#fff" }}>
-                                <img className="object-fit-contain" style={{ width: "62.5%", height: "62.5%" }} src="/icons/categories/beauty.png" alt="beauty" />
+                            <Link id="beauty" className="overflow-hidden d-flex position-relative rounded-circle justify-content-center w-100 h-100 align-items-center" style={{ backgroundColor: "#fff" }}>
+                                <img className="object-fit-contain position-absolute" src="/animation_elements/beauty1.png" alt="beauty1" />
+                                <img className="object-fit-contain position-absolute" src="/animation_elements/beauty2.png" alt="beauty2" />
+                                <img className="object-fit-contain position-absolute" src="/animation_elements/beauty3.png" alt="beauty3" />
                             </Link>
                         </div>
                     </Col>
                     <Col style={{ maxWidth: "12.5%" }}>
                         <div className="w-100 my-3 mb-5 rounded-circle" style={{ backgroundColor: "#fff", aspectRatio: "1 / 1" }}>
-                            <Link className="zoom-category-image d-flex rounded-circle justify-content-center w-100 h-100 align-items-center" style={{ backgroundColor: "#fff" }}>
-                                <img className="object-fit-contain" style={{ width: "62.5%", height: "62.5%" }} src="/icons/categories/kitchen.png" alt="kitchen" />
+                            <Link id="kitchen" className="overflow-hidden d-flex position-relative rounded-circle justify-content-center w-100 h-100 align-items-center" style={{ backgroundColor: "#fff" }}>
+                                <img className="object-fit-contain position-absolute" style={{ width: "62.5%", height: "62.5%" }} src="/icons/categories/kitchen.png" alt="kitchen" />
                             </Link>
                         </div>
                     </Col>
@@ -170,30 +194,30 @@ function Home() {
                         products.length > 0 ? (
                             products.map((product, index) =>
                                 <Col key={index}>
-                                    <ProductCard data-wow-iteration="infinite" className="border rounded wow animate__bounceInUp" product={product} />
+                                    <ProductCard data-wow-iteration="infinite" className="wow animate__bounceInUp" product={product} />
                                 </Col>)
                         ) : null
                     }
                 </Row>
             </Container>
             <Container className="mt-5 cards-section">
-                <Row className="mt-5 g-5 pb-2">
-                    <Col xs={6} className="mt-2">
+                <Row className="g-3 pb-4">
+                    <Col xs={6} className="">
                         <div onClick={() => { }} className="overflow-hidden" style={{ backgroundColor: "#6464C6", borderRadius: 50, border: "5px solid white", cursor: "pointer" }}>
                             <img className="zoom-image w-100 object-fit-contain" src="/banners/homeproducts.png" alt="homeproducts" />
                         </div>
                     </Col>
-                    <Col xs={6} className="mt-2">
-                        <div onClick={() => { }} className="overflow-hidden" style={{ backgroundColor: "white", borderRadius: 50, border: "5px solid #6464C6", cursor: "pointer" }}>
+                    <Col xs={6} className="">
+                        <div onClick={() => { }} className="overflow-hidden" style={{ backgroundColor: "#fff", borderRadius: 50, border: "5px solid #6464C6", cursor: "pointer" }}>
                             <img className="zoom-image w-100 object-fit-contain" src="/banners/gamingproducts.png" alt="gamingproducts" />
                         </div>
                     </Col>
-                    <Col xs={6} className="mt-2">
-                        <div onClick={() => { }} className="overflow-hidden" style={{ backgroundColor: "#6464C6", borderRadius: 50, border: "5px solid white", cursor: "pointer" }}>
-                            <img className="zoom-image w-100 object-fit-contain" src="/banners/homeproducts.png" alt="homeproducts" />
+                    <Col xs={6} className="">
+                        <div onClick={() => { }} className="overflow-hidden p-4" style={{ backgroundColor: "#fff", borderRadius: 50, border: "5px solid white", cursor: "pointer" }}>
+                            <img className="zoom-image w-100 object-fit-contain" src="/banners/toys.png" alt="homeproducts" />
                         </div>
                     </Col>
-                    <Col xs={6} id="laptop" className="mt-2 position-relative">
+                    <Col xs={6} id="laptop" className="position-relative">
                         <div onClick={() => { }} className="overflow-hidden" style={{ backgroundColor: "white", borderRadius: 50, border: "5px solid #6464C6", cursor: "pointer" }}>
                             <img className="w-100 object-fit-contain" src="/banners/laptops.png" alt="laptop" />
                         </div>
@@ -201,7 +225,53 @@ function Home() {
                     </Col>
                 </Row>
             </Container>
-            <Container className="categories my-5" fluid>
+            <Container className="px-0">
+                <Row className="g-0 text-center">
+                    <Col xs={6} style={{ backgroundColor: "#6464C6", color: "#6464C6" }}>
+                        <div style={{ backgroundColor: "#EAEAEA", borderBottomLeftRadius: 50, borderBottomRightRadius: 50, fontFamily: "Arial Rounded MT Bold", fontSize: 70 }}>
+                            top selling from
+                        </div>
+                    </Col>
+                    <Col xs={6} style={{ backgroundColor: "#EAEAEA", color: "#EAEAEA" }}>
+                        <div style={{ backgroundColor: "#6464C6", borderTopLeftRadius: 50, borderTopRightRadius: 50, fontFamily: "Arial Rounded MT Bold", fontSize: 70 }}>
+                            this categories
+                        </div>
+                    </Col>
+                </Row>
+                <Row className="g-0 rounded-bottom-4" xs={5} style={{ backgroundColor: "#6464C6" }}>
+                    {
+                        products.length > 0 ? (
+                            products.slice(0, 5).map((product, index) =>
+                                <Col key={index}>
+                                    <ProductCard data-wow-iteration="infinite" className="wow animate__bounceInUp" product={product} />
+                                </Col>)
+                        ) : null
+                    }
+                </Row>
+            </Container>
+            <Container fluid className="fluid-section my-5">
+                <Row>
+                    <Col xs={4} ref={carRef} className="position-relative ps-0" style={{ height: 250 }}>
+                        <img id="car" className={`${isVisible ? "scrolled " : ""}position-absolute object-fit-cover`} src="/animation_elements/car.png" alt="car" />
+                    </Col>
+                    <Col xs={8} className="align-self-center">
+                        <h1 className="text-white" style={{ fontFamily: "Century Gothic", fontSize: 75 }}>Explore available vehicles</h1>
+                    </Col>
+                </Row>
+            </Container>
+            <Container>
+                <Row xs={4}>
+                    {
+                        cars.length > 0 && motorcycles.length > 0 ? (
+                            [...cars, ...motorcycles].map((product, index) =>
+                                <Col key={index}>
+                                    <ProductCard data-wow-iteration="infinite" className="wow animate__bounceInUp" product={product} />
+                                </Col>)
+                        ) : null
+                    }
+                </Row>
+            </Container>
+            <Container className="fluid-section my-4" fluid>
                 <Row className="justify-content-center text-center pt-3" style={{ color: "#fff" }}>
                     <Col xs={2}>
                         <h3>for women.</h3>
@@ -237,14 +307,16 @@ function Home() {
                     </Col>
                 </Row>
             </Container>
-            <Container fluid className="fluid-section">
-                <Row>
-                    <Col xs={4} ref={carRef} className="position-relative ps-0" style={{ height: 250 }}>
-                        <img id="car" className={`${isVisible ? "scrolled " : ""}position-absolute object-fit-cover`} src="/animation_elements/car.png" alt="car" />
-                    </Col>
-                    <Col xs={8} className="align-self-center">
-                        <h1 className="text-white" style={{fontFamily:"Century Gothic", fontSize: 75}}>Explore available vehicles</h1>
-                    </Col>
+            <Container>
+                <Row xs={4}>
+                    {
+                        cars.length > 0 && motorcycles.length > 0 ? (
+                            [...cars, ...motorcycles].map((product, index) =>
+                                <Col key={index}>
+                                    <ProductCard data-wow-iteration="infinite" className="wow animate__bounceInUp" product={product} />
+                                </Col>)
+                        ) : null
+                    }
                 </Row>
             </Container>
         </>

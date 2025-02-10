@@ -154,7 +154,8 @@ body {
 
 .cards-section {
     background-color: $tertiaryColor;
-    border-radius: 50px;
+    border-top-right-radius: 50px;
+    border-top-left-radius: 50px;
 }
 
 .product-card {
@@ -199,10 +200,6 @@ body {
         opacity: 1;
         animation-play-state: running;
     }
-}
-
-.categories {
-    background-color: $elementBackground;
 }
 
 .zoom-category-image {
@@ -350,7 +347,7 @@ body {
     border-radius: 50px;
 
     >div {
-        height: 120%;
+        height: 110%;
         aspect-ratio: 1 / 1;
         top: 50%;
         left: 50%;
@@ -362,7 +359,7 @@ body {
         aspect-ratio: 1 / 1;
         top: 50%;
         left: 50%;
-        transition: 0.3s;
+        transition: 0.6s;
     }
 
     #moon {
@@ -370,7 +367,7 @@ body {
         aspect-ratio: 1 / 1;
         top: 50%;
         left: 50%;
-        transition: 0.3s;
+        transition: 0.6s;
     }
 }
 
@@ -380,7 +377,7 @@ body {
 
     >div {
         border: 3px solid #fff;
-        transform: translate(0%, -50%);
+        transform: translate(5%, -50%);
     }
 
     #sun {
@@ -398,7 +395,7 @@ body {
 
     >div {
         border: 3px solid $elementBackground;
-        transform: translate(-100%, -50%);
+        transform: translate(-105%, -50%);
     }
 
     #sun {
@@ -424,4 +421,179 @@ body {
 
 #car.scrolled {
     transform: translate(-75%, -50%);
+}
+
+@font-face {
+    font-family: 'Arial Rounded MT Bold';
+    src: url('fonts/arialroundedmtbold.ttf');
+}
+
+@keyframes smartphone {
+    0% {
+        transform: rotate(-30deg);
+    }
+
+    25% {
+        transform: rotate(30deg);
+    }
+
+    50% {
+        transform: rotate(-30deg);
+    }
+
+    75% {
+        transform: rotate(30deg);
+    }
+
+    100% {}
+}
+
+@keyframes smartphoneLeftBar {
+    0% {
+        transform: rotate(150deg) translate(400%, 0%);
+    }
+
+    25% {
+        transform: rotate(210deg) translate(400%, 0%);
+    }
+
+    50% {
+        transform: rotate(150deg) translate(400%, 0%);
+    }
+
+    75% {
+        transform: rotate(210deg) translate(400%, 0%);
+    }
+
+    100% {
+        transform: rotate(180deg) translate(400%, 0%);
+    }
+}
+
+@keyframes smartphoneRightBar {
+    0% {
+        transform: rotate(-30deg) translate(400%, 0%);
+    }
+
+    25% {
+        transform: rotate(30deg) translate(400%, 0%);
+    }
+
+    50% {
+        transform: rotate(-30deg) translate(400%, 0%);
+    }
+
+    75% {
+        transform: rotate(30deg) translate(400%, 0%);
+    }
+
+    100% {
+        transform: translate(400%, 0%);
+    }
+}
+
+#smartphone {
+    img:nth-child(1) {
+        transform: translate(-400%, 0%) rotate(180deg);
+    }
+
+    img:nth-child(3) {
+        transform: translate(400%, 0%);
+    }
+}
+
+#smartphone:hover {
+    img:nth-child(1) {
+        transform: translate(-400%, 0%) rotate(180deg);
+        transition: opacity 0.1s;
+        animation: smartphoneLeftBar 0.6s;
+    }
+
+    img:nth-child(2) {
+        animation: smartphone 0.6s;
+    }
+
+    img:nth-child(3) {
+        transition: opacity 0.1s;
+        animation: smartphoneRightBar 0.6s;
+    }
+}
+
+@keyframes sport {
+    0% {
+        transform: translate(-200%, 0%) rotate(-180deg);
+    }
+    50% {
+        transform: translate(10%, 0%) rotate(20deg);
+    }
+    100% {
+    }
+}
+
+#sport:hover {
+    img {
+        animation: sport 1s;
+    }
+}
+
+@keyframes grocery { 
+    0% {
+        transform: translate(-400%, 0%) rotate(0deg);
+    }
+    15% {
+        transform: rotate(15deg) translate(15%, calc(-15% * sin(15deg)));
+    }
+    30% {
+        transform: rotate(20deg) translate(10%, calc(-10% * sin(20deg)));
+    }
+    45% {
+        transform: rotate(20deg) translate(15%, calc(-15% * sin(20deg)));
+    }
+    90% {
+        transform: rotate(20deg) translate(15%, calc(-15% * sin(20deg)));
+    }
+    100% {
+        transform: rotate(0deg) translate(0%, 0%);
+    }
+}
+
+
+#grocery:hover {
+    img {
+        animation: grocery 0.6s;
+    }
+}
+
+@keyframes beauty { 
+    0% {
+        transform: translate(-400%, 0%) rotate(0deg);
+    }
+    15% {
+        transform: rotate(15deg) translate(15%, calc(-15% * sin(15deg)));
+    }
+    30% {
+        transform: rotate(20deg) translate(10%, calc(-10% * sin(20deg)));
+    }
+    45% {
+        transform: rotate(20deg) translate(15%, calc(-15% * sin(20deg)));
+    }
+    90% {
+        transform: rotate(20deg) translate(15%, calc(-15% * sin(20deg)));
+    }
+    100% {
+        transform: rotate(0deg) translate(0%, 0%);
+    }
+}
+
+
+#beauty:hover {
+    img:nth-child(1){
+        
+    }
+    img:nth-child(2){
+        
+    }
+    img:nth-child(3){
+        
+    }
 }
