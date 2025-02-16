@@ -177,7 +177,8 @@ function Home() {
                     <Col style={{ maxWidth: "12.5%" }}>
                         <div className="w-100 my-3 mb-5 rounded-circle" style={{ backgroundColor: "#fff", aspectRatio: "1 / 1" }}>
                             <Link id="kitchen" className="overflow-hidden d-flex position-relative rounded-circle justify-content-center w-100 h-100 align-items-center" style={{ backgroundColor: "#fff" }}>
-                                <img className="object-fit-contain position-absolute" style={{ width: "62.5%", height: "62.5%" }} src="/icons/categories/kitchen.png" alt="kitchen" />
+                                <img className="object-fit-contain position-absolute" style={{ width: "62.5%", height: "62.5%" }} src="/animation_elements/knife.png" alt="kitchen" />
+                                <img className="object-fit-contain position-absolute" style={{ width: "62.5%", height: "62.5%" }} src="/animation_elements/pan.png" alt="kitchen" />
                             </Link>
                         </div>
                     </Col>
@@ -207,18 +208,26 @@ function Home() {
                             <img className="zoom-image w-100 object-fit-contain" src="/banners/homeproducts.png" alt="homeproducts" />
                         </div>
                     </Col>
-                    <Col xs={6} className="">
-                        <div onClick={() => { }} className="overflow-hidden" style={{ backgroundColor: "#fff", borderRadius: 50, border: "5px solid #6464C6", cursor: "pointer" }}>
-                            <img className="zoom-image w-100 object-fit-contain" src="/banners/gamingproducts.png" alt="gamingproducts" />
+                    <Col xs={6} id="gamingProducts" className="">
+                        <div onClick={() => { }} className="overflow-hidden position-relative h-100" style={{ backgroundColor: "#fff", borderRadius: 50, border: "5px solid #6464C6", cursor: "pointer" }}>
+                            <img className="w-100 position-absolute object-fit-contain" src="/banners/gamingproducts.png" alt="gamingproducts" />
+                            <img className="w-100 position-absolute object-fit-contain" src="/animation_elements/gamepad.png" alt="gamingproducts" />
+                            <img className="w-100 position-absolute object-fit-contain" src="/animation_elements/wire.png" alt="gamingproducts" />
                         </div>
                     </Col>
-                    <Col xs={6} className="">
-                        <div onClick={() => { }} className="overflow-hidden p-4" style={{ backgroundColor: "#fff", borderRadius: 50, border: "5px solid white", cursor: "pointer" }}>
-                            <img className="zoom-image w-100 object-fit-contain" src="/banners/toys.png" alt="homeproducts" />
+                    <Col xs={6} id="toys" className="">
+                        <div onClick={() => { }} className="overflow-hidden position-relative h-100 p-4" style={{ backgroundColor: "#fff", borderRadius: 50, border: "8px solid #6464C6", cursor: "pointer" }}>
+                            <img className="w-100 position-absolute object-fit-contain" src="/animation_elements/toys.png" alt="gamingproducts" />
+                            <img className="w-100 position-absolute object-fit-contain" src="/animation_elements/bird.png" alt="gamingproducts" />
+                            <img className="w-100 position-absolute object-fit-contain" src="/animation_elements/bar.png" alt="gamingproducts" />
+                            <img className="w-100 position-absolute object-fit-contain" src="/animation_elements/capsule1.png" alt="gamingproducts" />
+                            <img className="w-100 position-absolute object-fit-contain" src="/animation_elements/capsule2.png" alt="gamingproducts" />
+                            <img className="w-100 position-absolute object-fit-contain" src="/animation_elements/capsule3.png" alt="gamingproducts" />
+                            <img className="w-100 position-absolute object-fit-contain" src="/animation_elements/capsule4.png" alt="gamingproducts" />
                         </div>
                     </Col>
                     <Col xs={6} id="laptop" className="position-relative">
-                        <div onClick={() => { }} className="overflow-hidden" style={{ backgroundColor: "white", borderRadius: 50, border: "5px solid #6464C6", cursor: "pointer" }}>
+                        <div onClick={() => { }} className="overflow-hidden" style={{ backgroundColor: "white", borderRadius: 50, cursor: "pointer" }}>
                             <img className="w-100 object-fit-contain" src="/banners/laptops.png" alt="laptop" />
                         </div>
                         <div className="red-dot" />

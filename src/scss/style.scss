@@ -523,11 +523,12 @@ body {
     0% {
         transform: translate(-200%, 0%) rotate(-180deg);
     }
+
     50% {
         transform: translate(10%, 0%) rotate(20deg);
     }
-    100% {
-    }
+
+    100% {}
 }
 
 #sport:hover {
@@ -536,22 +537,27 @@ body {
     }
 }
 
-@keyframes grocery { 
+@keyframes grocery {
     0% {
         transform: translate(-400%, 0%) rotate(0deg);
     }
+
     15% {
         transform: rotate(15deg) translate(15%, calc(-15% * sin(15deg)));
     }
+
     30% {
         transform: rotate(20deg) translate(10%, calc(-10% * sin(20deg)));
     }
+
     45% {
         transform: rotate(20deg) translate(15%, calc(-15% * sin(20deg)));
     }
+
     90% {
         transform: rotate(20deg) translate(15%, calc(-15% * sin(20deg)));
     }
+
     100% {
         transform: rotate(0deg) translate(0%, 0%);
     }
@@ -564,36 +570,301 @@ body {
     }
 }
 
-@keyframes beauty { 
+@keyframes beauty1 {
     0% {
-        transform: translate(-400%, 0%) rotate(0deg);
+        transform: rotate(-30deg) translate(-15%, -100%) scale(40%, 40%);
     }
-    15% {
-        transform: rotate(15deg) translate(15%, calc(-15% * sin(15deg)));
+
+    40% {
+        transform: rotate(0deg) translate(-25%, 5%) scale(40%, 40%);
     }
-    30% {
-        transform: rotate(20deg) translate(10%, calc(-10% * sin(20deg)));
+
+    60% {
+        transform: rotate(0deg) translate(-25%, -5%) scale(40%, 40%);
     }
-    45% {
-        transform: rotate(20deg) translate(15%, calc(-15% * sin(20deg)));
-    }
-    90% {
-        transform: rotate(20deg) translate(15%, calc(-15% * sin(20deg)));
-    }
-    100% {
-        transform: rotate(0deg) translate(0%, 0%);
+
+    80% {
+        transform: rotate(0deg) translate(-25%, 0%) scale(40%, 40%);
     }
 }
 
+@keyframes beauty2 {
+    0% {
+        transform: rotate(30deg) translate(15%, -100%) scale(40%, 40%);
+    }
+
+    40% {
+        transform: rotate(0deg) translate(25%, 10%) scale(40%, 40%);
+    }
+
+    60% {
+        transform: rotate(0deg) translate(25%, 0%) scale(40%, 40%);
+    }
+
+    80% {
+        transform: rotate(0deg) translate(25%, 5%) scale(40%, 40%);
+    }
+}
+
+@keyframes beauty3 {
+    0% {
+        transform: rotate(30deg) translate(40%, -100%) scale(40%, 40%);
+    }
+
+    40% {
+        transform: rotate(0deg) translate(55%, 5%) scale(40%, 40%);
+    }
+
+    60% {
+        transform: rotate(0deg) translate(55%, 5%) scale(40%, 40%);
+    }
+
+    80% {
+        transform: rotate(0deg) translate(55%, 5%) scale(40%, 40%);
+    }
+
+    90% {
+        transform: rotate(0deg) translate(55%, 5%) scale(40%, 40%);
+    }
+}
+
+#beauty {
+    img:nth-child(1) {
+        z-index: 1;
+        transform: translate(-25%, 0%) scale(40%, 40%);
+    }
+
+    img:nth-child(2) {
+        z-index: 1;
+        transform: translate(25%, 5%) scale(40%, 40%);
+    }
+
+    img:nth-child(3) {
+        transform: translate(55%, -30%) scale(30%, 25%);
+    }
+}
 
 #beauty:hover {
-    img:nth-child(1){
-        
+    img:nth-child(1) {
+        animation: beauty1 0.66s;
     }
-    img:nth-child(2){
-        
+
+    img:nth-child(2) {
+        animation: beauty2 0.66s;
     }
-    img:nth-child(3){
-        
+
+    img:nth-child(3) {
+        animation: beauty3 0.66s;
+    }
+}
+
+@keyframes knife {
+    0% {
+        transform: translate(100%, 20%) scale(75%, 75%);
+    }
+
+    10% {
+        transform: translate(15%, 20%) scale(75%, 75%) rotate(20deg);
+        z-index: 2;
+        filter: drop-shadow(3px 3px 0 white) drop-shadow(-2px -2px 0 white) drop-shadow(2px -2px 0 white) drop-shadow(-2px 2px 0 white);
+    }
+
+    25% {
+        transform: translate(15%, 20%) scale(75%, 75%) rotate(20deg);
+        z-index: 2;
+        filter: drop-shadow(3px 3px 0 white) drop-shadow(-2px -2px 0 white) drop-shadow(2px -2px 0 white) drop-shadow(-2px 2px 0 white);
+    }
+
+    40% {
+        transform: translate(15%, 40%) scale(75%, 75%) rotate(20deg);
+        filter: drop-shadow(3px 3px 0 white) drop-shadow(-2px -2px 0 white) drop-shadow(2px -2px 0 white) drop-shadow(-2px 2px 0 white);
+    }
+
+    55% {
+        transform: translate(20%, 25%) scale(75%, 75%) rotate(50deg);
+    }
+
+    70% {
+        transform: translate(20%, 25%) scale(75%, 75%) rotate(50deg);
+    }
+}
+
+@keyframes pan {
+    0% {
+        transform: translate(-100%, -20%) scale(75%, 75%);
+    }
+
+    10% {
+        transform: translate(-15%, -0%) scale(75%, 75%) rotate(20deg);
+    }
+
+    25% {
+        transform: translate(-15%, -0%) scale(75%, 75%) rotate(20deg);
+    }
+
+    40% {
+        transform: translate(-15%, -25%) scale(75%, 75%) rotate(20deg);
+        filter: drop-shadow(3px 3px 0 white) drop-shadow(-3px -3px 0 white) drop-shadow(3px -3px 0 white) drop-shadow(-3px 3px 0 white);
+    }
+
+    55% {
+        transform: translate(-15%, -15%) scale(75%, 75%) rotate(50deg);
+        filter: drop-shadow(3px 3px 0 white) drop-shadow(-3px -3px 0 white) drop-shadow(3px -3px 0 white) drop-shadow(-3px 3px 0 white);
+    }
+
+    70% {
+        transform: translate(-15%, -15%) scale(75%, 75%) rotate(50deg);
+        filter: drop-shadow(3px 3px 0 white) drop-shadow(-3px -3px 0 white) drop-shadow(3px -3px 0 white) drop-shadow(-3px 3px 0 white);
+    }
+}
+
+#kitchen {
+    img:nth-child(1) {
+        transform: translate(5%, 20%) scale(75%, 75%);
+    }
+
+    img:nth-child(2) {
+        transform: translate(-5%, -20%) scale(75%, 75%);
+    }
+}
+
+#kitchen:hover {
+    img:nth-child(1) {
+        transform: translate(5%, 20%) scale(75%, 75%);
+        animation: knife 1.1s;
+    }
+
+    img:nth-child(2) {
+        transform: translate(-5%, -20%) scale(75%, 75%);
+        animation: pan 1.1s;
+    }
+}
+
+@keyframes gamepad {
+    0% {
+        transform: translate(30%, 50%) scale(75%, 75%);
+    }
+}
+
+@keyframes wire {
+    0% {
+        clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0% 100%);
+    }
+
+    62.5% {
+        clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0% 100%);
+    }
+
+    100% {
+        clip-path: polygon(0 100%, 100% 100%, 100% 0, 0 0);
+    }
+}
+
+#gamingProducts {
+    img:nth-child(1) {
+        transform: translate(-20%, 30%) scale(50%, 50%);
+    }
+
+    img:nth-child(2) {
+        transform: translate(30%, 20%) scale(75%, 75%);
+        z-index: 2;
+    }
+
+    img:nth-child(3) {
+        transform: translate(25%, -43%) scale(15%, 15%);
+    }
+}
+
+#gamingProducts:hover {
+    img:nth-child(2) {
+        animation: gamepad 0.5s;
+    }
+
+    img:nth-child(3) {
+        animation: wire 0.8s;
+    }
+}
+
+@keyframes capsule1 {
+    0% {
+        transform: translate(-28%, -500%) scale(20%, 20%);
+    }
+
+    66% {
+        transform: translate(-28%, -500%) scale(20%, 20%);
+    }
+
+    100% {
+        transform: translate(-28%, 1%) scale(20%, 20%);
+    }
+}
+
+@keyframes capsule2 {
+    0% {
+        transform: translate(-28%, -500%) scale(30%, 30%);
+    }
+
+    33% {
+        transform: translate(-28%, -500%) scale(30%, 30%);
+    }
+
+    100% {
+        transform: translate(-28%, 55%) scale(30%, 30%);
+    }
+}
+
+@keyframes capsule3 {
+    0% {
+        transform: translate(-28%, -500%) scale(40%, 40%);
+    }
+
+    100% {
+        transform: translate(-28%, 135%) scale(40%, 40%);
+    }
+}
+
+#toys {
+    img:nth-child(1) {
+        transform: translate(10%, -10%) scale(50%, 50%);
+    }
+
+    img:nth-child(2) {
+        transform: translate(20%, 5%) scale(40%, 40%);
+        z-index: 2;
+    }
+
+    img:nth-child(3) {
+        transform: translate(-28%, -47%) scale(3%, 3%);
+    }
+
+    img:nth-child(4) {
+        transform: translate(-28%, 1%) scale(20%, 20%);
+    }
+
+    img:nth-child(5) {
+        transform: translate(-28%, 55%) scale(30%, 30%);
+    }
+
+    img:nth-child(6) {
+        transform: translate(-28%, 135%) scale(40%, 40%);
+    }
+
+    img:nth-child(7) {
+        transform: translate(-28%, 237%) scale(50%, 50%);
+    }
+}
+
+#toys:hover {
+
+    img:nth-child(4) {
+        animation: capsule1 0.9s;
+    }
+
+    img:nth-child(5) {
+        animation: capsule2 0.6s;
+    }
+
+    img:nth-child(6) {
+        animation: capsule3 0.3s;
     }
 }
