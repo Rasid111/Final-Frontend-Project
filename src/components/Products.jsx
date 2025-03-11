@@ -32,11 +32,12 @@ function Products() {
     }, []);
 
     useEffect(() => {
-        const url = `https://dummyjson.com/products${state.category === "" ? "" : `/category/${state.category}`}${state.searchInput === "" ? "" : `/search`}?q=${state.searchInput}&limit=${state.limit}&skip=${(state.page - 1) * state.limit}&select=id,title,price,thumbnail&sortBy=${state.sort}&order=${state.order}`
+        const url = `https://dummyjson.com/products${state.category === "" ? "" : `/category/${state.category}`}${state.searchInput === "" ? "" : `/search`}?q=${state.searchInput}&limit=${state.limit}&skip=${(state.page - 1) * state.limit}&sortBy=${state.sort}&order=${state.order}`
         axios.get(url)
             .then(function (response) {
                 setProducts({ products: response.data.products, total: response.data.total });
             })
+            console.log(products);
     }, [state]);
 
     return (

@@ -26,8 +26,8 @@ function NavigationMenu() {
         <>
             <Offcanvas className="offcanva" show={show} onHide={() => setShow(false)}>
                 <Container>
-                    <Row className='justify-content-around text-center mt-4'>
-                        <Col xs={3}>
+                    <Row className='justify-content-between text-center mt-4'>
+                        <Col xs={3} className='text-start'>
                             <Button className='p-0' variant="link"><img className='small-icon' src="/icons/az.png" alt="az" /></Button>
                         </Col>
                         <Col xs={3} className='d-flex justify-content-center align-items-center text-center'>
@@ -60,7 +60,9 @@ function NavigationMenu() {
                                     <Button onClick={() => setShow(true)} variant='link'><img className='object-fit-contain' style={{ height: 24 }} src="/icons/menu.png" alt="menu" /></Button>
                                 </Col>
                                 <Col xs={10}>
-                                    <input type="text" className='input-form w-100 h-100' />
+                                    <form action="">
+                                        <input type="text" className='input-form w-100 h-100' />
+                                    </form>
                                 </Col>
                                 <Col className="h-100" xs={"auto"}>
                                     <Link>
@@ -68,7 +70,7 @@ function NavigationMenu() {
                                     </Link>
                                 </Col>
                                 <Col className="h-100" xs={"auto"}>
-                                    <Link>
+                                    <Link to="/cart">
                                         <img className="icon p-1" src="/icons/cart.png" alt="cart" />
                                     </Link>
                                 </Col>
