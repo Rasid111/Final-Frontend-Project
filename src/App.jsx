@@ -25,7 +25,7 @@ function App() {
             </>
           }>
           </Route>
-          <Route path="/products" element={
+          <Route path="/products/:searchInput?" element={
             <>
               <NavigationMenu></NavigationMenu>
               <Products></Products>
@@ -41,7 +41,14 @@ function App() {
             </>
           }>
           </Route>
-          <Route path="/cart" element={<Cart></Cart>}></Route>
+          <Route path='/cart' element={
+            <>
+              <NavigationMenu></NavigationMenu>
+              <Cart></Cart>
+              <Footer></Footer>
+            </>
+          }>
+          </Route>
           <Route path="/register" element={
             <>
               <RegisterPage></RegisterPage>

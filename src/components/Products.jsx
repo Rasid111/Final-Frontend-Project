@@ -5,10 +5,14 @@ import { LangContext } from '../contexts/LangContext';
 import { Form } from 'react-bootstrap';
 import axios from 'axios';
 import ProductCard from './ProductCard';
+import { useNavigate, useParams } from 'react-router-dom';
 
 function Products() {
+    const navigate = useNavigate();
+    const params = useParams();
 
     const [products, setProducts] = useState({ products: [], total: 0 });
+
     const [state, setState] = useState({
         page: 1,
         limit: 8,
@@ -17,6 +21,14 @@ function Products() {
         sort: "",
         order: "",
     });
+    
+    useEffect(() => {
+        setState(prevState => ({
+            ...prevState,
+            searchInput: params.searchInput === undefined ? "" : params.searchInput,
+            page: 0,
+        }));
+    }, [params]);
 
     const [categories, setCategories] = useState([]);
 
@@ -32,12 +44,11 @@ function Products() {
     }, []);
 
     useEffect(() => {
-        const url = `https://dummyjson.com/products${state.category === "" ? "" : `/category/${state.category}`}${state.searchInput === "" ? "" : `/search`}?q=${state.searchInput}&limit=${state.limit}&skip=${(state.page - 1) * state.limit}&sortBy=${state.sort}&order=${state.order}`
+        const url = `https://dummyjson.com/products${state.category === "" ? "" : `/category/${state.category}`}${state.searchInput === "" ? "" : `/search`}?q=${state.searchInput}&limit=${state.limit}&skip=${(state.page - 1) * state.limit}&select=id,title,price,thumbnail&sortBy=${state.sort}&order=${state.order}`
         axios.get(url)
             .then(function (response) {
                 setProducts({ products: response.data.products, total: response.data.total });
             })
-            console.log(products);
     }, [state]);
 
     return (
@@ -63,6 +74,7 @@ function Products() {
                                     page: 0,
                                     category: ev.target.value
                                 }));
+                                navigate("/products");
                             }}>
                                 <option value="">{lang === "en" ? "All categories" : "Bütün kateqoriyalar"}</option>
                                 {categories.map((c, index) =>

@@ -911,3 +911,30 @@ body {
         transform: translate(-50%, -50%);
     }
 }
+
+#searchForm {
+    input:focus {
+        box-shadow: none;
+    }
+    button {
+        vertical-align: bottom ;
+        font-size: large;
+        font-weight: 500;
+        color: $iconHoveredBackground;
+        border-radius: 12px;
+    }
+}
+
+select.form-select {
+    box-shadow: none !important;
+    outline: none !important;
+    font-size: 20px;
+}
+
+select.form-select:focus {
+    border: 1px solid $elementBackground;
+}
+
+.custom-select {
+
+}

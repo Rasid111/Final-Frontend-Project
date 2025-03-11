@@ -4,9 +4,9 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Form from 'react-bootstrap/Form';
 
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { ColorModeContext } from '../contexts/ColorModeContex';
-import { Container, Col, Row, Button, Offcanvas } from 'react-bootstrap';
+import { Container, Col, Row, Button, Offcanvas, InputGroup } from 'react-bootstrap';
 import { FaLightbulb, FaRegLightbulb } from 'react-icons/fa';
 import { CurrencyContext } from '../contexts/CurrencyContext';
 import { LangContext } from '../contexts/LangContext';
@@ -15,12 +15,24 @@ import { logout } from '../tools/actions/accountAction';
 
 function NavigationMenu() {
 
+    const navigate = useNavigate();
+    const location = useLocation();
     const [colorMode, switchColorMode] = useContext(ColorModeContext);
     const [lang, switchLang] = useContext(LangContext);
     const { currency, switchCurrency } = useContext(CurrencyContext);
     const [show, setShow] = useState(false);
+    const [searchInput, setSearchInput] = useState("");
 
     const dispatch = useDispatch();
+
+    const handleSearch = (ev) => {
+        const basePath = "/products";
+        if (location.pathname.startsWith(basePath)) {
+            navigate(`${basePath}/${searchInput}`, { replace: true });
+        } else {
+            navigate(`${basePath}/${searchInput}`);
+        }
+    };
 
     return (
         <>
@@ -60,9 +72,18 @@ function NavigationMenu() {
                                     <Button onClick={() => setShow(true)} variant='link'><img className='object-fit-contain' style={{ height: 24 }} src="/icons/menu.png" alt="menu" /></Button>
                                 </Col>
                                 <Col xs={10}>
-                                    <form action="">
-                                        <input type="text" className='input-form w-100 h-100' />
-                                    </form>
+                                    <Form id='searchForm' onSubmit={(ev) => {ev.preventDefault(); handleSearch();}}>
+                                        <Container fluid>
+                                            <Row>
+                                                <Col className='px-1'>
+                                                    <Form.Control id="search" type="text" onInput={(ev) => { setSearchInput(ev.target.value) }} className='input-form h-100 w-100'></Form.Control>
+                                                </Col>
+                                                <Col className='px-1' xs={1}>
+                                                    <Button onClick={handleSearch} className="h-100 w-100 btn-light">search.</Button>
+                                                </Col>
+                                            </Row>
+                                        </Container>
+                                    </Form>
                                 </Col>
                                 <Col className="h-100" xs={"auto"}>
                                     <Link>
