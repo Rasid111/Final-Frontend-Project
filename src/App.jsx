@@ -10,6 +10,7 @@ import LoginPage from "./components/LoginPage";
 import Footer from "./components/Footer";
 import './scss/style.scss'
 import Dashboard from "./components/Dashboard";
+import NotFoundPage from "./components/NotFoundPage";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
             <>
               <NavigationMenu></NavigationMenu>
               <Home></Home>
+              <Footer></Footer>
             </>
           }>
           </Route>
@@ -27,6 +29,7 @@ function App() {
             <>
               <NavigationMenu></NavigationMenu>
               <Products></Products>
+              <Footer></Footer>
             </>
           }>
           </Route>
@@ -34,16 +37,35 @@ function App() {
             <>
               <NavigationMenu></NavigationMenu>
               <ProductPage></ProductPage>
+              <Footer></Footer>
             </>
           }>
           </Route>
           <Route path="/cart" element={<Cart></Cart>}></Route>
-          <Route path="/register" element={<RegisterPage></RegisterPage>}></Route>
-          <Route path="/login" element={<LoginPage></LoginPage>}></Route>
-          <Route path="/dashboard" element={<Dashboard></Dashboard>}></Route>
-          <Route path="*" element={404}></Route>
+          <Route path="/register" element={
+            <>
+              <RegisterPage></RegisterPage>
+              <Footer></Footer>
+            </>
+          }>
+          </Route>
+          <Route path="/login" element={
+            <>
+              <LoginPage></LoginPage>
+              <Footer></Footer>
+            </>
+          }>
+          </Route>
+          <Route path="/dashboard" element={
+            <>
+              <NavigationMenu></NavigationMenu>
+              <Dashboard></Dashboard>
+              <Footer></Footer>
+            </>
+          }>
+          </Route>
+          <Route path="*" element={<NotFoundPage></NotFoundPage>}></Route>
         </Routes>
-        <Footer></Footer>
       </BrowserRouter>
     </>
   )

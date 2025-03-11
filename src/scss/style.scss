@@ -865,3 +865,49 @@ body {
         animation: capsule3 0.3s;
     }
 }
+
+@keyframes notFoundBar {
+    0% {
+        transform: translate(0%, 0%);
+    }
+
+    50% {
+        transform: translate(0%, 45%);
+    }
+
+    75% {
+        transform: translate(0%, 38%);
+    }
+
+    100% {
+        transform: translate(0%, 40%);
+    }
+}
+
+#notFound {
+    img:nth-child(1) {
+        width: 0.95%;
+        padding-left: 3px;
+        padding-right: 3px;
+        top: -22%;
+        left: 24.375%;
+    }
+
+    img:nth-child(1):hover {
+        animation: notFoundBar 0.5s;
+        transform: translate(0%, 40%);
+    }
+
+    img:nth-child(2) {
+        height: 8.5%;
+        top: 25%;
+        left: 20%;
+    }
+
+    img:nth-child(3) {
+        height: 40%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+}
