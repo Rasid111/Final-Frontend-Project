@@ -12,6 +12,11 @@ import "animate.css";
 import supabase from "../../utils/supabase";
 import { Link } from "react-router-dom";
 
+function Login() {
+    const [products, setProducts] = useState([]);
+    
+}
+
 function Home() {
 
     const lang = useContext(LangContext)[0];
