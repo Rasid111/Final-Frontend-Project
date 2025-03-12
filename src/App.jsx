@@ -11,6 +11,7 @@ import Footer from "./components/Footer";
 import './scss/style.scss'
 import Dashboard from "./components/Dashboard";
 import NotFoundPage from "./components/NotFoundPage";
+import Profile from "./components/profile";
 
 function App() {
   return (
@@ -71,6 +72,7 @@ function App() {
             </>
           }>
           </Route>
+          <Route path="/profile" element={<Profile></Profile>}></Route>
           <Route path="*" element={<NotFoundPage></NotFoundPage>}></Route>
         </Routes>
       </BrowserRouter>

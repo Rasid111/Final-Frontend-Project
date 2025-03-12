@@ -50,7 +50,6 @@ export const accountReducer = (state = initialState, action) => {
                 ...state,
                 accounts: [
                     ...state.accounts.map(account => {
-                        console.log("in")
                         if (account.email === null && state.auth === null) {
                             return {
                                 ...account,
@@ -60,7 +59,7 @@ export const accountReducer = (state = initialState, action) => {
                         return account;
                     }),
                     {
-                        login: action.payload.name,
+                        login: action.payload.login,
                         email: action.payload.email,
                         password: action.payload.password,
                         cart: buffer
@@ -90,6 +89,9 @@ export const accountReducer = (state = initialState, action) => {
                 }
             });
             return state;
+        case "UPDATE_ACCOUNT":
+            console.log("update");
+            return;
         case "LOGOUT":
             return {
                 ...state,

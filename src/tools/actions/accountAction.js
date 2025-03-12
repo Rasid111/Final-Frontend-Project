@@ -19,6 +19,13 @@ export const addToCart = (product) => {
     };
 };
 
+export const updateAccount = (data) => {
+    return {
+        type: "UPDATE_ACCOUNT",
+        payload: data
+    };
+}
+
 export const incrementProductQuantity = (product) => {
     return {
         type: "INCREMENT_PRODUCT_QUANTITY",

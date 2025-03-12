@@ -13,6 +13,14 @@ function LoginPage() {
     const dispatch = useDispatch();
     const accounts = useSelector((state) => state.accounts);
 
+    const loginHandle = (ev) => {
+        ev.preventDefault();
+        const data = Object.fromEntries((new FormData(ev.target)).entries());
+        console.log(data);
+        navigate("/login");
+        dispatch(login({ ...data }));
+    }
+
     return (
         <Container className="mt-5">
             <Row>
@@ -23,20 +31,21 @@ function LoginPage() {
                 </Col>
                 <Col xs={6} className="backgrounded text-center d-flex flex-column align-items-center" style={{ borderRadius: 50 }}>
                     <div className="w-75">
-                        <Form>
+                        <Form onSubmit={(ev) => {loginHandle(ev)}}> 
                             <Form.Group className="text-center">
-                                <Form.Label className="my-4">
-                                    <img className="w-50 object-fit-contain" src="/titles/login.png" alt="login" />
+                                <Form.Label className="my-3" style={{ fontFamily: "Arial Rounded MT Bold", color: "#fff", fontSize: 50 }}>
+                                    email.
                                 </Form.Label>
-                                <Form.Control className="rounded-5 py-3" type="email" />
+                                <Form.Control name="email" className="rounded-5 py-3" type="email" />
                             </Form.Group>
 
                             <Form.Group className="text-center">
-                                <Form.Label className="my-4">
-                                    <img className="w-50 object-fit-contain" src="/titles/password.png" alt="password" />
+                                <Form.Label className="my-3" style={{ fontFamily: "Arial Rounded MT Bold", color: "#fff", fontSize: 50 }}>
+                                    password.
                                 </Form.Label>
-                                <Form.Control className="rounded-5 py-3" type="password" />
+                                <Form.Control name="password" className="rounded-5 py-3" type="password" />
                             </Form.Group>
+                            
                             <Container className="my-5">
                                 <Row>
                                     <Col xs={4}>
@@ -47,7 +56,7 @@ function LoginPage() {
                                         </div>
                                     </Col>
                                     <Col xs={8}>
-                                        <Button variant="">
+                                        <Button type="submit" variant="">
                                             <img className="object-fit-contain w-100" src="buttons/signin.png" alt="signin" />
                                         </Button>
                                     </Col>
@@ -73,24 +82,24 @@ function LoginPage() {
         // <Container className="mt-5">
         //     <Row className="justify-content-center">
         //         <Col xs={6}>
-                    // <Form onSubmit={(ev) => {
-                    //     ev.preventDefault();
-                    //     let userInfo = Object.fromEntries(new FormData(ev.target).entries())
-                    //     dispatch(login({ ...userInfo }));
-                    // }}>
-                    //     <Form.Group className="mb-3">
-                    //         <Form.Label>{lang === "en" ? "Email address" : "E-poçt ünvanı"}</Form.Label>
-                    //         <Form.Control name="email" type="email" placeholder={lang === "en" ? "Enter email" : "E-poçtu daxil edin"} />
-                    //     </Form.Group>
+        // <Form onSubmit={(ev) => {
+        //     ev.preventDefault();
+        //     let userInfo = Object.fromEntries(new FormData(ev.target).entries())
+        //     dispatch(login({ ...userInfo }));
+        // }}>
+        //     <Form.Group className="mb-3">
+        //         <Form.Label>{lang === "en" ? "Email address" : "E-poçt ünvanı"}</Form.Label>
+        //         <Form.Control name="email" type="email" placeholder={lang === "en" ? "Enter email" : "E-poçtu daxil edin"} />
+        //     </Form.Group>
 
-                    //     <Form.Group className="mb-3">
-                    //         <Form.Label>{lang === "en" ? "Password" : "Parol"}</Form.Label>
-                    //         <Form.Control name="password" type="password" placeholder={lang === "en" ? "Enter password" : "Parol daxil edin"} />
-                    //     </Form.Group>
-                    //     <Button variant="primary" type="submit">
-                    //         {lang === "en" ? "Login" : "Daxil ol"}
-                    //     </Button>
-                    // </Form>
+        //     <Form.Group className="mb-3">
+        //         <Form.Label>{lang === "en" ? "Password" : "Parol"}</Form.Label>
+        //         <Form.Control name="password" type="password" placeholder={lang === "en" ? "Enter password" : "Parol daxil edin"} />
+        //     </Form.Group>
+        //     <Button variant="primary" type="submit">
+        //         {lang === "en" ? "Login" : "Daxil ol"}
+        //     </Button>
+        // </Form>
         //         </Col>
         //     </Row>
         // </Container>

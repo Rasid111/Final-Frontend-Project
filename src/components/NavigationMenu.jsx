@@ -10,7 +10,7 @@ import { Container, Col, Row, Button, Offcanvas, InputGroup } from 'react-bootst
 import { FaLightbulb, FaRegLightbulb } from 'react-icons/fa';
 import { CurrencyContext } from '../contexts/CurrencyContext';
 import { LangContext } from '../contexts/LangContext';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../tools/actions/accountAction';
 
 function NavigationMenu() {
@@ -22,6 +22,8 @@ function NavigationMenu() {
     const { currency, switchCurrency } = useContext(CurrencyContext);
     const [show, setShow] = useState(false);
     const [searchInput, setSearchInput] = useState("");
+
+    const isAuthenticated = useSelector(state => state.accounts.find(account => account.email === state.auth) !== null);
 
     const dispatch = useDispatch();
 
@@ -96,7 +98,7 @@ function NavigationMenu() {
                                     </Link>
                                 </Col>
                                 <Col className="h-100" xs={"auto"}>
-                                    <Link to={"/login"}>
+                                    <Link to={`${isAuthenticated ? "/profile" : "/login"}`}>
                                         <img className="icon p-1" src="/icons/profile.png" alt="profile" />
                                     </Link>
                                 </Col>

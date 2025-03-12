@@ -57,16 +57,6 @@ function Products() {
                 <Container>
                     <Row>
                         <Col>
-                            <Form.Control type="text" value={state.searchInput} placeholder={lang === "en" ? "Search" : "Axtar"} onInput={(ev) => {
-                                setState(prevState => ({
-                                    ...prevState,
-                                    searchInput: ev.target.value,
-                                    page: 0,
-                                    category: ""
-                                }));
-                            }} />
-                        </Col>
-                        <Col>
                             <Form.Select value={state.category} onChange={(ev) => {
                                 setState(prevState => ({
                                     ...prevState,

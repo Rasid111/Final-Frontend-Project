@@ -3,12 +3,13 @@ import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { createAccount } from "../tools/actions/accountAction";
 import { LangContext } from "../contexts/LangContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import FormRange from "react-bootstrap/esm/FormRange";
 
 
 function RegisterPage() {
 
-
+    const navigate = useNavigate();
     const lang = useContext(LangContext)[0];
 
     const [username, setUsername] = useState("");
@@ -16,6 +17,22 @@ function RegisterPage() {
     const [password, setPassword] = useState("");
 
     const dispatch = useDispatch();
+
+    const [formData, setFormData] = useState({
+        login: null,
+        email: null,
+        password: null,
+        confirmation: null
+    });
+    const register = (ev) => {
+        ev.preventDefault();
+        const data = Object.fromEntries((new FormData(ev.target)).entries());
+        if (data.password.length >= 8 && /\d/.test(data.password) && /\D/.test(data.password) && data.password === data.confirmation ) {
+            dispatch(createAccount({ ...data }));
+            navigate("/login");
+        }
+        setFormData(data);
+    }
 
     return (
 
@@ -28,33 +45,41 @@ function RegisterPage() {
                 </Col>
                 <Col xs={6} className="backgrounded text-center d-flex flex-column align-items-center" style={{ borderRadius: 50 }}>
                     <div className="w-100 px-2">
-                        <Form>
+                        <Form onSubmit={(ev) => {register(ev)}}>
                             <Form.Group className="text-center">
                                 <Form.Label className="my-3" style={{ fontFamily: "Arial Rounded MT Bold", color: "#fff", fontSize: 25 }}>
                                     login.
                                 </Form.Label>
-                                <Form.Control className="rounded-5 py-3" type="email" />
+                                <Form.Control name="login" className="rounded-5 py-3" type="text" />
                             </Form.Group>
 
                             <Form.Group className="text-center">
                                 <Form.Label className="my-3" style={{ fontFamily: "Arial Rounded MT Bold", color: "#fff", fontSize: 25 }}>
                                     email.
                                 </Form.Label>
-                                <Form.Control className="rounded-5 py-3" type="email" />
+                                <Form.Control name="email" className="rounded-5 py-3" type="email" />
                             </Form.Group>
-                            
+
                             <Form.Group className="text-center">
-                                <Form.Label className="my-3" style={{fontFamily: "Arial Rounded MT Bold", color: "#fff", fontSize: 25}}>
+                                <Form.Label className="my-3" style={{ fontFamily: "Arial Rounded MT Bold", color: "#fff", fontSize: 25 }}>
                                     password.
                                 </Form.Label>
-                                <Form.Control className="rounded-5 py-3" type="email" />
+                                <Form.Control name="password" className="rounded-5 py-3" type="password" />
+                                <ul>
+                                    <li className={`error-span d-${formData.password === null || formData.password.length > 8 ? "none" : "block"}`}><span>Password length must be 8 symbols or longer</span></li>
+                                    <li className={`error-span d-${formData.password === null || /\d/.test(formData.password) ? "none" : "block"}`}><span>Password must conatin at least 1 number (0-9)</span></li>
+                                    <li className={`error-span d-${formData.password === null || /\D/.test(formData.password) ? "none" : "block"}`}><span>Password must conatin at least 1 symbol (A-Z)</span></li>
+                                </ul>
                             </Form.Group>
-                            
+
                             <Form.Group className="text-center">
-                                <Form.Label className="my-3" style={{fontFamily: "Arial Rounded MT Bold", color: "#fff", fontSize: 25}}>
+                                <Form.Label className="my-3" style={{ fontFamily: "Arial Rounded MT Bold", color: "#fff", fontSize: 25 }}>
                                     password. (confirmation)
                                 </Form.Label>
-                                <Form.Control className="rounded-5 py-3" type="email" />
+                                <Form.Control name="confirmation" className="rounded-5 py-3" type="password" />
+                                <ul>
+                                    <li className={`error-span d-${formData.confirmation === null || formData.confirmation === formData.password ? "none" : "block"}`}><span>Passwords must match</span></li>
+                                </ul>
                             </Form.Group>
                             <Container className="my-5">
                                 <Row>
@@ -66,24 +91,28 @@ function RegisterPage() {
                                         </div>
                                     </Col>
                                     <Col xs={8}>
-                                        <Button variant="">
+                                        <Button type="submit" variant="">
                                             <img className="object-fit-contain w-100" src="buttons/register.png" alt="register" />
                                         </Button>
                                     </Col>
                                 </Row>
-                                <Row className="mt-5 justify-content-center text-center">
-                                    <Col xs={8}>
-                                        <Link to="/login">
-                                            <img className="object-fit-contain w-100" src="buttons/signin.png" alt="signin" />
-                                        </Link>
-                                    </Col>
-                                </Row>
                             </Container>
                         </Form>
+                        <Container className="my-5">
+                            <Row className="mt-5 justify-content-center text-center">
+                                <Col xs={8}>
+                                    <Link to="/login">
+                                        <img className="object-fit-contain w-100" src="buttons/signin.png" alt="signin" />
+                                    </Link>
+                                </Col>
+                            </Row>
+                        </Container>
                     </div>
                 </Col>
             </Row>
         </Container>
+    )
+    
 
         // <Container className="mt-5">
         //     <Row className="justify-content-center">
@@ -118,7 +147,6 @@ function RegisterPage() {
         //         </Col>
         //     </Row>
         // </Container>
-    )
 }
 
 export default RegisterPage;

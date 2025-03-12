@@ -935,6 +935,7 @@ select.form-select:focus {
     border: 1px solid $elementBackground;
 }
 
-.custom-select {
-
+.error-span {
+    color: rgb(215, 24, 24);
+    font-size: 20px;
 }
