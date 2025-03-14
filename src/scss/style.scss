@@ -939,3 +939,21 @@ select.form-select:focus {
     color: rgb(215, 24, 24);
     font-size: 20px;
 }
+
+.reset-button {
+    background-color: $elementBackground;
+    font-size: 25px;
+    padding-left: 25px;
+    padding-right: 25px;
+    box-shadow: none;
+    outline: none;
+    border: none;
+}
+
+.reset-button:hover {
+    background-color: $iconHoveredBackground;
+}
+
+.aasd{
+    color: #fff
+}

@@ -18,6 +18,8 @@ function RegisterPage() {
 
     const dispatch = useDispatch();
 
+    const accounts = useSelector(state => state.accounts)
+
     const [formData, setFormData] = useState({
         login: null,
         email: null,
@@ -29,7 +31,9 @@ function RegisterPage() {
         const data = Object.fromEntries((new FormData(ev.target)).entries());
         if (data.password.length >= 8 && /\d/.test(data.password) && /\D/.test(data.password) && data.password === data.confirmation ) {
             dispatch(createAccount({ ...data }));
-            navigate("/login");
+            if (accounts.some(account => account.email === formData.email)) {
+                navigate("/login");
+            }
         }
         setFormData(data);
     }
@@ -66,7 +70,7 @@ function RegisterPage() {
                                 </Form.Label>
                                 <Form.Control name="password" className="rounded-5 py-3" type="password" />
                                 <ul>
-                                    <li className={`error-span d-${formData.password === null || formData.password.length > 8 ? "none" : "block"}`}><span>Password length must be 8 symbols or longer</span></li>
+                                    <li className={`error-span d-${formData.password === null || formData.password.length >= 8 ? "none" : "block"}`}><span>Password length must be 8 symbols or longer</span></li>
                                     <li className={`error-span d-${formData.password === null || /\d/.test(formData.password) ? "none" : "block"}`}><span>Password must conatin at least 1 number (0-9)</span></li>
                                     <li className={`error-span d-${formData.password === null || /\D/.test(formData.password) ? "none" : "block"}`}><span>Password must conatin at least 1 symbol (A-Z)</span></li>
                                 </ul>

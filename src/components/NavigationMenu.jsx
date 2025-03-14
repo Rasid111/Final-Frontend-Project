@@ -28,12 +28,7 @@ function NavigationMenu() {
     const dispatch = useDispatch();
 
     const handleSearch = (ev) => {
-        const basePath = "/products";
-        if (location.pathname.startsWith(basePath)) {
-            navigate(`${basePath}/${searchInput}`, { replace: true });
-        } else {
-            navigate(`${basePath}/${searchInput}`);
-        }
+        navigate(`/products?q=${searchInput === "" && searchInput === null && searchInput === undefined ? "" : searchInput}`);
     };
 
     return (

@@ -5,11 +5,11 @@ import { LangContext } from '../contexts/LangContext';
 import { Form } from 'react-bootstrap';
 import axios from 'axios';
 import ProductCard from './ProductCard';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 
 function Products() {
     const navigate = useNavigate();
-    const params = useParams();
+    const [searchParams, setSearchParams] = useSearchParams();
 
     const [products, setProducts] = useState({ products: [], total: 0 });
 
@@ -17,18 +17,18 @@ function Products() {
         page: 1,
         limit: 8,
         category: "",
-        searchInput: "",
+        searchInput: searchParams.get("q") ?? "",
         sort: "",
         order: "",
     });
-    
+
     useEffect(() => {
         setState(prevState => ({
             ...prevState,
-            searchInput: params.searchInput === undefined ? "" : params.searchInput,
-            page: 0,
-        }));
-    }, [params]);
+            searchInput: searchParams.get("q") ?? "",
+            category: searchParams.get("q") !== null && searchParams.get("q") !== undefined ? "" : state.category,
+        }))
+    }, [searchParams]);
 
     const [categories, setCategories] = useState([]);
 
@@ -44,7 +44,7 @@ function Products() {
     }, []);
 
     useEffect(() => {
-        const url = `https://dummyjson.com/products${state.category === "" ? "" : `/category/${state.category}`}${state.searchInput === "" ? "" : `/search`}?q=${state.searchInput}&limit=${state.limit}&skip=${(state.page - 1) * state.limit}&select=id,title,price,thumbnail&sortBy=${state.sort}&order=${state.order}`
+        const url = `https://dummyjson.com/products${state.category === "" || state.searchInput !== "" ? "" : `/category/${state.category}`}${state.searchInput === "" ? "?" : `/search?q=${state.searchInput}`}&limit=${state.limit}&skip=${(state.page - 1) * state.limit}&sortBy=${state.sort}&order=${state.order}`
         axios.get(url)
             .then(function (response) {
                 setProducts({ products: response.data.products, total: response.data.total });
@@ -60,7 +60,6 @@ function Products() {
                             <Form.Select value={state.category} onChange={(ev) => {
                                 setState(prevState => ({
                                     ...prevState,
-                                    searchInput: "",
                                     page: 0,
                                     category: ev.target.value
                                 }));

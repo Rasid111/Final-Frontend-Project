@@ -26,7 +26,7 @@ function App() {
             </>
           }>
           </Route>
-          <Route path="/products/:searchInput?" element={
+          <Route path="/products" element={
             <>
               <NavigationMenu></NavigationMenu>
               <Products></Products>

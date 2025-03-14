@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import Swal from "sweetalert2";
 import { LangContext } from "../../contexts/LangContext";
+import { useNavigate } from "react-router-dom";
 
 let initialState = {
     auth: null,
@@ -90,8 +91,56 @@ export const accountReducer = (state = initialState, action) => {
             });
             return state;
         case "UPDATE_ACCOUNT":
-            console.log("update");
-            return;
+            if (!state.accounts.some(account => account.email === state.auth && account.password === action.payload.password)) {
+                Swal.fire({
+                    title: "Update failed",
+                    text: "Incorrect password",
+                    icon: "error",
+                    customClass: {
+                        popup: 'swal2-dark',
+                    }
+                });
+                return {
+                    ...state,
+                };
+            }
+            if (state.accounts.some(account => account.email === action.payload.email && account.email != state.auth)) {
+                Swal.fire({
+                    title: "Update failed",
+                    text: "This email is already used",
+                    icon: "error",
+                    customClass: {
+                        popup: 'swal2-dark',
+                    }
+                });
+                return { ...state };
+            }
+            if (state.accounts.some(account => account.email === state.auth && account.password === action.payload.password)) {
+                Swal.fire({
+                    title: "Your account updated",
+                    icon: "success",
+                    customClass: {
+                        popup: 'swal2-dark',
+                    }
+                });
+                return {
+                    ...state,
+                    accounts: [
+                        ...state.accounts.map(account => {
+                            if (account.email === state.auth) {
+                                return {
+                                    ...account,
+                                    login: action.payload.login === null || action.payload.login === undefined || action.payload.login === "" ? account.login : action.payload.login,
+                                    email: action.payload.email === null || action.payload.email === undefined || action.payload.email === "" ? account.email : action.payload.email,
+                                    password: action.payload.newPassword === null || action.payload.newPassword === undefined || action.payload.newPassword === "" ? account.password : action.payload.newPassword,
+                                }
+                            }
+                            return account;
+                        }),
+                    ],
+                    auth: action.payload.email
+                };
+            }
         case "LOGOUT":
             return {
                 ...state,

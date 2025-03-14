@@ -1,22 +1,29 @@
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../tools/actions/accountAction";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { LangContext } from "../contexts/LangContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 function LoginPage() {
 
     const lang = useContext(LangContext)[0];
 
+    const navigate = useNavigate();
+
     const dispatch = useDispatch();
-    const accounts = useSelector((state) => state.accounts);
+    const auth = useSelector((state) => state.auth);
+
+    useEffect(() => {
+        if (auth !== null) {
+            navigate("/");
+        }
+    }, [auth]);
 
     const loginHandle = (ev) => {
         ev.preventDefault();
         const data = Object.fromEntries((new FormData(ev.target)).entries());
-        console.log(data);
         navigate("/login");
         dispatch(login({ ...data }));
     }
