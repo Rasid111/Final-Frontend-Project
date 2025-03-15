@@ -56,7 +56,9 @@ function Cart() {
         return (
             <Container>
                 {
-                    products.map(product => (
+                    products.map(product => {
+                        const [localQuantity, setLocatlQUantity] = useStat();
+                        return (
                         <Row key={product.id} className="justify-content-center">
                             <Col xs={3}>
                                 <img className="w-100 h-100 object-fit-contain" src={product.thumbnail} alt="thumbnail" />
@@ -78,8 +80,8 @@ function Cart() {
                                         <Col xs={2}>
                                             <Button onClick={() => dispatch(decrementProductQuantity(product.id))} variant="danger" className="w-100">-</Button>
                                         </Col>
-                                        <Col xs={2}>
-                                            <Form.Control onInput={(ev) => dispatch(changeProductQuantity({ id: product.id, quantity: ev.target.value }))} value={product.quantity} className="w-100"></Form.Control>
+                                        <Col xs={3}>
+                                            <Form.Control type="number" onBlur={(ev) => dispatch(changeProductQuantity({ id: product.id, quantity: ev.target.value }))} value={product.quantity} className="w-100"></Form.Control>
                                         </Col>
                                         <Col xs={2}>
                                             <Button onClick={() => dispatch(incrementProductQuantity(product.id))} variant="success" className="w-100">+</Button>
@@ -96,7 +98,7 @@ function Cart() {
                                 <Button variant="danger" onClick={() => dispatch(removeProduct(product.id))}>{lang === "en" ? "Remove" : "Sil"}</Button>
                             </Col>
                         </Row>
-                    ))
+                    )})
                 }
             </Container>
         )

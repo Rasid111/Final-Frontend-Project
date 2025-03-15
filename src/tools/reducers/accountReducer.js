@@ -189,7 +189,7 @@ export const accountReducer = (state = initialState, action) => {
                                     }
                                 }
                                 return p;
-                            }).filter(p => p.quantity !== 0)
+                            }).filter(p => p.quantity > 0)
                         };
                     }
                     return account;
