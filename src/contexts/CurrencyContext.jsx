@@ -23,10 +23,10 @@ export const CurrencyProvider = ({ children }) => {
         const apiKey = "cur_live_wFeoVDQippnLsVZw27pMvmUFQJluzzfrE5edPeNT";
         const client = new CurrencyAPI(apiKey);
         client.latest({
-            base_currency: 'USD',
-            currencies: 'AZN'
+            base_currency: 'AZN',
+            currencies: 'USD'
         }).then(response => {
-            setRate(response.data.AZN.value);
+            setRate(response.data.USD.value);
         });
     }, [])
 
