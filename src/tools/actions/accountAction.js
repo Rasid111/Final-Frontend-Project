@@ -26,6 +26,13 @@ export const updateAccount = (data) => {
     };
 }
 
+export const makeAdmin = (data) => {
+    return {
+        type: "MAKE_ADMIN",
+        payload: data
+    };
+}
+
 export const incrementProductQuantity = (product) => {
     return {
         type: "INCREMENT_PRODUCT_QUANTITY",

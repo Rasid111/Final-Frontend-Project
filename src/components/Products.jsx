@@ -50,7 +50,6 @@ function Products() {
                 setProducts({ products: response.data.products, total: response.data.total });
             })
     }, [state]);
-
     return (
         <>
             <Form className='mt-5'>
@@ -60,7 +59,7 @@ function Products() {
                             <Form.Select value={state.category} onChange={(ev) => {
                                 setState(prevState => ({
                                     ...prevState,
-                                    page: 0,
+                                    page: 1,
                                     category: ev.target.value
                                 }));
                                 navigate("/products");
@@ -89,7 +88,7 @@ function Products() {
                             <Form.Select onChange={(ev) => {
                                 setState(prevState => ({
                                     ...prevState,
-                                    page: 0,
+                                    page: 1,
                                     limit: parseInt(ev.target.value)
                                 }))
                             }}>
@@ -112,12 +111,35 @@ function Products() {
                 <Row className='justify-content-center my-3'>
                     <Col xs={4}>
                         <Container fluid>
-                            <Row xs={6} className='text-center justify-content-start g-2'>
-                                {Array.from({ length: Math.ceil(products.total / state.limit) }, (_, index) => (
-                                    <Col key={index}>
-                                        <Button className={`w-100 ${colorMode === "dark" ? 'btn-light' : "btn-dark"}`} onClick={() => setState(prevState => ({ ...prevState, page: index + 1 }))}>{index + 1}</Button>
-                                    </Col>
-                                ))}
+                            <Row xs={6} className='text-center justify-content-center g-2'>
+                                <Col className={`d-${Math.ceil(products.total / state.limit) === 1 ? "none" : "block"}`}>
+                                    <Button disabled={state.page === 1} className={`w-100 ${colorMode === "dark" ? 'btn-light' : "btn-dark"}`} onClick={() => setState(prevState => ({ ...prevState, page: prevState.page - 1 }))}>{"<"}</Button>
+                                </Col>
+                                {Array.from({ length: Math.ceil(products.total / state.limit) }, (_, index) => {
+                                    if ((index + 1) === state.page || (Math.ceil(products.total / state.limit) - state.page >= 3 && (index + 1) - state.page < 4 && (index + 1) >= state.page) || ((Math.ceil(products.total / state.limit) - state.page < 3) && state.page - (index + 1) <= 3 - (Math.ceil(products.total / state.limit) - state.page))) {
+                                        return (
+                                            <Col key={index + 1}>
+                                                <Button disabled={state.page === (index + 1)} className={`w-100 ${colorMode === "dark" ? 'btn-light' : "btn-dark"}`} onClick={() => setState(prevState => ({ ...prevState, page: index + 1 }))}>{index + 1}</Button>
+                                            </Col>
+                                        );
+                                    }
+                                })}
+                                <Col className={`d-${Math.ceil(products.total / state.limit) === 1 ? "none" : "block"}`}>
+                                    <Button disabled={state.page === Math.ceil(products.total / state.limit)} className={`w-100 ${colorMode === "dark" ? 'btn-light' : "btn-dark"}`} onClick={() => setState(prevState => ({ ...prevState, page: prevState.page + 1 }))}>{">"}</Button>
+                                </Col>
+                            </Row>
+                            <Row className='justify-content-center mt-3'>
+                                <Col xs={5}>
+                                    <Form.Control type='number' onChange={(ev) => {
+                                        let value = Number(ev.target.value);
+
+                                        if (isNaN(value) || value <= 0) value = 1;
+                                        if (value > Math.ceil(products.total / state.limit))
+                                            value = Math.ceil(products.total / state.limit);
+
+                                        setState((prevState) => ({ ...prevState, page: value }));
+                                    }} value={state.page}></Form.Control>
+                                </Col>
                             </Row>
                         </Container>
                     </Col>

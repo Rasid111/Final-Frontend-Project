@@ -22,7 +22,6 @@ function Cart() {
     } = useContext(CurrencyContext);
 
     const cart = useSelector(state => state.accounts.find(account => account.email === state.auth).cart);
-
     useEffect(() => {
         const fetchProducts = async () => {
             const fetchedProducts = await Promise.all(
@@ -36,7 +35,6 @@ function Cart() {
     
         fetchProducts();
     }, [cart])
-
     if (cart.length === 0)
         return (
             <Container>
@@ -57,7 +55,6 @@ function Cart() {
             <Container>
                 {
                     products.map(product => {
-                        const [localQuantity, setLocatlQUantity] = useStat();
                         return (
                         <Row key={product.id} className="justify-content-center">
                             <Col xs={3}>
@@ -81,7 +78,11 @@ function Cart() {
                                             <Button onClick={() => dispatch(decrementProductQuantity(product.id))} variant="danger" className="w-100">-</Button>
                                         </Col>
                                         <Col xs={3}>
-                                            <Form.Control type="number" onBlur={(ev) => dispatch(changeProductQuantity({ id: product.id, quantity: ev.target.value }))} value={product.quantity} className="w-100"></Form.Control>
+                                            <Form.Control type="number" onChange={(ev) => {setProducts(products.map((p) => {
+                                                if (p.id === product.id) {
+                                                    return {...p, quantity: ev.target.value};
+                                                }
+                                            }))}} onBlur={(ev) => dispatch(changeProductQuantity({ id: product.id, quantity: ev.target.value }))} value={product.quantity} className="w-100"></Form.Control>
                                         </Col>
                                         <Col xs={2}>
                                             <Button onClick={() => dispatch(incrementProductQuantity(product.id))} variant="success" className="w-100">+</Button>

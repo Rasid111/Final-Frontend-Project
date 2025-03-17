@@ -27,13 +27,6 @@ function ProductPage() {
     console.log(productInfo)
     return (
         <Container>
-            <Row>
-                <Col sm={2}></Col>
-                <Col sm={8}>
-                    <Link className={`btn ${colorMode === "dark" ? "btn-light" : "btn-dark"} mt-5`} to="/">{lang === "en" ? "Back" : "Dala"}</Link>
-                </Col>
-                <Col sm={2}></Col>
-            </Row>
             <Row className="justify-content-center">
                 <Col sm={3}>
                     <img className="w-100 h-100 object-fit-contain" src={productInfo.thumbnail} alt="thumbnail" />

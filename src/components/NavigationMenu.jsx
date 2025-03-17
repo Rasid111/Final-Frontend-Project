@@ -37,7 +37,7 @@ function NavigationMenu() {
                 <Container>
                     <Row className='justify-content-between text-center mt-4'>
                         <Col xs={3} className='text-start'>
-                            <Button className='p-0' variant="link"><img className='small-icon' src="/icons/az.png" alt="az" /></Button>
+                            <Button onClick={() => switchLang()} className='p-0' variant="link"><img className='small-icon' src={`/icons/${lang === "en" ? "az" : "en"}.png`} alt={`${lang === "en" ? "az" : "en"}`} /></Button>
                         </Col>
                         <Col xs={3} className='d-flex justify-content-center align-items-center text-center'>
                             <div id='colorModeSwitch' className={`${colorMode} h-100 w-100 position-relative`} onClick={() => switchColorMode()}>
@@ -105,7 +105,7 @@ function NavigationMenu() {
                     <Col xs={2}>
                         <div className='d-flex g-0 justify-content-end pe-4'>
                             <div className='p-1'><Button className='p-0' variant="link"><img className='small-icon' src="/icons/location.png" alt="location" /></Button></div>
-                            <div className='p-1'><Button className='p-0' variant="link"><img className='small-icon' src="/icons/dollar.png" alt="dollar" /></Button></div>
+                            <div className='p-1'><Button onClick={switchCurrency} className='p-0' variant="link"><img className='small-icon' src={`/icons/${currency === "usd" ? "azn" : "dollar"}.png`} alt="dollar" /></Button></div>
                         </div>
                     </Col>
                 </Row>

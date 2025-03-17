@@ -19,16 +19,16 @@ export const CurrencyProvider = ({ children }) => {
 
     }, [])
 
-    // useEffect(() => {
-    //     const apiKey = "cur_live_wFeoVDQippnLsVZw27pMvmUFQJluzzfrE5edPeNT";
-    //     const client = new CurrencyAPI("");
-    //     client.latest({
-    //         base_currency: 'USD',
-    //         currencies: 'AZN'
-    //     }).then(response => {
-    //         setRate(response.data.AZN.value);
-    //     });
-    // }, [])
+    useEffect(() => {
+        const apiKey = "cur_live_wFeoVDQippnLsVZw27pMvmUFQJluzzfrE5edPeNT";
+        const client = new CurrencyAPI(apiKey);
+        client.latest({
+            base_currency: 'USD',
+            currencies: 'AZN'
+        }).then(response => {
+            setRate(response.data.AZN.value);
+        });
+    }, [])
 
     function switchCurrency() {
         localStorage.setItem("currency", currency === "usd" ? "azn" : "usd");

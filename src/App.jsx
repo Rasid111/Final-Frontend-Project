@@ -12,6 +12,7 @@ import './scss/style.scss'
 import Dashboard from "./components/Dashboard";
 import NotFoundPage from "./components/NotFoundPage";
 import Profile from "./components/profile";
+import AdminPanel from "./components/AdminPanel";
 
 function App() {
   return (
@@ -68,6 +69,14 @@ function App() {
             <>
               <NavigationMenu></NavigationMenu>
               <Dashboard></Dashboard>
+              <Footer></Footer>
+            </>
+          }>
+          </Route>
+          <Route path="/admin" element={
+            <>
+              <NavigationMenu></NavigationMenu>
+              <AdminPanel></AdminPanel>
               <Footer></Footer>
             </>
           }>

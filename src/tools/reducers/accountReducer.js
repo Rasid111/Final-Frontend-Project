@@ -10,7 +10,15 @@ let initialState = {
             login: null,
             email: null,
             password: null,
-            cart: []
+            cart: [],
+            isAdmin: false
+        },
+        {
+            login: "admin",
+            email: "admin@admin",
+            password: "admin",
+            cart: [],
+            isAdmin: true
         }
     ]
 };
@@ -63,7 +71,8 @@ export const accountReducer = (state = initialState, action) => {
                         login: action.payload.login,
                         email: action.payload.email,
                         password: action.payload.password,
-                        cart: buffer
+                        cart: buffer,
+                        isAdmin: false
                     }
                 ]
             };
@@ -140,6 +149,21 @@ export const accountReducer = (state = initialState, action) => {
                     ],
                     auth: action.payload.email
                 };
+            }
+        case "MAKE_ADMIN":
+            return {
+                ...state,
+                accounts: [
+                    ...state.accounts.map(account => {
+                        if (account.email === action.payload.email) {
+                            return {
+                                ...account,
+                                isAdmin: true
+                            }
+                        }
+                        return account;
+                    }),
+                ],
             }
         case "LOGOUT":
             return {

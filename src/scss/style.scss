@@ -954,6 +954,16 @@ select.form-select:focus {
     background-color: $iconHoveredBackground;
 }
 
-.aasd{
-    color: #fff
+.white-backgrounded {
+    border-radius: 30px;
+    background-color: #fff;
+}
+
+.styled-text {
+    background-color: #fff;
+    border-radius: 255px;
+    padding: 5px;
+    font-family: 'Arial Rounded MT Bold';
+    color: #6c6cd9;
+    font-size: 20px;
 }

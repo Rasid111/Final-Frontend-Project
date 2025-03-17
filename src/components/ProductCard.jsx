@@ -47,7 +47,7 @@ function ProductCard({ className, product, cardHeight = 300 }) {
                 </div>
                 <Container fluid className="p-0">
                     <Row className="justify-content-start g-1">
-                        <Col xs={8}><Button onClick={() => dispatch(addToCart({ id: product.id }))} className="w-100 add-to-cart" variant="warning">{lang === "en" ? "Add to cart" : "Səbətə əlavə et"}</Button></Col>
+                        <Col xs={8}><Button onClick={() => dispatch(addToCart({ id: product.id }))} className="w-100 add-to-cart" variant="warning">{lang === "en" ? "Add to cart" : "Səbətə at"}</Button></Col>
                         <Col xs={4}><Button as={Link} to={`/product/${product.id}`} className="w-100 more">{lang === "en" ? "More" : "Ətraflı"}</Button></Col>
                     </Row>
                 </Container>

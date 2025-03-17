@@ -47,7 +47,7 @@ function Profile() {
     const updateHandle = (ev) => {
         ev.preventDefault();
         const data = Object.fromEntries((new FormData(ev.target)).entries());
-        if ((data.newPassword.length >= 8 && /\d/.test(data.newPassword) && /\D/.test(data.newPassword) && data.newPassword === data.confirmation) || (data.newPassword === "" && data.confirmation ==""))
+        if ((data.newPassword.length >= 8 && /\d/.test(data.newPassword) && /\D/.test(data.newPassword) && data.newPassword === data.confirmation) || (data.newPassword === "" && data.confirmation == ""))
             dispatch(updateAccount({ ...data }));
         console.log(data);
         setFormData(data);
@@ -128,6 +128,15 @@ function Profile() {
                                     </Row>
                                 </Container>
                             </Form>
+                        </div>
+                    </Col>
+                    <Col hidden={!profile.isAdmin} xs={{ span: 3, offset: 0 }}>
+                        <div className="backgrounded text-center p-3" style={{ borderRadius: 50 }}>
+                            <span style={{ fontFamily: "Arial Rounded MT Bold", color: "#fff", fontSize: 25 }}>
+                                You are admin
+                            </span>
+                            <Button className="w-100 h-100" variant="" style={{ backgroundColor: "#fff", borderRadius: 255, fontFamily: "Arial Rounded MT Bold", color: "#6c6cd9", fontSize: 20 }} as={Link} to="/dashboard">Dashboard</Button>
+                            <Button className="w-100 h-100 mt-2" variant="" style={{ backgroundColor: "#fff", borderRadius: 255, fontFamily: "Arial Rounded MT Bold", color: "#6c6cd9", fontSize: 20 }} as={Link} to="/admin">Manage users</Button>
                         </div>
                     </Col>
                 </Row>
