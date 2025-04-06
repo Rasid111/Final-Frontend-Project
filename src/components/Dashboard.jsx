@@ -3,30 +3,51 @@ import supabase from "../../utils/supabase";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { BiCategory } from "react-icons/bi";
 
 const Dashboard = () => {
-    const isAdmin = useSelector(state => {
-        return state.accounts.some(account => {
-            return account.email === state.auth && account.isAdmin
-        });
-    })
+
     const navigate = useNavigate();
+    const auth = useSelector(state => state.auth.id);
+
     useEffect(() => {
-        if (!isAdmin)
+        if (auth === null) {
+            navigate("/login");
+        }
+    }, [auth]);
+
+    const [profile, setProfile] = useState({});
+    
+    useEffect(() => {
+        async function getUserById(userId) {
+            const { data } = await supabase
+                .from('Users')
+                .select('*')
+                .eq('id', userId)
+                .single()
+            setProfile(data);
+        }
+        getUserById(auth);
+    }, [auth]);
+    
+    useEffect(() => {
+        if (!profile && !profile.is_admin) {
             navigate("/");
-    })
+        }
+    }, [profile]);
 
     const [products, setProducts] = useState([]);
     const [update, setUpdate] = useState(-1);
     const [updated, setUpdated] = useState(true);
 
     const updateProduct = async (product) => {
-        console.log(product);
         const { error } = await supabase
             .from('Products')
             .update({
-                img: product.img,
+                thumbnail: product.img,
                 title: product.title,
+                brand: product.brand,
+                category: product.category,
                 price: product.price,
                 description: product.description,
             })
@@ -45,7 +66,10 @@ const Dashboard = () => {
 
     useEffect(() => {
         const getProductsFromSupaBase = async () => {
-            const { data } = await supabase.from("Products").select();
+            const { data } = await supabase
+                .from("Products")
+                .select()
+                .order('id', { ascending: true })
             setProducts(data);
         }
         getProductsFromSupaBase();
@@ -57,12 +81,12 @@ const Dashboard = () => {
             {products.map(p => {
                 return (
                     <div key={p.id}>
-                        <Row className="backgrounded g-1 mt-2 p-3 justify-content-between align-items-center">
+                        <Row className="backgrounded g-1 my-2 p-3 justify-content-between align-items-center">
                             <Col xs={1}>
                                 <span className="white-backgrounded p-2">{p.id}</span>
                             </Col>
                             <Col xs={1}>
-                                <img className="w-100 object-fit-contain" src={p.img} alt="thumbnail" />
+                                <img className="w-100 object-fit-contain" src={p.thumbnail} alt="thumbnail" />
                             </Col>
                             <Col xs={3}>
                                 <span className="white-backgrounded p-2">{p.title}</span>
@@ -81,17 +105,25 @@ const Dashboard = () => {
                             </Col>
                         </Row>
                         <Row className={`justify-content-center text-center ${update !== p.id ? "d-none" : "d-flex"}`}>
-                            <Col xs={{ span: 4, offset: 6 }}>
+                            <Col xs={{ span: 5, offset: 6 }}>
                                 <Form onSubmit={(ev) => {
                                     ev.preventDefault();
                                     updateProduct({ ...Object.fromEntries(new FormData(ev.target).entries()), id: p.id });
                                     setUpdated(true);
                                     setUpdate(-1);
                                 }}>
-                                    <Form.Control name="title" className="mt-3" placeholder="title"></Form.Control>
-                                    <Form.Control name="img" className="mt-1" placeholder="imgUrl"></Form.Control>
-                                    <Form.Control name="description" className="mt-1" placeholder="description"></Form.Control>
-                                    <Form.Control name="price" className="mt-1" placeholder="price(usd)"></Form.Control>
+                                    <Form.Label htmlFor="title" className="d-inline-block w-25 text-start">Title</Form.Label>
+                                    <Form.Control name="title" defaultValue={p.title} className="d-inline-block w-75" placeholder="title"></Form.Control>
+                                    <Form.Label htmlFor="brand" className="d-inline-block w-25 text-start">Brand</Form.Label>
+                                    <Form.Control name="brand" defaultValue={p.brand} className="mt-1 d-inline-block w-75" placeholder="brand"></Form.Control>
+                                    <Form.Label htmlFor="category" className="d-inline-block w-25 text-start">Category</Form.Label>
+                                    <Form.Control name="category" defaultValue={p.category} className="mt-1 d-inline-block w-75" placeholder="category"></Form.Control>
+                                    <Form.Label htmlFor="thumbnail" className="d-inline-block w-25 text-start">Thumbnail URL</Form.Label>
+                                    <Form.Control name="thumbnail" defaultValue={p.thumbnail} className="mt-1 d-inline-block w-75" placeholder="thumbnail url"></Form.Control>
+                                    <Form.Label htmlFor="description" className="d-inline-block w-25 text-start">Desctiption</Form.Label>
+                                    <Form.Control name="description" defaultValue={p.description} className="mt-1 d-inline-block w-75" placeholder="description"></Form.Control>
+                                    <Form.Label htmlFor="price" className="d-inline-block w-25 text-start">Price (USD)</Form.Label>
+                                    <Form.Control name="price" defaultValue={p.price} className="mt-1 d-inline-block w-75" placeholder="price(usd)"></Form.Control>
                                     <Button className="mt-2" type="submit" variant="" style={{ backgroundColor: "#6c6cd9", borderRadius: 255, fontFamily: "Arial Rounded MT Bold", color: "#fff", fontSize: 20 }}>Save</Button>
                                     <Button className="ms-2 mt-2" type="button" variant="" style={{ backgroundColor: "#6c6cd9", borderRadius: 255, fontFamily: "Arial Rounded MT Bold", color: "#fff", fontSize: 20 }} onClick={() => setUpdate(-1)}>Cancel</Button>
                                 </Form>

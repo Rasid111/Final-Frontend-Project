@@ -2,26 +2,68 @@ import { useEffect, useState } from "react";
 import { Button, Col, Container, Modal, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { makeAdmin } from "../tools/actions/accountAction";
+import supabase from "../../utils/supabase";
 
 function AdminPanel() {
-    const accounts = useSelector(state => state.accounts);
-    const auth = useSelector(state => state.auth);
-
-    const dispatch = useDispatch();
 
     const navigate = useNavigate();
+    const auth = useSelector(state => state.auth.id);
+
     useEffect(() => {
-        if (!accounts.some(account => account.email === auth && account.isAdmin)) {
+        if (auth === null) {
+            navigate("/login");
+        }
+    }, [auth]);
+
+    const [profile, setProfile] = useState({});
+    
+    useEffect(() => {
+        async function getUserById(userId) {
+            const { data } = await supabase
+                .from('Users')
+                .select('*')
+                .eq('id', userId)
+                .single()
+            setProfile(data);
+        }
+        getUserById(auth);
+    }, [auth]);
+    
+    useEffect(() => {
+        if (!profile && !profile.is_admin) {
             navigate("/");
         }
-    })
+    }, [profile]);
+
+    const [update, setUpdate] = useState(false);
+    const [accounts, setAccounts] = useState([]);
+    useEffect(() => {
+        async function getAccounts() {
+            const {data} = await supabase
+                .from("Users")
+                .select("*");
+            setAccounts(data);
+        }
+        getAccounts();
+    }, [update])
+    const dispatch = useDispatch();
 
     const [show, setShow] = useState(false);
     const [account, setAccount] = useState();
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    async function makeAdmin(account) {
+        const { error } = await supabase.
+            from("Users")
+            .update({
+                is_admin: true
+            })
+            .eq("id", account.id)
+        setUpdate(!update);
+        console.log(error);
+    }
 
     return (
         <Container>
@@ -32,7 +74,7 @@ function AdminPanel() {
                 <Modal.Body>Are you sure you want to make {account ? account.login : ""} an administrator?</Modal.Body>
                 <Modal.Footer>
                     <Button onClick = {() => {
-                        dispatch(makeAdmin(account));
+                        makeAdmin(account);
                         handleClose();
                     }} variant="" style={{ backgroundColor: "#6c6cd9", borderRadius: 255, fontFamily: "Arial Rounded MT Bold", color: "#fff", fontSize: 20 }}>
                         Yes
@@ -42,7 +84,7 @@ function AdminPanel() {
                     </Button>
                 </Modal.Footer>
             </Modal>
-            {accounts.map((account, index) => {
+            {!accounts ? "..." : accounts.map((account, index) => {
                 if (account.login === null) {
                     return <div key={index}></div>
                 }
@@ -56,7 +98,7 @@ function AdminPanel() {
                             <span className="styled-text d-block">Email</span>
                         </Col>
                         <Col xs={11} className="white-backgrounded p-2 mt-2">{account.email}</Col>
-                        {account.isAdmin ? (
+                        {account.is_admin ? (
                             <Col xs={2} className="mt-2 text-center"><span className="styled-text d-block">Is already Admin</span></Col>
                         ) : (
                             <Col xs={2} className="mt-2">

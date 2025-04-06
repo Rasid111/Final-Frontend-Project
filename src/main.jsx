@@ -4,14 +4,13 @@ import App from './App.jsx'
 import { ColorModeProvider } from './contexts/ColorModeContex.jsx'
 import { CurrencyProvider } from './contexts/CurrencyContext.jsx'
 import { LangProvider } from './contexts/LangContext.jsx'
-import configureStore from './tools/store/configureStore.js'
 import { Provider } from 'react-redux'
-import { accountReducer } from './tools/reducers/accountReducer.js'
+import { store } from './tools/store.js'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
 
-    <Provider store={configureStore(accountReducer)}>
+    <Provider store={store}>
       <ColorModeProvider>
         <LangProvider>
           <CurrencyProvider>

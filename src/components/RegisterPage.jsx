@@ -1,24 +1,30 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { createAccount } from "../tools/actions/accountAction";
 import { LangContext } from "../contexts/LangContext";
 import { Link, useNavigate } from "react-router-dom";
 import FormRange from "react-bootstrap/esm/FormRange";
+import Swal from "sweetalert2";
+import supabase from "../../utils/supabase";
 
 
 function RegisterPage() {
-
+    
     const navigate = useNavigate();
+
+    const auth = useSelector(state => state.auth.id);
+    useEffect(() => {
+        if (auth !== null) {
+            navigate("/profile");
+        }
+    }, [auth]);
+
     const lang = useContext(LangContext)[0];
 
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    const dispatch = useDispatch();
-
-    const accounts = useSelector(state => state.accounts)
 
     const [formData, setFormData] = useState({
         login: null,
@@ -26,16 +32,37 @@ function RegisterPage() {
         password: null,
         confirmation: null
     });
-    const register = (ev) => {
+    const cart = useSelector(state => state.cart);
+    console.log(cart);
+    const register = async (ev) => {
         ev.preventDefault();
-        const data = Object.fromEntries((new FormData(ev.target)).entries());
-        if (data.password.length >= 8 && /\d/.test(data.password) && /\D/.test(data.password) && data.password === data.confirmation ) {
-            dispatch(createAccount({ ...data }));
-            if (accounts.some(account => account.email === formData.email)) {
+        const user = Object.fromEntries((new FormData(ev.target)).entries());
+        if (user.password.length >= 8 && /\d/.test(user.password) && /\D/.test(user.password) && user.password === user.confirmation) {
+            const { data, error } = await supabase
+                .from('Users')
+                .insert([{
+                    login: user.login,
+                    email: user.email.toLowerCase(),
+                    password: user.password,
+                    cart: cart,
+                    is_admin: false
+                }])
+                .select();
+            if (error) {
+                console.log(error);
+                Swal.fire({
+                    title: "Registration failed",
+                    text: "Account with this email already exists",
+                    icon: "error",
+                    customClass: {
+                        popup: 'swal2-dark',
+                    }
+                });
+            } else{
                 navigate("/login");
             }
         }
-        setFormData(data);
+        setFormData(user);
     }
 
     return (
@@ -49,7 +76,7 @@ function RegisterPage() {
                 </Col>
                 <Col xs={6} className="backgrounded text-center d-flex flex-column align-items-center" style={{ borderRadius: 50 }}>
                     <div className="w-100 px-2">
-                        <Form onSubmit={(ev) => {register(ev)}}>
+                        <Form onSubmit={(ev) => { register(ev) }}>
                             <Form.Group className="text-center">
                                 <Form.Label className="my-3" style={{ fontFamily: "Arial Rounded MT Bold", color: "#fff", fontSize: 25 }}>
                                     login.
@@ -116,41 +143,6 @@ function RegisterPage() {
             </Row>
         </Container>
     )
-    
-
-        // <Container className="mt-5">
-        //     <Row className="justify-content-center">
-        //         <Col xs={6}>
-        //             <Form onSubmit={(ev) => {
-        //                 ev.preventDefault();
-        //                 let userInfo = Object.fromEntries(new FormData(ev.target).entries())
-        //                 dispatch(createAccount({ ...userInfo }));
-        //             }}>
-        //                 <Form.Group className="mb-3">
-        //                     <Form.Label>{lang === "en" ? "Username" : "İstifadəçi adı"}</Form.Label>
-        //                     <Form.Control onInput={(ev) => setUsername(ev.target.value)} name="name" type="text" placeholder={lang === "en" ? "Enter username" : "İstifadəçi adı daxil edin"} />
-        //                 </Form.Group>
-
-        //                 <Form.Group className="mb-3">
-        //                     <Form.Label>{lang === "en" ? "Email address" : "E-poçt ünvanı"}</Form.Label>
-        //                     <Form.Control onInput={(ev) => setEmail(ev.target.value)} name="email" type="email" placeholder={lang === "en" ? "Enter email" : "E-poçtu daxil edin"} />
-        //                     <Form.Text className="text-muted">
-        //                         {lang === "en" ? "We'll never share your email with anyone else." : "E-poçtunuzu heç kimlə bölüşməyəcəyik."}
-        //                     </Form.Text>
-        //                 </Form.Group>
-
-        //                 <Form.Group className="mb-3">
-        //                     <Form.Label>{lang === "en" ? "Password" : "Parol"}</Form.Label>
-        //                     <Form.Control onInput={(ev) => setPassword(ev.target.value)} name="password" type="password" placeholder={lang === "en" ? "Enter password" : "Parol daxil edin"} />
-        //                 </Form.Group>
-        //                 <Button variant="primary" type="submit" disabled={!(username.length > 0 && email.length > 0 && password.length >= 6)}>
-        //                     {lang === "en" ? "Register" : "Qeydiyyatdan keçmək"}
-        //                 </Button>
-        //                 <Form.Text className="d-block">{lang === "en" ? "Password must contain at least 6 characters" : "Şifrə ən azı 6 simvoldan ibarət olmalıdır"}</Form.Text>
-        //             </Form>
-        //         </Col>
-        //     </Row>
-        // </Container>
 }
 
 export default RegisterPage;

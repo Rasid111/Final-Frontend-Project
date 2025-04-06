@@ -5,8 +5,13 @@ import { Link, useParams } from "react-router-dom";
 import { LangContext } from "../contexts/LangContext";
 import { CurrencyContext } from "../contexts/CurrencyContext";
 import { ColorModeContext } from "../contexts/ColorModeContex";
+import supabase from "../../utils/supabase";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../tools/slices/cartSlice";
+import Swal from "sweetalert2";
 
 function ProductPage() {
+    const auth = useSelector(state => state.auth.id);
 
     const lang = useContext(LangContext)[0];
     const currencyContext = useContext(CurrencyContext);
@@ -18,13 +23,25 @@ function ProductPage() {
     const params = useParams();
     const [productInfo, setProductInfo] = useState({});
 
+    const dispatch = useDispatch();
+
     useEffect(() => {
-        axios.get(`https://dummyjson.com/products/${params.id}`)
-            .then(function (response) {
-                setProductInfo(response.data);
-            })
-    }, []);
-    console.log(productInfo)
+        async function getProduct(id) {
+            const { data, error } = await supabase
+                .from("Products")
+                .select("*")
+                .eq("id", id)
+                .single()
+            setProductInfo({
+                ...data,
+                reviews: JSON.parse(data.reviews)
+            });
+            if (error) {
+                console.log(error);
+            }
+        }
+        getProduct(params.id)
+    }, [params]);
     return (
         <Container>
             <Row className="justify-content-center">
@@ -40,7 +57,36 @@ function ProductPage() {
                             `${Math.round(productInfo.price / currencyRate * 100) / 100} AZN`
                         }
                     </p>
-                    <Button variant="warning" className="w-50 mt-3">Add to cart</Button>
+                    <Button variant="warning"onClick={async () => {
+                            if (auth !== null) {
+                                const { data, error } = await supabase
+                                    .from("Users")
+                                    .select("*")
+                                    .eq("id", auth)
+                                    .single();
+                                const existingProduct = data.cart.find(p => p.id === productInfo.id);
+
+                                if (existingProduct) {
+                                    existingProduct.quantity += 1;
+                                } else {
+                                    data.cart.push({ id: productInfo.id, quantity: 1 });
+                                }
+                                await supabase
+                                    .from("Users")
+                                    .update({ cart: data.cart })
+                                    .eq("id", auth);
+                                Swal.fire({
+                                    title: "Producted added to Your cart",
+                                    icon: "success"
+                                })
+                            } else {
+                                dispatch(addToCart({ id: productInfo.id }))
+                                Swal.fire({
+                                    title: "Producted added to Your local cart",
+                                    icon: "success"
+                                })
+                            }
+                        }} className="w-50 mt-3">Add to cart</Button>
                 </Col>
             </Row>
             <Row className="justify-content-center">

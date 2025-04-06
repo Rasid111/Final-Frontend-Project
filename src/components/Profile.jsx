@@ -1,21 +1,35 @@
-import { useDebugValue, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { logout, updateAccount } from "../tools/actions/accountAction";
-import { LiaCommentAltSolid } from "react-icons/lia";
+import supabase from "../../utils/supabase";
+import { logout } from "../tools/slices/authSlice";
+import Swal from "sweetalert2";
+import { clearCart } from "../tools/slices/cartSlice";
 
 function Profile() {
 
     const navigate = useNavigate();
-    const profile = useSelector(state => state.accounts.find(account => account.email === state.auth));
-
+    const auth = useSelector(state => state.auth.id);
 
     useEffect(() => {
-        if (profile.email === null) {
+        if (auth === null) {
             navigate("/login");
         }
-    }, [profile]);
+    }, [auth]);
+
+    const [profile, setProfile] = useState({});
+    useEffect(() => {
+        async function getUserById(userId) {
+            const { data } = await supabase
+                .from('Users')
+                .select('*')
+                .eq('id', userId)
+                .single()
+            setProfile(data);
+        }
+        getUserById(auth);
+    }, [auth]);
 
     const [formData, setFormData] = useState({
         login: null,
@@ -44,12 +58,49 @@ function Profile() {
         }
     }, [profile]);
 
-    const updateHandle = (ev) => {
+    const updateHandle = async (ev) => {
         ev.preventDefault();
         const data = Object.fromEntries((new FormData(ev.target)).entries());
-        if ((data.newPassword.length >= 8 && /\d/.test(data.newPassword) && /\D/.test(data.newPassword) && data.newPassword === data.confirmation) || (data.newPassword === "" && data.confirmation == ""))
-            dispatch(updateAccount({ ...data }));
-        console.log(data);
+        if ((data.newPassword.length >= 8 && /\d/.test(data.newPassword) && /\D/.test(data.newPassword) && data.newPassword === data.confirmation) || (data.newPassword === "" && data.confirmation == "")) {
+            if (data.password === profile.password) {
+                const { error } = await supabase
+                    .from("Users")
+                    .update({
+                        login: data.login,
+                        email: data.email,
+                        password: data.newPassword === "" ? profile.password : data.newPassword
+                    })
+                    .eq("id", auth);
+                    if (error && error.code == "23505") {
+                        Swal.fire({
+                            title: "Update failed",
+                            text: "This email is already used",
+                            icon: "error",
+                            customClass: {
+                                popup: 'swal2-dark',
+                            }
+                        });
+                        return;
+                    }
+
+                Swal.fire({
+                    title: "Update succeed",
+                    icon: "success",
+                    customClass: {
+                        popup: 'swal2-dark',
+                    }
+                });
+            } else {
+                Swal.fire({
+                    title: "Update failed",
+                    text: "Incorrect password",
+                    icon: "error",
+                    customClass: {
+                        popup: 'swal2-dark',
+                    }
+                });
+            }
+        }
         setFormData(data);
     }
 
@@ -120,7 +171,9 @@ function Profile() {
                                         <Col xs={6}>
                                             <Button type="button" onClick={() => {
                                                 dispatch(logout());
-                                                navigate("/login");
+                                                dispatch(clearCart());
+                                                console.log(1)
+                                                navigate("/");
                                             }} className="w-100 h-100" variant="" style={{ backgroundColor: "#d30101", borderRadius: 255, fontFamily: "Arial Rounded MT Bold", color: "#fff", fontSize: 40 }}>
                                                 logout
                                             </Button>
@@ -130,7 +183,7 @@ function Profile() {
                             </Form>
                         </div>
                     </Col>
-                    <Col hidden={!profile.isAdmin} xs={{ span: 3, offset: 0 }}>
+                    <Col hidden={!profile.is_admin} xs={{ span: 3, offset: 0 }}>
                         <div className="backgrounded text-center p-3" style={{ borderRadius: 50 }}>
                             <span style={{ fontFamily: "Arial Rounded MT Bold", color: "#fff", fontSize: 25 }}>
                                 You are admin

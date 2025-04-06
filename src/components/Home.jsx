@@ -40,22 +40,41 @@ function Home() {
     }, []);
 
     useEffect(() => {
-        axios.get("https://dummyjson.com/products?sortBy=rating&order=desc&limit=10")
-            .then((response) => {
-                setTopProducts(response.data.products);
-            });
-        axios.get("https://dummyjson.com/products?limit=8")
-            .then((response) => {
-                setProducts(response.data.products);
-            });
-        axios.get("https://dummyjson.com/products/category/vehicle?limit=4")
-            .then((response) => {
-                setCars(response.data.products);
-            });
-        axios.get("https://dummyjson.com/products/category/motorcycle?limit=4")
-            .then((response) => {
-                setMotorcycles(response.data.products);
-            });
+        const getTopProducts = async () => {
+            const { data } = await supabase
+                .from("Products")
+                .select("*")
+                .limit(10)
+                .order('rating', { ascending: false })
+            setTopProducts(data);
+        }
+        const getRecomendedProducts = async () => {
+            const { data } = await supabase
+                .from("Products")
+                .select("*")
+                .limit(8);
+            setProducts(data);
+        }
+        const getCars = async () => {
+            const { data } = await supabase
+                .from("Products")
+                .select("*")
+                .eq('category', "vehicle")
+                .limit(4);
+            setCars(data);
+        }
+        const getMotorcycles = async () => {
+            const { data } = await supabase
+                .from("Products")
+                .select("*")
+                .eq('category', "motorcycle")
+                .limit(4);
+            setMotorcycles(data);
+        }
+        getTopProducts();
+        getRecomendedProducts();
+        getCars();
+        getMotorcycles();
     }, []);
 
     const [isVisible, setIsVisible] = useState(false);

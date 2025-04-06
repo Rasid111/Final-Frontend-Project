@@ -1,31 +1,48 @@
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "../tools/actions/accountAction";
 import { useContext, useEffect } from "react";
 import { LangContext } from "../contexts/LangContext";
 import { Link, useNavigate } from "react-router-dom";
+import supabase from "../../utils/supabase";
+import { login } from "../tools/slices/authSlice";
+import { clearCart, setCart } from "../tools/slices/cartSlice";
 
 
 function LoginPage() {
-
-    const lang = useContext(LangContext)[0];
-
+    
     const navigate = useNavigate();
-
-    const dispatch = useDispatch();
-    const auth = useSelector((state) => state.auth);
-
+    
+    const auth = useSelector(state => state.auth.id);
     useEffect(() => {
         if (auth !== null) {
-            navigate("/");
+            navigate("/profile");
         }
     }, [auth]);
 
-    const loginHandle = (ev) => {
+    const lang = useContext(LangContext)[0];
+
+
+    async function getUser(userData) {
+        const { data } = await supabase
+            .from('Users')
+            .select('*')
+            .eq('email', userData.email.toLowerCase())
+            .eq("password", userData.password)
+            .single();
+        return data;
+    }
+
+    const dispatch = useDispatch();
+
+    const loginHandle = async (ev) => {
         ev.preventDefault();
         const data = Object.fromEntries((new FormData(ev.target)).entries());
-        navigate("/login");
-        dispatch(login({ ...data }));
+        const userData = await getUser(data);
+        if (userData) {
+            dispatch(login({ id: userData.id }));
+            dispatch(setCart(userData.cart));
+            navigate("/");
+        }
     }
 
     return (

@@ -4,12 +4,17 @@ import { ColorModeContext } from "../contexts/ColorModeContex";
 import { CurrencyContext } from "../contexts/CurrencyContext";
 import { LangContext } from "../contexts/LangContext";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { addToCart } from "../tools/actions/accountAction";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../tools/slices/cartSlice";
+import supabase from "../../utils/supabase";
+import Swal from "sweetalert2";
 
 function ProductCard({ className, product, cardHeight = 300 }) {
 
     const dispatch = useDispatch();
+
+    const cart = useSelector(state => state.cart);
+    const auth = useSelector(state => state.auth.id);
 
     const lang = useContext(LangContext)[0];
     const colorMode = useContext(ColorModeContext)[0];
@@ -47,7 +52,35 @@ function ProductCard({ className, product, cardHeight = 300 }) {
                 </div>
                 <Container fluid className="p-0">
                     <Row className="justify-content-start g-1">
-                        <Col xs={8}><Button onClick={() => dispatch(addToCart({ id: product.id }))} className="w-100 add-to-cart" variant="warning">{lang === "en" ? "Add to cart" : "Səbətə at"}</Button></Col>
+                        <Col xs={8}><Button onClick={async () => {
+                            if (auth !== null) {
+                                const { data, error } = await supabase
+                                    .from("Users")
+                                    .select("*")
+                                    .eq("id", auth)
+                                    .single();
+                                const existingProduct = data.cart.find(p => p.id === product.id);
+
+                                if (existingProduct) {
+                                    existingProduct.quantity += 1;
+                                } else {
+                                    data.cart.push({ id: product.id, quantity: 1 });
+                                }
+                                await supabase
+                                    .from("Users")
+                                    .update({ cart: data.cart })
+                                    .eq("id", auth);
+                                Swal.fire({
+                                    title: "Producted added to Your cart",
+                                    icon: "success"
+                                })
+                            }
+                            dispatch(addToCart({ id: product.id }))
+                            Swal.fire({
+                                title: "Producted added to Your local cart",
+                                icon: "success"
+                            })
+                        }} className="w-100 add-to-cart" variant="warning">{lang === "en" ? "Add to cart" : "Səbətə at"}</Button></Col>
                         <Col xs={4}><Button as={Link} to={`/product/${product.id}`} className="w-100 more">{lang === "en" ? "More" : "Ətraflı"}</Button></Col>
                     </Row>
                 </Container>

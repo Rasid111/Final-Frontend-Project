@@ -11,7 +11,6 @@ import { FaLightbulb, FaRegLightbulb } from 'react-icons/fa';
 import { CurrencyContext } from '../contexts/CurrencyContext';
 import { LangContext } from '../contexts/LangContext';
 import { useDispatch, useSelector } from 'react-redux';
-import { logout } from '../tools/actions/accountAction';
 
 function NavigationMenu() {
 
@@ -23,7 +22,7 @@ function NavigationMenu() {
     const [show, setShow] = useState(false);
     const [searchInput, setSearchInput] = useState("");
 
-    const isAuthenticated = useSelector(state => state.accounts.find(account => account.email === state.auth) !== null);
+    const isAuthenticated = useSelector(state => state.auth.id !== null);
 
     const dispatch = useDispatch();
 
