@@ -67,7 +67,7 @@ function Checkout() {
     return (
         <Container className="backgrounded p-3">
             <Row className="px-2">
-                <Col xs={2} style={{ height: 50, fontFamily: "Arial Rounded MT Bold", color: "#6c6cd9", }} className="d-flex align-items-center justify-content-center white-backgrounded">
+                <Col xs={12} lg={2} style={{ height: 50, fontFamily: "Arial Rounded MT Bold", color: "#6c6cd9", }} className="d-flex align-items-center justify-content-center white-backgrounded">
                     Total: {total} USD
                 </Col>
             </Row>
@@ -104,7 +104,7 @@ function Checkout() {
                             </Form.Label>
                             <Form.Control ref={discount} name="discountCode" className="rounded-5 py-3" type="text" />
                         </Form.Group>
-                        <Button type="button" className="mt-4 ms-2" variant="" style={{ backgroundColor: "#fff", borderRadius: 255, fontFamily: "Arial Rounded MT Bold", color: "#6c6cd9", fontSize: 25 }}
+                        <Button type="button" className="mt-4 w-100 ms-2" variant="warning" style={{ borderRadius: 255, fontFamily: "Arial Rounded MT Bold", fontSize: 25 }}
                             onClick={async () => {
                                 const { data, error } = await supabase
                                     .from("DiscountCodes")

@@ -59,7 +59,7 @@ function ProductPage() {
         }
         getProfile(auth);
     }, [auth]);
-    
+
     return (
         <Container>
             <Row className="justify-content-center">
@@ -75,78 +75,86 @@ function ProductPage() {
                             `${Math.round(productInfo.price / currencyRate * 100) / 100} AZN`
                         }
                     </p>
-                    <Button variant="warning" onClick={async () => {
-                        if (auth !== null) {
-                            const { data, error } = await supabase
-                                .from("Users")
-                                .select("*")
-                                .eq("id", auth)
-                                .single();
-                            const existingProduct = data.cart.find(p => p.id === productInfo.id);
+                    <Container className="p-0 mb-2">
+                        <Row className="justify-content-start g-2">
+                            <Col xs={12} lg={6}>
+                                <Button variant="warning" onClick={async () => {
+                                    if (auth !== null) {
+                                        const { data, error } = await supabase
+                                            .from("Users")
+                                            .select("*")
+                                            .eq("id", auth)
+                                            .single();
+                                        const existingProduct = data.cart.find(p => p.id === productInfo.id);
 
-                            if (existingProduct) {
-                                existingProduct.quantity += 1;
-                            } else {
-                                data.cart.push({ id: productInfo.id, quantity: 1 });
-                            }
-                            await supabase
-                                .from("Users")
-                                .update({ cart: data.cart })
-                                .eq("id", auth);
-                            Swal.fire({
-                                title: "Producted added to Your cart",
-                                icon: "success"
-                            })
-                        } else {
-                            dispatch(addToCart({ id: productInfo.id }))
-                            Swal.fire({
-                                title: "Producted added to Your local cart",
-                                icon: "success"
-                            })
-                        }
-                    }} className="w-50 mt-3">Add to cart</Button>
-                    <Button
-                    variant=""
-                    hidden={profile && profile.wishlist.includes(productInfo.id)}
-                    className="w-25 ms-1 mt-3 add-to-wishlist-btn"
-                    onClick={async () => {
-                        setProfile({
-                            ...profile,
-                            wishlist: [...profile.wishlist, productInfo.id]
-                        })
-                        await supabase
-                            .from("Users")
-                            .update({wishlist: [...profile.wishlist, productInfo.id]})
-                            .eq("id", auth);
-                    }}
-                    >
-                        Add to wishlist
-                    </Button>
-                    <Button
-                    variant=""
-                    onMouseLeave={(ev) => {
-                        ev.target.style.backgroundColor = "#6c6cd9";
-                        ev.target.innerHTML = "Wishlisted";
-                    }}
-                    onMouseEnter={(ev) => {
-                        ev.target.style.backgroundColor = "rgb(211, 1, 1)";
-                        ev.target.innerHTML = "Remove";
-                    }}
-                    hidden={profile && !profile.wishlist.includes(productInfo.id)}
-                    className="w-25 ms-1 mt-3 add-to-wishlist-btn"
-                    onClick={async () => {
-                        setProfile({
-                            ...profile,
-                            wishlist: profile.wishlist.filter(id => id !== productInfo.id)
-                        })
-                        await supabase
-                            .from("Users")
-                            .update({wishlist: profile.wishlist.filter(id => id !== productInfo.id)})
-                            .eq("id", auth);
-                    }}
-                    >
-                        Wishlisted
-                    </Button>
+                                        if (existingProduct) {
+                                            existingProduct.quantity += 1;
+                                        } else {
+                                            data.cart.push({ id: productInfo.id, quantity: 1 });
+                                        }
+                                        await supabase
+                                            .from("Users")
+                                            .update({ cart: data.cart })
+                                            .eq("id", auth);
+                                        Swal.fire({
+                                            title: "Producted added to Your cart",
+                                            icon: "success"
+                                        })
+                                    } else {
+                                        dispatch(addToCart({ id: productInfo.id }))
+                                        Swal.fire({
+                                            title: "Producted added to Your local cart",
+                                            icon: "success"
+                                        })
+                                    }
+                                }} className="w-100 w-xl-100">Add to cart</Button>
+                            </Col>
+                            <Col xs={12} lg={6}>
+                                <Button
+                                    variant=""
+                                    hidden={profile && profile.wishlist.includes(productInfo.id)}
+                                    className="w-100 add-to-wishlist-btn"
+                                    onClick={async () => {
+                                        setProfile({
+                                            ...profile,
+                                            wishlist: [...profile.wishlist, productInfo.id]
+                                        })
+                                        await supabase
+                                            .from("Users")
+                                            .update({ wishlist: [...profile.wishlist, productInfo.id] })
+                                            .eq("id", auth);
+                                    }}
+                                >
+                                    Add to wishlist
+                                </Button>
+                                <Button
+                                    variant=""
+                                    onMouseLeave={(ev) => {
+                                        ev.target.style.backgroundColor = "#6c6cd9";
+                                        ev.target.innerHTML = "Wishlisted";
+                                    }}
+                                    onMouseEnter={(ev) => {
+                                        ev.target.style.backgroundColor = "rgb(211, 1, 1)";
+                                        ev.target.innerHTML = "Remove";
+                                    }}
+                                    hidden={profile && !profile.wishlist.includes(productInfo.id)}
+                                    className="w-100 add-to-wishlist-btn"
+                                    onClick={async () => {
+                                        setProfile({
+                                            ...profile,
+                                            wishlist: profile.wishlist.filter(id => id !== productInfo.id)
+                                        })
+                                        await supabase
+                                            .from("Users")
+                                            .update({ wishlist: profile.wishlist.filter(id => id !== productInfo.id) })
+                                            .eq("id", auth);
+                                    }}
+                                >
+                                    Wishlisted
+                                </Button>
+                            </Col>
+                        </Row>
+                    </Container>
                 </Col>
             </Row>
             <Row className="justify-content-center">

@@ -31,7 +31,9 @@ function NavigationMenu() {
             else
                 setProfile(data);
         }
-        getProfile(auth);
+        if (auth) {
+            getProfile(auth);
+        }
     }, [auth]);
     const [colorMode, switchColorMode] = useContext(ColorModeContext);
     const [lang, switchLang] = useContext(LangContext);
@@ -52,13 +54,14 @@ function NavigationMenu() {
             <Offcanvas className="offcanva" show={show} onHide={() => setShow(false)}>
                 <Container>
                     <Row>
-                        <Col className='h-100 mt-3 ms-2 p-1 rounded-4' xs={2}  style={{ backgroundColor: "white" }}>
+                        <Col className='h-100 mt-3 ms-2 p-1 rounded-4' xs={2} style={{ backgroundColor: "white" }}>
                             <Link to="/" className='w-100'><img className='w-100 object-fit-contain' src="/icons/r-light.png" alt="logo" /></Link>
                         </Col>
                     </Row>
                     <Row className='justify-content-between text-center mt-4'>
                         <Col xs={3} className='text-start'>
                             <Button onClick={() => switchLang()} className='p-0' variant="link"><img className='small-icon w-100' src={`/icons/${lang === "en" ? "az" : "en"}.png`} alt={`${lang === "en" ? "az" : "en"}`} /></Button>
+                            <Button onClick={switchCurrency} className='p-0' variant="link"><img className='small-icon' src={`/icons/${currency === "usd" ? "azn" : "dollar"}.png`} alt="dollar" /></Button>
                         </Col>
                         <Col xs={3} className='d-flex justify-content-center align-items-center text-center'>
                             <div id='colorModeSwitch' className={`${colorMode} h-100 w-100 position-relative`} onClick={() => switchColorMode()}>
@@ -159,57 +162,37 @@ function NavigationMenu() {
                     </Row>
                 </Container>
             </Offcanvas>
+
+
             <Container id='navbar' className='my-5 ps-0'>
-                <Row className='d-flex h-100 justify-content-between'>
-                    <Col className='h-100' xs={"auto"}>
-                        <Link to="/" className='h-100'><img className='h-100 object-fit-contain' src="/icons/r-light.png" alt="logo" /></Link>
-                    </Col>
-                    <Col className='backgrounded px-1'>
-                        <Container className="d-flex align-items-center h-100 px-0">
-                            <Row className='w-100 g-1 align-items-center'>
-                                <Col xs={"auto"}>
-                                    <Button onClick={() => setShow(true)} variant='link'><img className='object-fit-contain' style={{ height: 24 }} src="/icons/menu.png" alt="menu" /></Button>
-                                </Col>
-                                <Col xs={10}>
-                                    <Form id='searchForm' onSubmit={(ev) => { ev.preventDefault(); handleSearch(); }}>
-                                        <Container fluid>
-                                            <Row>
-                                                <Col className='px-1'>
-                                                    <Form.Control id="search" type="text" onInput={(ev) => { setSearchInput(ev.target.value) }} className='input-form h-100 w-100'></Form.Control>
-                                                </Col>
-                                                <Col className='px-1' xs={1}>
-                                                    <Button onClick={handleSearch} className="h-100 w-100 btn-light">search.</Button>
-                                                </Col>
-                                            </Row>
-                                        </Container>
-                                    </Form>
-                                </Col>
-                                <Col className="h-100" xs={"auto"}>
-                                    <Link to="/products">
-                                        <img className="icon p-1" src="/icons/shipping.png" alt="shipping" />
-                                    </Link>
-                                </Col>
-                                <Col className="h-100" xs={"auto"}>
-                                    <Link to="/cart">
-                                        <img className="icon p-1" src="/icons/cart.png" alt="cart" />
-                                    </Link>
-                                </Col>
-                                <Col className="h-100" xs={"auto"}>
-                                    <Link to={`${isAuthenticated ? "/profile" : "/login"}`}>
-                                        <img className="icon p-1" src="/icons/profile.png" alt="profile" />
-                                    </Link>
-                                </Col>
-                            </Row>
-                        </Container>
-                    </Col>
-                </Row>
-                <Row className='justify-content-end text-center'>
-                    <Col xs={2}>
-                        <div className='d-flex g-0 justify-content-end pe-4'>
-                            <div className='p-1'><Button className='p-0' variant="link"><img className='small-icon' src="/icons/location.png" alt="location" /></Button></div>
-                            <div className='p-1'><Button onClick={switchCurrency} className='p-0' variant="link"><img className='small-icon' src={`/icons/${currency === "usd" ? "azn" : "dollar"}.png`} alt="dollar" /></Button></div>
+                <Row className='d-flex h-100 align-items-center'>
+                    <div className='h-100 logo'>
+                        <Link to="/" className='h-100 w-100'><img className='h-100 w-100 object-fit-contain' src="/icons/r-light.png" alt="logo" /></Link>
+                    </div>
+                    <div className='d-flex align-items-center backgrounded h-100 px-1 navbar-interactables'>
+                        <div className='side-menu-button'>
+                            <Button onClick={() => setShow(true)} variant='link'><img className='object-fit-contain' style={{ height: 24 }} src="/icons/menu.png" alt="menu" /></Button>
                         </div>
-                    </Col>
+                        <Form className='d-flex nav-search-form' id='searchForm' onSubmit={(ev) => { ev.preventDefault(); handleSearch(); }}>
+                            <div className='px-1 input'>
+                                <Form.Control id="search" type="text" onInput={(ev) => { setSearchInput(ev.target.value) }} className='input-form h-100 w-100|'></Form.Control>
+                            </div>
+                            <div className='px-1 button'>
+                                <Button onClick={handleSearch} style={{ fontSize: "24px" }} className="d-block h-100 w-100 btn-light">search.</Button>
+                            </div>
+                        </Form>
+                        <div className='d-flex justify-content-evenly nav-links'>
+                            <Link to="/products">
+                                <img className="icon p-1" src="/icons/shipping.png" alt="shipping" />
+                            </Link>
+                            <Link to="/cart">
+                                <img className="icon p-1" src="/icons/cart.png" alt="cart" />
+                            </Link>
+                            <Link to={`${isAuthenticated ? "/profile" : "/login"}`}>
+                                <img className="icon p-1" src="/icons/profile.png" alt="profile" />
+                            </Link>
+                        </div>
+                    </div>
                 </Row>
             </Container>
         </>

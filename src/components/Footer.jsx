@@ -17,9 +17,9 @@ function Footer() {
                             <hr></hr>
                             <Container>
                                 <Row className="justify-content-center g-3">
-                                    <Col xs={8} className="p-0 text-center"><Button variant="link">Careers</Button></Col>
-                                    <Col xs={8} className="p-0 text-center"><Button variant="link">Sell products on R-Store</Button></Col>
-                                    <Col xs={8} className="p-0 text-center"><Button variant="link">Advertise Your Products</Button></Col>
+                                    <Col xs={12} className="p-0 text-center"><Button variant="link">Careers</Button></Col>
+                                    <Col xs={12} className="p-0 text-center"><Button variant="link">Sell products on R-Store</Button></Col>
+                                    <Col xs={12} className="p-0 text-center"><Button variant="link">Advertise Your Products</Button></Col>
                                 </Row>
                             </Container>
                         </div>
@@ -30,9 +30,9 @@ function Footer() {
                             <hr></hr>
                             <Container>
                                 <Row className="justify-content-center g-3">
-                                    <Col xs={8} className="p-0 text-center"><Button variant="link">About</Button></Col>
-                                    <Col xs={8} className="p-0 text-center"><Button variant="link">FAQ</Button></Col>
-                                    <Col xs={8} className="p-0 text-center"><Button variant="link">Blog</Button></Col>
+                                    <Col xs={12} className="p-0 text-center"><Button variant="link">About</Button></Col>
+                                    <Col xs={12} className="p-0 text-center"><Button variant="link">FAQ</Button></Col>
+                                    <Col xs={12} className="p-0 text-center"><Button variant="link">Blog</Button></Col>
                                 </Row>
                             </Container>
                         </div>

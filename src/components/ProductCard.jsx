@@ -9,7 +9,7 @@ import { addToCart } from "../tools/slices/cartSlice";
 import supabase from "../../utils/supabase";
 import Swal from "sweetalert2";
 
-function ProductCard({ className, product, cardHeight = 300 }) {
+function ProductCard({ className, product, thumbHeight = 300 }) {
 
     const dispatch = useDispatch();
 

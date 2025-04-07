@@ -14,7 +14,7 @@ import { Link } from "react-router-dom";
 
 function Login() {
     const [products, setProducts] = useState([]);
-    
+
 }
 
 function Home() {
@@ -107,7 +107,7 @@ function Home() {
         <>
             <Container style={{ marginTop: 100 }}>
                 <Row className="justify-content-center text-center">
-                    <Col className="backgrounded p-3">
+                    <Col className="backgrounded p-2 py-2 p-lg-3">
                         <Swiper
                             style={{ borderRadius: 14 }}
                             loop={true}
@@ -141,8 +141,8 @@ function Home() {
             </Container >
             <Container className="my-5">
                 <Row className="justify-content-center text-center wow animate__fadeInLeft">
-                    <Col className="title my-3">
-                        <img src="./titles/title1.png" alt="title1" />
+                    <Col xs={12} md={6} xxl={12} className="title my-3">
+                        <img className="object-fit-contain w-100" src="./titles/title1.png" alt="title1" />
                     </Col>
                 </Row>
                 <Row>
@@ -161,12 +161,12 @@ function Home() {
             </Container>
             <Container className="fluid-section mb-5" fluid>
                 <Row className="justify-content-center text-center">
-                    <Col className="title mt-5">
-                        <img src="./titles/categories.png" alt="categories" />
+                    <Col xs={12} md={6} xxl={12} className="title my-3">
+                        <img className="object-fit-contain w-100" src="./titles/categories.png" alt="categories" />
                     </Col>
                 </Row>
-                <Row className="justify-content-center">
-                    <Col style={{ maxWidth: "12.5%" }}>
+                <Row xs={1} md={3} xl={5} className="justify-content-center px-5 mx-5">
+                    <Col>
                         <div className="w-100 my-3 mb-5 rounded-circle" style={{ backgroundColor: "#fff", aspectRatio: "1 / 1" }}>
                             <Link id="smartphone" className="overflow-hidden d-flex position-relative rounded-circle justify-content-center w-100 h-100 align-items-center" style={{ backgroundColor: "#fff" }}>
                                 <img onAnimationStart={(ev) => ev.target.classList.toggle("opacity-0")} onAnimationEnd={(ev) => ev.target.classList.toggle("opacity-0")} className="opacity-0 object-fit-contain position-absolute" style={{ width: "5%" }} src="/animation_elements/smartphonebar.png" alt="smartphone" />
@@ -175,30 +175,30 @@ function Home() {
                             </Link>
                         </div>
                     </Col>
-                    <Col style={{ maxWidth: "12.5%" }}>
+                    <Col>
                         <div className="w-100 my-3 mb-5 rounded-circle" style={{ backgroundColor: "#fff", aspectRatio: "1 / 1" }}>
                             <Link id="sport" className="overflow-hidden d-flex position-relative rounded-circle justify-content-center w-100 h-100 align-items-center" style={{ backgroundColor: "#fff" }}>
                                 <img className="object-fit-contain position-absolute" style={{ width: "62.5%", height: "62.5%" }} src="/icons/categories/sport.png" alt="sport" />
                             </Link>
                         </div>
                     </Col>
-                    <Col style={{ maxWidth: "12.5%" }}>
+                    <Col>
                         <div className="w-100 my-3 mb-5 rounded-circle" style={{ backgroundColor: "#fff", aspectRatio: "1 / 1" }}>
                             <Link id="grocery" className="overflow-hidden d-flex position-relative rounded-circle justify-content-center w-100 h-100 align-items-center" style={{ backgroundColor: "#fff" }}>
                                 <img className="object-fit-contain position-absolute" style={{ width: "62.5%", height: "62.5%" }} src="/icons/categories/grocery.png" alt="grocery" />
                             </Link>
                         </div>
                     </Col>
-                    <Col style={{ maxWidth: "12.5%" }}>
+                    <Col>
                         <div className="w-100 my-3 mb-5 rounded-circle" style={{ backgroundColor: "#fff", aspectRatio: "1 / 1" }}>
                             <Link id="beauty" className="overflow-hidden d-flex position-relative rounded-circle justify-content-center w-100 h-100 align-items-center" style={{ backgroundColor: "#fff" }}>
-                                <img className="object-fit-contain position-absolute" src="/animation_elements/beauty1.png" alt="beauty1" />
-                                <img className="object-fit-contain position-absolute" src="/animation_elements/beauty2.png" alt="beauty2" />
-                                <img className="object-fit-contain position-absolute" src="/animation_elements/beauty3.png" alt="beauty3" />
+                                <img className="object-fit-contain position-absolute" style={{ width: "62.5%", height: "62.5%" }} src="/animation_elements/beauty1.png" alt="beauty1" />
+                                <img className="object-fit-contain position-absolute" style={{ width: "62.5%", height: "62.5%" }} src="/animation_elements/beauty2.png" alt="beauty2" />
+                                <img className="object-fit-contain position-absolute" style={{ width: "62.5%", height: "62.5%" }} src="/animation_elements/beauty3.png" alt="beauty3" />
                             </Link>
                         </div>
                     </Col>
-                    <Col style={{ maxWidth: "12.5%" }}>
+                    <Col>
                         <div className="w-100 my-3 mb-5 rounded-circle" style={{ backgroundColor: "#fff", aspectRatio: "1 / 1" }}>
                             <Link id="kitchen" className="overflow-hidden d-flex position-relative rounded-circle justify-content-center w-100 h-100 align-items-center" style={{ backgroundColor: "#fff" }}>
                                 <img className="object-fit-contain position-absolute" style={{ width: "62.5%", height: "62.5%" }} src="/animation_elements/knife.png" alt="kitchen" />
@@ -210,11 +210,11 @@ function Home() {
             </Container>
             <Container className="mt-5">
                 <Row className="justify-content-center text-center wow animate__fadeInRight">
-                    <Col className="title my-3">
-                        <img src="./titles/title2.png" alt="title2" />
+                    <Col xs={12} md={6} xxl={12} className="title my-3">
+                        <img className="object-fit-contain w-100" src="./titles/title2.png" alt="title2" />
                     </Col>
                 </Row>
-                <Row xs={4} className='g-4 mt-3 wow'>
+                <Row md={2} lg={3} xl={4} className='g-4 mt-3 wow'>
                     {
                         products.length > 0 ? (
                             products.map((product, index) =>
@@ -226,21 +226,22 @@ function Home() {
                 </Row>
             </Container>
             <Container className="mt-5 cards-section">
-                <Row className="g-3 pb-4">
-                    <Col xs={6} className="">
+                <Row xs={1} sm={2} className="g-3 pb-4">
+                    <Col>
                         <div onClick={() => { }} className="overflow-hidden" style={{ backgroundColor: "#6464C6", borderRadius: 50, border: "5px solid white", cursor: "pointer" }}>
                             <img className="zoom-image w-100 object-fit-contain" src="/banners/homeproducts.png" alt="homeproducts" />
                         </div>
                     </Col>
-                    <Col xs={6} id="gamingProducts" className="">
+                    <Col id="gamingProducts">
                         <div onClick={() => { }} className="overflow-hidden position-relative h-100" style={{ backgroundColor: "#fff", borderRadius: 50, border: "5px solid #6464C6", cursor: "pointer" }}>
                             <img className="w-100 position-absolute object-fit-contain" src="/banners/gamingproducts.png" alt="gamingproducts" />
                             <img className="w-100 position-absolute object-fit-contain" src="/animation_elements/gamepad.png" alt="gamingproducts" />
                             <img className="w-100 position-absolute object-fit-contain" src="/animation_elements/wire.png" alt="gamingproducts" />
+                            <div className="size-setter"></div>
                         </div>
                     </Col>
-                    <Col xs={6} id="toys" className="">
-                        <div onClick={() => { }} className="overflow-hidden position-relative h-100 p-4" style={{ backgroundColor: "#fff", borderRadius: 50, border: "8px solid #6464C6", cursor: "pointer" }}>
+                    <Col id="toys">
+                        <div onClick={() => { }} className="overflow-hidden position-relative h-100 px-4" style={{ backgroundColor: "#fff", borderRadius: 50, border: "8px solid #6464C6", cursor: "pointer" }}>
                             <img className="w-100 position-absolute object-fit-contain" src="/animation_elements/toys.png" alt="gamingproducts" />
                             <img className="w-100 position-absolute object-fit-contain" src="/animation_elements/bird.png" alt="gamingproducts" />
                             <img className="w-100 position-absolute object-fit-contain" src="/animation_elements/bar.png" alt="gamingproducts" />
@@ -248,9 +249,10 @@ function Home() {
                             <img className="w-100 position-absolute object-fit-contain" src="/animation_elements/capsule2.png" alt="gamingproducts" />
                             <img className="w-100 position-absolute object-fit-contain" src="/animation_elements/capsule3.png" alt="gamingproducts" />
                             <img className="w-100 position-absolute object-fit-contain" src="/animation_elements/capsule4.png" alt="gamingproducts" />
+                            <div className="size-setter"></div>
                         </div>
                     </Col>
-                    <Col xs={6} id="laptop" className="position-relative">
+                    <Col id="laptop" className="position-relative">
                         <div onClick={() => { }} className="overflow-hidden" style={{ backgroundColor: "white", borderRadius: 50, cursor: "pointer" }}>
                             <img className="w-100 object-fit-contain" src="/banners/laptops.png" alt="laptop" />
                         </div>
@@ -259,7 +261,7 @@ function Home() {
                 </Row>
             </Container>
             <Container className="px-0">
-                <Row className="g-0 text-center">
+                <Row className="g-0 text-center d-none d-lg-flex">
                     <Col xs={6} style={{ backgroundColor: "#6464C6", color: "#6464C6" }}>
                         <div style={{ backgroundColor: "#EAEAEA", borderBottomLeftRadius: 50, borderBottomRightRadius: 50, fontFamily: "Arial Rounded MT Bold", fontSize: 70 }}>
                             top selling from
@@ -271,7 +273,19 @@ function Home() {
                         </div>
                     </Col>
                 </Row>
-                <Row className="g-0 rounded-bottom-4" xs={5} style={{ backgroundColor: "#6464C6" }}>
+                <Row className="g-0 text-center d-lg-none">
+                    <Col style={{ backgroundColor: "#EAEAEA", color: "#EAEAEA" }}>
+                        <div className="h-100" style={{ backgroundColor: "#6464C6", borderTopLeftRadius: 50, borderTopRightRadius: 50, fontFamily: "Arial Rounded MT Bold", fontSize: 70 }}>
+                            top selling from
+                        </div>
+                    </Col>
+                    <Col style={{ backgroundColor: "#6464C6", color: "#6464C6" }}>
+                        <div className="h-100" style={{ backgroundColor: "#EAEAEA", borderBottomLeftRadius: 50, borderBottomRightRadius: 50, fontFamily: "Arial Rounded MT Bold", fontSize: 70 }}>
+                            this categories
+                        </div>
+                    </Col>
+                </Row>
+                <Row className="g-0 rounded-bottom-4" xs={1} md={2} lg={3} xxl={5} style={{ backgroundColor: "#6464C6" }}>
                     {
                         products.length > 0 ? (
                             products.slice(0, 5).map((product, index) =>
@@ -293,7 +307,7 @@ function Home() {
                 </Row>
             </Container>
             <Container>
-                <Row xs={4}>
+                <Row xs={1} md={2} lg={3} xxl={5}>
                     {
                         cars.length > 0 && motorcycles.length > 0 ? (
                             [...cars, ...motorcycles].map((product, index) =>
@@ -305,43 +319,41 @@ function Home() {
                 </Row>
             </Container>
             <Container className="fluid-section my-4" fluid>
-                <Row className="justify-content-center text-center pt-3" style={{ color: "#fff" }}>
-                    <Col xs={2}>
-                        <h3>for women.</h3>
+                <Row className="justify-content-center align-center text-white text-center pb-3">
+                    <Col xs={7} md={3} className="for">
+                        <h2 className="d-block">for women.</h2>
+                        <div>
+                            <Link className="d-block h-100">
+                                <div className="w-100 h-100 rounded-circle p-5 overflow-hidden position-relative">
+                                    <img className="object-fit-contain position-absolute" src="/icons/forwomen.png" alt="forwomen" />
+                                </div>
+                            </Link>
+                        </div>
                     </Col>
-                    <Col xs={2}>
-                        <h3>for men.</h3>
+                    <Col xs={7} md={3} className="for">
+                        <h2>for men.</h2>
+                        <div>
+                            <Link className="d-block h-100">
+                                <div className="w-100 h-100 rounded-circle p-5 overflow-hidden position-relative">
+                                    <img className="object-fit-contain position-absolute" src="/icons/formen.png" alt="forwomen" />
+                                </div>
+                            </Link>
+                        </div>
                     </Col>
-                    <Col xs={2}>
-                        <h3>for kids.</h3>
-                    </Col>
-                </Row>
-                <Row className="justify-content-center text-center pb-3">
-                    <Col className="for" xs={2} id="forWomen">
-                        <Link className="d-block w-100 h-100">
-                            <div className="w-100 h-100 rounded-circle p-5 overflow-hidden position-relative">
-                                <img className="object-fit-contain position-absolute" src="/icons/forwomen.png" alt="forwomen" />
-                            </div>
-                        </Link>
-                    </Col>
-                    <Col className="for" xs={2} id="forMen">
-                        <Link className="d-block w-100 h-100">
-                            <div className="w-100 h-100 rounded-circle p-5 overflow-hidden position-relative">
-                                <img className="object-fit-contain position-absolute" src="/icons/formen.png" alt="forwomen" />
-                            </div>
-                        </Link>
-                    </Col>
-                    <Col className="for" xs={2} id="forKids">
-                        <Link className="d-block w-100 h-100">
-                            <div className="w-100 h-100 rounded-circle p-5 overflow-hidden position-relative">
-                                <img className="object-fit-contain position-absolute" src="/icons/forkids.png" alt="forwomen" />
-                            </div>
-                        </Link>
+                    <Col xs={7} md={3} className="for">
+                        <h2>for kids.</h2>
+                        <div>
+                            <Link className="d-block h-100">
+                                <div className="w-100 h-100 rounded-circle p-5 overflow-hidden position-relative">
+                                    <img className="object-fit-contain position-absolute" src="/icons/forkids.png" alt="forwomen" />
+                                </div>
+                            </Link>
+                        </div>
                     </Col>
                 </Row>
             </Container>
             <Container>
-                <Row xs={4}>
+                <Row  xs={1} md={2} lg={3} xxl={4}>
                     {
                         cars.length > 0 && motorcycles.length > 0 ? (
                             [...cars, ...motorcycles].map((product, index) =>

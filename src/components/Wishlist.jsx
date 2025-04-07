@@ -88,47 +88,55 @@ function Wishlist() {
                                                 `${Math.round(product.price / rate * 100) / 100} AZN`
                                             }
                                         </p>
-                                        <Button variant="warning" onClick={async () => {
-                                            if (auth !== null) {
-                                                const { data, error } = await supabase
-                                                    .from("Users")
-                                                    .select("*")
-                                                    .eq("id", auth)
-                                                    .single();
-                                                const existingProduct = data.cart.find(p => p.id === product.id);
+                                        <Container className="p-0">
+                                            <Row className="justify-contnet-start g-2">
+                                                <Col xs={12} lg={4}>
+                                                    <Button className="w-100" variant="warning" onClick={async () => {
+                                                        if (auth !== null) {
+                                                            const { data, error } = await supabase
+                                                                .from("Users")
+                                                                .select("*")
+                                                                .eq("id", auth)
+                                                                .single();
+                                                            const existingProduct = data.cart.find(p => p.id === product.id);
 
-                                                if (existingProduct) {
-                                                    existingProduct.quantity += 1;
-                                                } else {
-                                                    data.cart.push({ id: product.id, quantity: 1 });
-                                                }
-                                                await supabase
-                                                    .from("Users")
-                                                    .update({ cart: data.cart })
-                                                    .eq("id", auth);
-                                                Swal.fire({
-                                                    title: "Producted added to Your cart",
-                                                    icon: "success"
-                                                })
-                                            } else {
-                                                dispatch(addToCart({ id: product.id }))
-                                                Swal.fire({
-                                                    title: "Producted added to Your local cart",
-                                                    icon: "success"
-                                                })
-                                            }
-                                        }}>Add to cart</Button>
-                                        <Button variant="danger" className="ms-2"
-                                            onClick={async () => {
-                                                setProfile({
-                                                    ...profile,
-                                                    wishlist: profile.wishlist.filter(id => id !== product.id)
-                                                })
-                                                await supabase
-                                                    .from("Users")
-                                                    .update({ wishlist: profile.wishlist.filter(id => id !== product.id) })
-                                                    .eq("id", auth);
-                                            }}>Remove from wishlist</Button>
+                                                            if (existingProduct) {
+                                                                existingProduct.quantity += 1;
+                                                            } else {
+                                                                data.cart.push({ id: product.id, quantity: 1 });
+                                                            }
+                                                            await supabase
+                                                                .from("Users")
+                                                                .update({ cart: data.cart })
+                                                                .eq("id", auth);
+                                                            Swal.fire({
+                                                                title: "Producted added to Your cart",
+                                                                icon: "success"
+                                                            })
+                                                        } else {
+                                                            dispatch(addToCart({ id: product.id }))
+                                                            Swal.fire({
+                                                                title: "Producted added to Your local cart",
+                                                                icon: "success"
+                                                            })
+                                                        }
+                                                    }}>Add to cart</Button>
+                                                </Col>
+                                                <Col xs={12} lg={4}>
+                                                    <Button className="w-100" variant="danger"
+                                                        onClick={async () => {
+                                                            setProfile({
+                                                                ...profile,
+                                                                wishlist: profile.wishlist.filter(id => id !== product.id)
+                                                            })
+                                                            await supabase
+                                                                .from("Users")
+                                                                .update({ wishlist: profile.wishlist.filter(id => id !== product.id) })
+                                                                .eq("id", auth);
+                                                        }}>Remove from wishlist</Button>
+                                                </Col>
+                                            </Row>
+                                        </Container>
                                     </Col>
                                 </Row>
                             )

@@ -108,7 +108,7 @@ function Profile() {
         <>
             <Container className="mt-5">
                 <Row>
-                    <Col xs={{ span: 1, offset: 2 }}>
+                    <Col xs={{ span: 3, offset: 0 }} sm={{ span: 2, offset: 1 }} lg={{ span: 1, offset: 2 }}>
                         <div className="backgrounded">
                             <Link to="/"><img className="w-100 object-fit-contain" src="/icons/home.png" alt="home" /></Link>
                         </div>
@@ -163,12 +163,12 @@ function Profile() {
 
                                 <Container className="my-5">
                                     <Row className="justify-content-center">
-                                        <Col xs={6}>
+                                        <Col xs={12} lg={6}>
                                             <Button type="submit" className="w-100 h-100" variant="" style={{ backgroundColor: "#fff", borderRadius: 255, fontFamily: "Arial Rounded MT Bold", color: "#6c6cd9", fontSize: 40 }}>
                                                 save
                                             </Button>
                                         </Col>
-                                        <Col xs={6}>
+                                        <Col xs={12} lg={6} className="mt-2 mt-lg-0">
                                             <Button type="button" onClick={() => {
                                                 dispatch(logout());
                                                 dispatch(clearCart());

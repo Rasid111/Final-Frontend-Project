@@ -10,10 +10,6 @@ $iconHoveredBackground: #5D60B7;
 $mainBackground: #7e7ee5;
 $tertiaryColor: rgb(234, 234, 234);
 
-#navbar {
-    height: 90px;
-}
-
 .input-form {
     color: black;
     background-color: white;
@@ -270,7 +266,7 @@ body {
 }
 
 .for {
-    >a {
+    a {
         >div {
             aspect-ratio: 1 / 1;
             background-color: #fff;
@@ -569,75 +565,75 @@ body {
 
 @keyframes beauty1 {
     0% {
-        transform: rotate(-30deg) translate(-15%, -100%) scale(40%, 40%);
+        transform: rotate(-30deg) translate(-15%, -100%) scale(75%, 75%);
     }
 
     40% {
-        transform: rotate(0deg) translate(-25%, 5%) scale(40%, 40%);
+        transform: rotate(0deg) translate(-25%, 5%) scale(75%, 75%);
     }
 
     60% {
-        transform: rotate(0deg) translate(-25%, -5%) scale(40%, 40%);
+        transform: rotate(0deg) translate(-25%, -5%) scale(75%, 75%);
     }
 
     80% {
-        transform: rotate(0deg) translate(-25%, 0%) scale(40%, 40%);
+        transform: rotate(0deg) translate(-25%, 0%) scale(75%, 75%);
     }
 }
 
 @keyframes beauty2 {
     0% {
-        transform: rotate(30deg) translate(15%, -100%) scale(40%, 40%);
+        transform: rotate(30deg) translate(15%, -100%) scale(60%, 60%);
     }
 
     40% {
-        transform: rotate(0deg) translate(25%, 10%) scale(40%, 40%);
+        transform: rotate(0deg) translate(25%, 10%) scale(60%, 60%);
     }
 
     60% {
-        transform: rotate(0deg) translate(25%, 0%) scale(40%, 40%);
+        transform: rotate(0deg) translate(25%, 5%) scale(60%, 60%);
     }
 
     80% {
-        transform: rotate(0deg) translate(25%, 5%) scale(40%, 40%);
+        transform: rotate(0deg) translate(25%, 10%) scale(60%, 60%);
     }
 }
 
 @keyframes beauty3 {
     0% {
-        transform: rotate(30deg) translate(40%, -100%) scale(40%, 40%);
+        transform: rotate(30deg) translate(40%, -100%) scale(30%, 25%);
     }
 
     40% {
-        transform: rotate(0deg) translate(55%, 5%) scale(40%, 40%);
+        transform: rotate(0deg) translate(25%, 5%) scale(30%, 25%);
     }
 
     60% {
-        transform: rotate(0deg) translate(55%, 5%) scale(40%, 40%);
+        transform: rotate(0deg) translate(25%, 5%) scale(30%, 25%);
     }
 
     80% {
-        transform: rotate(0deg) translate(55%, 5%) scale(40%, 40%);
+        transform: rotate(0deg) translate(25%, 5%) scale(30%, 25%);
     }
 
     90% {
-        transform: rotate(0deg) translate(55%, 5%) scale(40%, 40%);
+        transform: rotate(0deg) translate(25%, 5%) scale(30%, 25%);
     }
 }
 
 #beauty {
     img:nth-child(1) {
         z-index: 1;
-        transform: translate(-25%, 0%) scale(40%, 40%);
+        transform: translate(-25%, 0%) scale(75%, 75%);
     }
 
     img:nth-child(2) {
         z-index: 1;
-        transform: translate(25%, 5%) scale(40%, 40%);
+        transform: translate(25%, 10%) scale(60%, 60%);
     }
 
     img:nth-child(3) {
-        transform: translate(55%, -30%) scale(30%, 25%);
+        transform: translate(25%, -25%) scale(30%, 25%);
     }
 }
 
@@ -889,6 +885,7 @@ body {
         width: 0.95%;
         padding-left: 3px;
         padding-right: 3px;
+        height: 30vw;
         top: -22%;
         left: 24.375%;
     }
@@ -916,8 +913,9 @@ body {
     input:focus {
         box-shadow: none;
     }
+
     button {
-        vertical-align: bottom ;
+        vertical-align: bottom;
         font-size: large;
         font-weight: 500;
         color: $iconHoveredBackground;
@@ -972,7 +970,190 @@ select.form-select:focus {
     color: #FFF;
     background-color: #6c6cd9;
 }
+
 .add-to-wishlist-btn:hover {
     color: #FFF;
     background-color: #5454aa;
+}
+
+#navbar {
+    height: 90px;
+    .nav-search-form {
+        height: 60%;
+        display: flex;
+    }
+}
+
+@media (min-width: 1400px) {
+    #navbar {
+        .logo {
+            width: 10%;
+        }
+        .navbar-interactables {
+            width: 90%;
+        }
+        .side-menu-button {
+            width: 4.1%;
+        }
+        .nav-search-form {
+            width: 83.4%;
+    
+            >.input {
+                width: 90%;
+            }
+    
+            >.button {
+                width: 10%;
+            }
+        }
+        .nav-links{
+            width: 13.4%;
+        }
+    }
+}
+
+@media (max-width: 1400px) {
+    #navbar {
+        .logo {
+            width: 10%;
+        }
+        .navbar-interactables {
+            width: 90%;
+        }
+        .side-menu-button {
+            width: 4.1%;
+        }
+        .nav-search-form {
+            width: 82%;
+    
+            >.input {
+                width: 85%;
+            }
+    
+            >.button {
+                width: 15%;
+            }
+        }
+        .nav-links{
+            width: 14%;
+        }
+    }
+}
+
+@media (max-width: 1200px) {
+    #navbar {
+        .logo {
+            width: 12%;
+        }
+        .navbar-interactables {
+            width: 88%;
+        }
+        .side-menu-button {
+            width: 5%;
+        }
+        .nav-search-form {
+            width: 79%;
+    
+            >.input {
+                width: 80%;
+            }
+    
+            >.button {
+                width: 20%;
+            }
+        }
+        .nav-links{
+            width: 16%;
+        }
+    }
+}
+
+@media (max-width: 992px) {
+    #navbar {
+        .logo {
+            width: 15%;
+        }
+        .navbar-interactables {
+            width: 85%;
+        }
+        .side-menu-button {
+            width: 7.5%;
+        }
+        .nav-search-form {
+            width: 70%;
+    
+            >.input {
+                width: 75%;
+            }
+    
+            >.button {
+                width: 25%;
+            }
+        }
+        .nav-links{
+            width: 22.5%;
+        }
+    }
+    .size-setter {
+        height: 213.36px;
+    }
+}
+
+@media (max-width: 768px) {
+    #navbar {
+        .logo {
+            width: 20%;
+        }
+        .navbar-interactables {
+            width: 80%;
+        }
+        .side-menu-button {
+            width: 10%;
+        }
+        .nav-search-form {
+            width: 60%;
+    
+            >.input {
+                width: 60%;
+            }
+    
+            >.button {
+                width: 40%;
+            }
+        }
+        .nav-links{
+            width: 30%;
+        }
+    }
+    .size-setter {
+        height: 155.17px;
+    }
+}
+
+@media (max-width: 576px) {
+    #navbar {
+        .logo {
+            display: none;
+        }
+        .navbar-interactables {
+            width: 100%;
+        }
+        .nav-search-form {
+            width: 83.4%;
+    
+            >.input {
+                width: 70%;
+            }
+    
+            >.button {
+                width: 30%;
+            }
+        }
+        .nav-links{
+            display: none !important;
+        }
+    }
+    .size-setter {
+        height: 58vw;
+    }
 }

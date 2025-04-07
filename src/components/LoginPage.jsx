@@ -67,7 +67,7 @@ function LoginPage() {
     return (
         <Container className="mt-5">
             <Row>
-                <Col xs={{ span: 1, offset: 2 }}>
+                <Col xs={{ span: 3, offset: 0 }} sm={{ span: 2, offset: 1 }} lg={{ span: 1, offset: 2 }}>
                     <div className="backgrounded">
                         <Link to="/"><img className="w-100 object-fit-contain" src="/icons/home.png" alt="home" /></Link>
                     </div>
@@ -90,18 +90,18 @@ function LoginPage() {
                             </Form.Group>
 
                             <Container className="my-5">
-                                <Row>
-                                    <Col xs={4}>
-                                        <div className="d-flex h-100">
-                                            <img className="object-fit-contain ms-2" style={{ width: "33%" }} src="icons/mailru.png" alt="mail.ru" />
-                                            <img className="object-fit-contain ms-2" style={{ width: "33%" }} src="icons/facebook.png" alt="facebook" />
-                                            <img className="object-fit-contain ms-2" style={{ width: "33%" }} src="icons/google.png" alt="google" />
-                                        </div>
-                                    </Col>
-                                    <Col xs={8}>
+                                <Row className="justify-content-center">
+                                    <Col xs={12} xl={8} className="order-xl-2">
                                         <Button type="submit" variant="">
                                             <img className="object-fit-contain w-100" src="buttons/signin.png" alt="signin" />
                                         </Button>
+                                    </Col>
+                                    <Col xs={6} xl={4} className="order-xl-1 mt-3">
+                                        <div className="d-flex h-100">
+                                            <img className="object-fit-contain" style={{ width: "33%" }} src="icons/mailru.png" alt="mail.ru" />
+                                            <img className="object-fit-contain mx-1" style={{ width: "33%" }} src="icons/facebook.png" alt="facebook" />
+                                            <img className="object-fit-contain" style={{ width: "33%" }} src="icons/google.png" alt="google" />
+                                        </div>
                                     </Col>
                                 </Row>
                                 <Row className="justify-content-center mt-3 text-center">

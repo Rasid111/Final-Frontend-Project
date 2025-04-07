@@ -30,7 +30,7 @@ function Cart() {
                 .from("Products")
                 .select("*")
                 .in("id", cart.map(p => p.id));
-            setProducts(data.map((p, i) => ({...p, quantity: cart[i].quantity})));
+            setProducts(data.map((p, i) => ({ ...p, quantity: cart[i].quantity })));
         }
         getProducts(cart);
     }, [cart]);
@@ -66,7 +66,7 @@ function Cart() {
         return (
             <Container className="pt-4">
                 <Row className="justify-content-end">
-                    <Col xs={2}>
+                    <Col xs={12} md={2}>
                         <Button
                             className="w-100"
                             as={Link}
@@ -95,15 +95,15 @@ function Cart() {
                                         }
                                     </p>
                                 </Col>
-                                <Col className="align-self-center">
+                                <Col className="align-self-center p-0">
                                     <Container fluid>
                                         <Row className="justify-content-center text-center">
-                                            <Col xs={2}>
+                                            <Col xs={2} className="p-0">
                                                 <Button onClick={async () => {
                                                     dispatch(decrementProduuctQuantity(product.id));
                                                 }} variant="danger" className="w-100">-</Button>
                                             </Col>
-                                            <Col xs={3}>
+                                            <Col xs={6} md={4} className="p-0 px-1">
                                                 <Form.Control type="number" onChange={(ev) => {
                                                     setProducts(products.map((p) => {
                                                         if (p.id === product.id) {
@@ -112,7 +112,7 @@ function Cart() {
                                                     }))
                                                 }} onBlur={(ev) => dispatch(updateQuantity({ id: product.id, quantity: ev.target.value }))} value={product.quantity} className="w-100"></Form.Control>
                                             </Col>
-                                            <Col xs={2}>
+                                            <Col xs={2} className="p-0">
                                                 <Button onClick={async () => {
                                                     dispatch(incrementProduuctQuantity(product.id));
                                                 }} variant="success" className="w-100">+</Button>
@@ -123,10 +123,12 @@ function Cart() {
                                                 <p>{lang === "en" ? "Total" : "Cəmi"} {currency === "usd" ? `${Math.round(product.price * product.quantity * 100) / 100} USD` : `${product.quantity * Math.round(product.price / rate * 100) / 100} AZN`}</p>
                                             </Col>
                                         </Row>
+                                        <Row>
+                                            <Col className="text-center">
+                                                <Button variant="danger" onClick={() => dispatch(removeFromCart(product.id))}>{lang === "en" ? "Remove" : "Sil"}</Button>
+                                            </Col>
+                                        </Row>
                                     </Container>
-                                </Col>
-                                <Col xs={1} className="align-self-center">
-                                    <Button variant="danger" onClick={() => dispatch(removeFromCart(product.id))}>{lang === "en" ? "Remove" : "Sil"}</Button>
                                 </Col>
                             </Row>
                         )

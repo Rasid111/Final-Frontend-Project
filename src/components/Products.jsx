@@ -90,7 +90,7 @@ function Products() {
         <>
             <Form className='mt-5'>
                 <Container>
-                    <Row>
+                    <Row xs={1} sm={3} className='g-3'>
                         <Col>
                             <Form.Select value={state.category} onChange={(ev) => {
                                 setState(prevState => ({
@@ -137,7 +137,7 @@ function Products() {
                 </Container>
             </Form>
             <Container>
-                <Row xs={4} className='g-4 mt-3'>
+                <Row xs={1} md={2} lg={3} xxl={4} className='g-4 mt-3'>
                     {!outputProducts ? "..." : outputProducts.map((product, index) =>
                         <Col key={index}>
                             <ProductCard className="border rounded" product={product} />
@@ -146,7 +146,7 @@ function Products() {
                 <Row className='justify-content-center my-3'>
                     <Col xs={4}>
                         <Container fluid>
-                            <Row xs={6} className='text-center justify-content-center g-2'>
+                            <Row xs={3} md={4} lg={6} className='text-center justify-content-center g-2'>
                                 <Col className={`d-${Math.ceil(filteredProducts.length / state.limit) === 1 ? "none" : "block"}`}>
                                     <Button disabled={state.page === 1} className={`w-100 ${colorMode === "dark" ? 'btn-light' : "btn-dark"}`} onClick={() => setState(prevState => ({ ...prevState, page: prevState.page - 1 }))}>{"<"}</Button>
                                 </Col>
@@ -164,7 +164,7 @@ function Products() {
                                 </Col>
                             </Row>
                             <Row className='justify-content-center mt-3'>
-                                <Col xs={5}>
+                                <Col xs={12} md={5}>
                                     <Form.Control type='number' onChange={(ev) => {
                                         let value = Number(ev.target.value);
 
