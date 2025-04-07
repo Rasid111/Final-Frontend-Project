@@ -71,17 +71,17 @@ function Profile() {
                         password: data.newPassword === "" ? profile.password : data.newPassword
                     })
                     .eq("id", auth);
-                    if (error && error.code == "23505") {
-                        Swal.fire({
-                            title: "Update failed",
-                            text: "This email is already used",
-                            icon: "error",
-                            customClass: {
-                                popup: 'swal2-dark',
-                            }
-                        });
-                        return;
-                    }
+                if (error && error.code == "23505") {
+                    Swal.fire({
+                        title: "Update failed",
+                        text: "This email is already used",
+                        icon: "error",
+                        customClass: {
+                            popup: 'swal2-dark',
+                        }
+                    });
+                    return;
+                }
 
                 Swal.fire({
                     title: "Update succeed",
@@ -183,13 +183,19 @@ function Profile() {
                             </Form>
                         </div>
                     </Col>
-                    <Col hidden={!profile.is_admin} xs={{ span: 3, offset: 0 }}>
+                    <Col xs={{ span: 3, offset: 0 }}>
                         <div className="backgrounded text-center p-3" style={{ borderRadius: 50 }}>
-                            <span style={{ fontFamily: "Arial Rounded MT Bold", color: "#fff", fontSize: 25 }}>
-                                You are admin
-                            </span>
-                            <Button className="w-100 h-100" variant="" style={{ backgroundColor: "#fff", borderRadius: 255, fontFamily: "Arial Rounded MT Bold", color: "#6c6cd9", fontSize: 20 }} as={Link} to="/dashboard">Dashboard</Button>
-                            <Button className="w-100 h-100 mt-2" variant="" style={{ backgroundColor: "#fff", borderRadius: 255, fontFamily: "Arial Rounded MT Bold", color: "#6c6cd9", fontSize: 20 }} as={Link} to="/admin">Manage users</Button>
+                            <Button className="w-100 h-100" variant="" style={{ backgroundColor: "#fff", borderRadius: 255, fontFamily: "Arial Rounded MT Bold", color: "#6c6cd9", fontSize: 20 }} as={Link} to="/wishlist">Your wishlist</Button>
+                            <Button className="w-100 h-100 mt-2" variant="" style={{ backgroundColor: "#fff", borderRadius: 255, fontFamily: "Arial Rounded MT Bold", color: "#6c6cd9", fontSize: 20 }} as={Link} to="/cart">Your cart</Button>
+                        </div>
+                        <div className="mt-3" hidden={!profile.is_admin} xs={{ span: 3, offset: 0 }}>
+                            <div className="backgrounded text-center p-3" style={{ borderRadius: 50 }}>
+                                <span style={{ fontFamily: "Arial Rounded MT Bold", color: "#fff", fontSize: 25 }}>
+                                    You are admin
+                                </span>
+                                <Button className="w-100 h-100" variant="" style={{ backgroundColor: "#fff", borderRadius: 255, fontFamily: "Arial Rounded MT Bold", color: "#6c6cd9", fontSize: 20 }} as={Link} to="/dashboard">Dashboard</Button>
+                                <Button className="w-100 h-100 mt-2" variant="" style={{ backgroundColor: "#fff", borderRadius: 255, fontFamily: "Arial Rounded MT Bold", color: "#6c6cd9", fontSize: 20 }} as={Link} to="/admin">Manage users</Button>
+                            </div>
                         </div>
                     </Col>
                 </Row>

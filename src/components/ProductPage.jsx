@@ -9,6 +9,7 @@ import supabase from "../../utils/supabase";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../tools/slices/cartSlice";
 import Swal from "sweetalert2";
+import { RiPolaroidLine } from "react-icons/ri";
 
 function ProductPage() {
     const auth = useSelector(state => state.auth.id);
@@ -42,6 +43,23 @@ function ProductPage() {
         }
         getProduct(params.id)
     }, [params]);
+
+    const [profile, setProfile] = useState();
+    useEffect(() => {
+        async function getProfile(id) {
+            const { data, error } = await supabase
+                .from("Users")
+                .select("*")
+                .eq("id", id)
+                .single();
+            if (error)
+                console.log(error);
+            else
+                setProfile(data);
+        }
+        getProfile(auth);
+    }, [auth]);
+    
     return (
         <Container>
             <Row className="justify-content-center">
@@ -57,36 +75,78 @@ function ProductPage() {
                             `${Math.round(productInfo.price / currencyRate * 100) / 100} AZN`
                         }
                     </p>
-                    <Button variant="warning"onClick={async () => {
-                            if (auth !== null) {
-                                const { data, error } = await supabase
-                                    .from("Users")
-                                    .select("*")
-                                    .eq("id", auth)
-                                    .single();
-                                const existingProduct = data.cart.find(p => p.id === productInfo.id);
+                    <Button variant="warning" onClick={async () => {
+                        if (auth !== null) {
+                            const { data, error } = await supabase
+                                .from("Users")
+                                .select("*")
+                                .eq("id", auth)
+                                .single();
+                            const existingProduct = data.cart.find(p => p.id === productInfo.id);
 
-                                if (existingProduct) {
-                                    existingProduct.quantity += 1;
-                                } else {
-                                    data.cart.push({ id: productInfo.id, quantity: 1 });
-                                }
-                                await supabase
-                                    .from("Users")
-                                    .update({ cart: data.cart })
-                                    .eq("id", auth);
-                                Swal.fire({
-                                    title: "Producted added to Your cart",
-                                    icon: "success"
-                                })
+                            if (existingProduct) {
+                                existingProduct.quantity += 1;
                             } else {
-                                dispatch(addToCart({ id: productInfo.id }))
-                                Swal.fire({
-                                    title: "Producted added to Your local cart",
-                                    icon: "success"
-                                })
+                                data.cart.push({ id: productInfo.id, quantity: 1 });
                             }
-                        }} className="w-50 mt-3">Add to cart</Button>
+                            await supabase
+                                .from("Users")
+                                .update({ cart: data.cart })
+                                .eq("id", auth);
+                            Swal.fire({
+                                title: "Producted added to Your cart",
+                                icon: "success"
+                            })
+                        } else {
+                            dispatch(addToCart({ id: productInfo.id }))
+                            Swal.fire({
+                                title: "Producted added to Your local cart",
+                                icon: "success"
+                            })
+                        }
+                    }} className="w-50 mt-3">Add to cart</Button>
+                    <Button
+                    variant=""
+                    hidden={profile && profile.wishlist.includes(productInfo.id)}
+                    className="w-25 ms-1 mt-3 add-to-wishlist-btn"
+                    onClick={async () => {
+                        setProfile({
+                            ...profile,
+                            wishlist: [...profile.wishlist, productInfo.id]
+                        })
+                        await supabase
+                            .from("Users")
+                            .update({wishlist: [...profile.wishlist, productInfo.id]})
+                            .eq("id", auth);
+                    }}
+                    >
+                        Add to wishlist
+                    </Button>
+                    <Button
+                    variant=""
+                    onMouseLeave={(ev) => {
+                        ev.target.style.backgroundColor = "#6c6cd9";
+                        ev.target.innerHTML = "Wishlisted";
+                    }}
+                    onMouseEnter={(ev) => {
+                        ev.target.style.backgroundColor = "rgb(211, 1, 1)";
+                        ev.target.innerHTML = "Remove";
+                    }}
+                    hidden={profile && !profile.wishlist.includes(productInfo.id)}
+                    className="w-25 ms-1 mt-3 add-to-wishlist-btn"
+                    onClick={async () => {
+                        setProfile({
+                            ...profile,
+                            wishlist: profile.wishlist.filter(id => id !== productInfo.id)
+                        })
+                        await supabase
+                            .from("Users")
+                            .update({wishlist: profile.wishlist.filter(id => id !== productInfo.id)})
+                            .eq("id", auth);
+                    }}
+                    >
+                        Wishlisted
+                    </Button>
                 </Col>
             </Row>
             <Row className="justify-content-center">

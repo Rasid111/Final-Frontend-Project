@@ -8,7 +8,6 @@ import axios from "axios";
 import { CurrencyContext } from "../contexts/CurrencyContext";
 import supabase from "../../utils/supabase";
 import { decrementProduuctQuantity, incrementProduuctQuantity, removeFromCart, updateQuantity } from "../tools/slices/cartSlice";
-// import { changeProductQuantity, decrementProductQuantity, incrementProductQuantity, removeProduct } from "../tools/actions/accountAction";
 
 function Cart() {
 
@@ -27,21 +26,11 @@ function Cart() {
     const cart = useSelector(state => state.cart);
     useEffect(() => {
         async function getProducts(cart) {
-            const productsData = await Promise.all(
-                cart.map(async (product) => {
-                    const { data } = await supabase
-                        .from("Products")
-                        .select("*")
-                        .eq("id", product.id)
-                        .single();
-
-                    return {
-                        ...data,
-                        quantity: product.quantity,
-                    };
-                })
-            );
-            setProducts(productsData);
+            const { data, error } = await supabase
+                .from("Products")
+                .select("*")
+                .in("id", cart.map(p => p.id));
+            setProducts(data.map((p, i) => ({...p, quantity: cart[i].quantity})));
         }
         getProducts(cart);
     }, [cart]);
@@ -75,7 +64,19 @@ function Cart() {
         );
     else
         return (
-            <Container>
+            <Container className="pt-4">
+                <Row className="justify-content-end">
+                    <Col xs={2}>
+                        <Button
+                            className="w-100"
+                            as={Link}
+                            to="/checkout"
+                            style={{ backgroundColor: "#6c6cd9" }}
+                        >
+                            Order
+                        </Button>
+                    </Col>
+                </Row>
                 {
                     products.map(product => {
                         return (

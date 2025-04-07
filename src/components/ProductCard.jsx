@@ -74,12 +74,13 @@ function ProductCard({ className, product, cardHeight = 300 }) {
                                     title: "Producted added to Your cart",
                                     icon: "success"
                                 })
+                            } else {
+                                Swal.fire({
+                                    title: "Producted added to Your local cart",
+                                    icon: "success"
+                                })
                             }
                             dispatch(addToCart({ id: product.id }))
-                            Swal.fire({
-                                title: "Producted added to Your local cart",
-                                icon: "success"
-                            })
                         }} className="w-100 add-to-cart" variant="warning">{lang === "en" ? "Add to cart" : "Səbətə at"}</Button></Col>
                         <Col xs={4}><Button as={Link} to={`/product/${product.id}`} className="w-100 more">{lang === "en" ? "More" : "Ətraflı"}</Button></Col>
                     </Row>

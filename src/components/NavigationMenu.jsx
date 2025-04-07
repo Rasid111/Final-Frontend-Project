@@ -1,4 +1,4 @@
-import { useContext, useDebugValue, useState } from 'react';
+import { useContext, useDebugValue, useEffect, useState } from 'react';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
@@ -11,11 +11,28 @@ import { FaLightbulb, FaRegLightbulb } from 'react-icons/fa';
 import { CurrencyContext } from '../contexts/CurrencyContext';
 import { LangContext } from '../contexts/LangContext';
 import { useDispatch, useSelector } from 'react-redux';
+import supabase from '../../utils/supabase';
 
 function NavigationMenu() {
 
     const navigate = useNavigate();
-    const location = useLocation();
+
+    const [profile, setProfile] = useState();
+    const auth = useSelector(state => state.auth.id);
+    useEffect(() => {
+        async function getProfile(id) {
+            const { data, error } = await supabase
+                .from("Users")
+                .select("*")
+                .eq("id", id)
+                .single();
+            if (error)
+                console.log(error);
+            else
+                setProfile(data);
+        }
+        getProfile(auth);
+    }, [auth]);
     const [colorMode, switchColorMode] = useContext(ColorModeContext);
     const [lang, switchLang] = useContext(LangContext);
     const { currency, switchCurrency } = useContext(CurrencyContext);
@@ -34,9 +51,14 @@ function NavigationMenu() {
         <>
             <Offcanvas className="offcanva" show={show} onHide={() => setShow(false)}>
                 <Container>
+                    <Row>
+                        <Col className='h-100 mt-3 ms-2 p-1 rounded-4' xs={2}  style={{ backgroundColor: "white" }}>
+                            <Link to="/" className='w-100'><img className='w-100 object-fit-contain' src="/icons/r-light.png" alt="logo" /></Link>
+                        </Col>
+                    </Row>
                     <Row className='justify-content-between text-center mt-4'>
                         <Col xs={3} className='text-start'>
-                            <Button onClick={() => switchLang()} className='p-0' variant="link"><img className='small-icon' src={`/icons/${lang === "en" ? "az" : "en"}.png`} alt={`${lang === "en" ? "az" : "en"}`} /></Button>
+                            <Button onClick={() => switchLang()} className='p-0' variant="link"><img className='small-icon w-100' src={`/icons/${lang === "en" ? "az" : "en"}.png`} alt={`${lang === "en" ? "az" : "en"}`} /></Button>
                         </Col>
                         <Col xs={3} className='d-flex justify-content-center align-items-center text-center'>
                             <div id='colorModeSwitch' className={`${colorMode} h-100 w-100 position-relative`} onClick={() => switchColorMode()}>
@@ -49,9 +71,90 @@ function NavigationMenu() {
                     </Row>
                     <Row className='mt-4'>
                         <Col>
-                            <div className="ofcanva-dropdown position-relative rounded-5 overflow-hidden" style={{ backgroundColor: "#fff", height: 50 }}>
+                            <Button
+                                className="text-start align-bottom ofcanva-dropdown position-relative rounded-5 w-100 overflow-hidden"
+                                style={{
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'start',
+                                    backgroundColor: "#fff",
+                                    height: 50,
+                                    borderRadius: 255,
+                                    fontFamily: "Arial Rounded MT Bold",
+                                    color: "#6c6cd9",
+                                    fontSize: 20
+                                }}
+                                as={Link}
+                                to={`${auth ? "/profile" : "/login"}`}>
+                                {`${profile?.login ? profile.login : "Login"}`}
                                 <img className='position-absolute arrow object-fit-contain' src="/animation_elements/arrow.png" alt="arrow" />
-                            </div>
+                            </Button>
+                        </Col>
+                    </Row>
+                    <Row className='mt-4'>
+                        <Col>
+                            <Button
+                                className="text-start align-bottom ofcanva-dropdown position-relative rounded-5 w-100 overflow-hidden"
+                                style={{
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'start',
+                                    backgroundColor: "#fff",
+                                    height: 50,
+                                    borderRadius: 255,
+                                    fontFamily: "Arial Rounded MT Bold",
+                                    color: "#6c6cd9",
+                                    fontSize: 20
+                                }}
+                                as={Link}
+                                to="/products">
+                                See Our Products
+                                <img className='position-absolute arrow object-fit-contain' src="/animation_elements/arrow.png" alt="arrow" />
+                            </Button>
+                        </Col>
+                    </Row>
+                    <Row className='mt-4'>
+                        <Col>
+                            <Button
+                                className="text-start align-bottom ofcanva-dropdown position-relative rounded-5 w-100 overflow-hidden"
+                                style={{
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'start',
+                                    backgroundColor: "#fff",
+                                    height: 50,
+                                    borderRadius: 255,
+                                    fontFamily: "Arial Rounded MT Bold",
+                                    color: "#6c6cd9",
+                                    fontSize: 20
+                                }}
+                                as={Link}
+                                to="/about">
+                                About Us
+                                <img className='position-absolute arrow object-fit-contain' src="/animation_elements/arrow.png" alt="arrow" />
+                            </Button>
+                        </Col>
+                    </Row>
+                    <Row className='mt-4'>
+                        <Col>
+                            <Button
+                                className="text-start align-bottom ofcanva-dropdown position-relative rounded-5 w-100 overflow-hidden"
+                                style={{
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'start',
+                                    backgroundColor: "#fff",
+                                    height: 50,
+                                    borderRadius: 255,
+                                    fontFamily: "Arial Rounded MT Bold",
+                                    color: "#6c6cd9",
+                                    fontSize: 20
+                                }}
+                                as={Link}
+                                to="/faq">
+                                FAQ
+                                <img className='position-absolute arrow object-fit-contain' src="/animation_elements/arrow.png" alt="arrow" />
+                            </Button>
                         </Col>
                     </Row>
                 </Container>
@@ -68,7 +171,7 @@ function NavigationMenu() {
                                     <Button onClick={() => setShow(true)} variant='link'><img className='object-fit-contain' style={{ height: 24 }} src="/icons/menu.png" alt="menu" /></Button>
                                 </Col>
                                 <Col xs={10}>
-                                    <Form id='searchForm' onSubmit={(ev) => {ev.preventDefault(); handleSearch();}}>
+                                    <Form id='searchForm' onSubmit={(ev) => { ev.preventDefault(); handleSearch(); }}>
                                         <Container fluid>
                                             <Row>
                                                 <Col className='px-1'>
@@ -82,7 +185,7 @@ function NavigationMenu() {
                                     </Form>
                                 </Col>
                                 <Col className="h-100" xs={"auto"}>
-                                    <Link>
+                                    <Link to="/products">
                                         <img className="icon p-1" src="/icons/shipping.png" alt="shipping" />
                                     </Link>
                                 </Col>

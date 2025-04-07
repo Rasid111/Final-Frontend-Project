@@ -8,11 +8,13 @@ import Cart from "./components/Cart";
 import RegisterPage from "./components/RegisterPage";
 import LoginPage from "./components/LoginPage";
 import Footer from "./components/Footer";
-import './scss/style.scss'
+import './scss/style.scss';
 import Dashboard from "./components/Dashboard";
 import NotFoundPage from "./components/NotFoundPage";
 import Profile from "./components/profile";
 import AdminPanel from "./components/AdminPanel";
+import Wishlist from "./components/Wishlist";
+import Checkout from "./components/Checkout";
 
 function App() {
   return (
@@ -47,6 +49,22 @@ function App() {
             <>
               <NavigationMenu></NavigationMenu>
               <Cart></Cart>
+              <Footer></Footer>
+            </>
+          }>
+          </Route>
+          <Route path='/wishlist' element={
+            <>
+              <NavigationMenu></NavigationMenu>
+              <Wishlist></Wishlist>
+              <Footer></Footer>
+            </>
+          }>
+          </Route>
+          <Route path='/checkout' element={
+            <>
+              <NavigationMenu></NavigationMenu>
+              <Checkout></Checkout>
               <Footer></Footer>
             </>
           }>

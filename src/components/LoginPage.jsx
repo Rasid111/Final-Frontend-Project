@@ -1,17 +1,27 @@
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { LangContext } from "../contexts/LangContext";
 import { Link, useNavigate } from "react-router-dom";
 import supabase from "../../utils/supabase";
 import { login } from "../tools/slices/authSlice";
 import { clearCart, setCart } from "../tools/slices/cartSlice";
+import Swal from "sweetalert2";
 
 
 function LoginPage() {
-    
+
     const navigate = useNavigate();
-    
+
+    const [goHome, setGoHome] = useState(false);
+
+    useEffect(() => {
+        if (goHome) {
+            navigate("/");
+            setGoHome(false);
+        }
+    }, [goHome]);
+
     const auth = useSelector(state => state.auth.id);
     useEffect(() => {
         if (auth !== null) {
@@ -41,7 +51,16 @@ function LoginPage() {
         if (userData) {
             dispatch(login({ id: userData.id }));
             dispatch(setCart(userData.cart));
-            navigate("/");
+            setGoHome(true);
+        } else {
+            Swal.fire({
+                title: "Login failed",
+                text: "Incorrect email or password",
+                icon: "error",
+                customClass: {
+                    popup: 'swal2-dark',
+                }
+            });
         }
     }
 
@@ -55,7 +74,7 @@ function LoginPage() {
                 </Col>
                 <Col xs={6} className="backgrounded text-center d-flex flex-column align-items-center" style={{ borderRadius: 50 }}>
                     <div className="w-75">
-                        <Form onSubmit={(ev) => {loginHandle(ev)}}> 
+                        <Form onSubmit={(ev) => { loginHandle(ev) }}>
                             <Form.Group className="text-center">
                                 <Form.Label className="my-3" style={{ fontFamily: "Arial Rounded MT Bold", color: "#fff", fontSize: 50 }}>
                                     email.
@@ -69,7 +88,7 @@ function LoginPage() {
                                 </Form.Label>
                                 <Form.Control name="password" className="rounded-5 py-3" type="password" />
                             </Form.Group>
-                            
+
                             <Container className="my-5">
                                 <Row>
                                     <Col xs={4}>
@@ -103,30 +122,6 @@ function LoginPage() {
                 </Col>
             </Row>
         </Container>
-        // <Container className="mt-5">
-        //     <Row className="justify-content-center">
-        //         <Col xs={6}>
-        // <Form onSubmit={(ev) => {
-        //     ev.preventDefault();
-        //     let userInfo = Object.fromEntries(new FormData(ev.target).entries())
-        //     dispatch(login({ ...userInfo }));
-        // }}>
-        //     <Form.Group className="mb-3">
-        //         <Form.Label>{lang === "en" ? "Email address" : "E-poçt ünvanı"}</Form.Label>
-        //         <Form.Control name="email" type="email" placeholder={lang === "en" ? "Enter email" : "E-poçtu daxil edin"} />
-        //     </Form.Group>
-
-        //     <Form.Group className="mb-3">
-        //         <Form.Label>{lang === "en" ? "Password" : "Parol"}</Form.Label>
-        //         <Form.Control name="password" type="password" placeholder={lang === "en" ? "Enter password" : "Parol daxil edin"} />
-        //     </Form.Group>
-        //     <Button variant="primary" type="submit">
-        //         {lang === "en" ? "Login" : "Daxil ol"}
-        //     </Button>
-        // </Form>
-        //         </Col>
-        //     </Row>
-        // </Container>
     )
 }
 
