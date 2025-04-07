@@ -15,6 +15,7 @@ import Profile from "./components/profile";
 import AdminPanel from "./components/AdminPanel";
 import Wishlist from "./components/Wishlist";
 import Checkout from "./components/Checkout";
+import Faq from "./components/Faq";
 
 function App() {
   return (
@@ -65,6 +66,14 @@ function App() {
             <>
               <NavigationMenu></NavigationMenu>
               <Checkout></Checkout>
+              <Footer></Footer>
+            </>
+          }>
+          </Route>
+          <Route path='/faq' element={
+            <>
+              <NavigationMenu></NavigationMenu>
+              <Faq></Faq>
               <Footer></Footer>
             </>
           }>
