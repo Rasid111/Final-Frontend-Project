@@ -17,7 +17,7 @@ const Dashboard = () => {
     }, [auth]);
 
     const [profile, setProfile] = useState({});
-    
+
     useEffect(() => {
         async function getUserById(userId) {
             const { data } = await supabase
@@ -29,7 +29,7 @@ const Dashboard = () => {
         }
         getUserById(auth);
     }, [auth]);
-    
+
     useEffect(() => {
         if (!profile && !profile.is_admin) {
             navigate("/");
@@ -52,7 +52,7 @@ const Dashboard = () => {
                 description: product.description,
             })
             .eq('id', product.id)
-            console.log(error);
+        console.log(error);
         setUpdated(true);
     }
 
@@ -85,27 +85,20 @@ const Dashboard = () => {
                             <Col xs={1}>
                                 <span className="white-backgrounded p-2">{p.id}</span>
                             </Col>
-                            <Col xs={1}>
-                                <img className="w-100 object-fit-contain" src={p.thumbnail} alt="thumbnail" />
+                            <Col xs={2}>
+                                <img className="w-100 object-fit-contain" src={p.thumbnail} style={{height: 100}} alt="thumbnail" />
                             </Col>
-                            <Col xs={3}>
-                                <span className="white-backgrounded p-2">{p.title}</span>
+                            <Col className="white-backgrounded p-2" xs={6}>
+                                <span className="p-2 text-center d-block">{p.title}</span>
+                                <span className=" overflow-auto d-block" style={{maxHeight: 100}}>{p.description}</span>
                             </Col>
-                            <Col className="white-backgrounded p-3" xs={3}>
-                                <span>{p.description}</span>
-                            </Col>
-                            <Col xs={1}>
-                                <span className="white-backgrounded p-2">${p.price}</span>
-                            </Col>
-                            <Col xs={1}>
+                            <Col xs={3} md={2}>
                                 <Button className="w-100 h-100 mt-2" variant="" style={{ backgroundColor: "#fff", borderRadius: 255, fontFamily: "Arial Rounded MT Bold", color: "#6c6cd9", fontSize: 20 }} onClick={() => setUpdate(p.id)}>Update</Button>
-                            </Col>
-                            <Col xs={1}>
                                 <Button className="w-100 h-100 mt-2" variant="danger" style={{ borderRadius: 255, fontFamily: "Arial Rounded MT Bold", fontSize: 20 }} onClick={() => removeProduct(p.id)}>Remove</Button>
                             </Col>
                         </Row>
                         <Row className={`justify-content-center text-center ${update !== p.id ? "d-none" : "d-flex"}`}>
-                            <Col xs={{ span: 5, offset: 6 }}>
+                            <Col xs={{ span: 12, offset: 0 }}>
                                 <Form onSubmit={(ev) => {
                                     ev.preventDefault();
                                     updateProduct({ ...Object.fromEntries(new FormData(ev.target).entries()), id: p.id });

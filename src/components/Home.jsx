@@ -307,7 +307,7 @@ function Home() {
                 </Row>
             </Container>
             <Container>
-                <Row xs={1} md={2} lg={3} xxl={5}>
+                <Row xs={1} md={2} lg={3} xxl={4}>
                     {
                         cars.length > 0 && motorcycles.length > 0 ? (
                             [...cars, ...motorcycles].map((product, index) =>
