@@ -87,26 +87,6 @@ function ProductCard({ className, product, thumbHeight = 300 }) {
                 </Container>
             </div>
         </div>
-
-
-        // <Card className={className} style={{ height: cardHeight }}>
-        //     <Card.Img variant="top" className="object-fit-contain" style={{height: 150}} src={product.thumbnail} />
-        //     <Card.Body>
-        //         <Card.Title>{product.title}</Card.Title>
-        //         <Card.Text>
-        //             {currency === "usd" ?
-        //                 `${product.price} USD` :
-        //                 `${Math.round(product.price / rate * 100) / 100} AZN`
-        //             }
-        //         </Card.Text>
-        //         <Container fluid className="p-0">
-        //             <Row className="justify-content-start g-1">
-        //                 <Col xs={8}><Button onClick={() => dispatch(addToCart({ id: product.id }))} className="w-100" variant="warning">{lang === "en" ? "Add to cart" : "Səbətə əlavə et"}</Button></Col>
-        //                 <Col xs={4}><Button as={Link} to={`/product/${product.id}`} className="w-100" variant={colorMode === "dark" ? "light" : "dark"}>{lang === "en" ? "More" : "Ətraflı"}</Button></Col>
-        //             </Row>
-        //         </Container>
-        //     </Card.Body>
-        // </Card>
     )
 }
 

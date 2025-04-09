@@ -135,6 +135,9 @@ function Wishlist() {
                                                                 .eq("id", auth);
                                                         }}>Remove from wishlist</Button>
                                                 </Col>
+                                                <Col xs={12} lg={4}>
+                                                    <Button as={Link} to={`/product/${product.id}`} className="w-100 more">{lang === "en" ? "More" : "Ətraflı"}</Button>
+                                                </Col>
                                             </Row>
                                         </Container>
                                     </Col>

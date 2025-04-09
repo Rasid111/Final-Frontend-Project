@@ -87,13 +87,14 @@ function Cart() {
                                 <Col className="mt-5">
                                     <h3>{product.title}</h3>
                                     <h4>{product.brand}</h4>
-                                    <p>{product.description}</p>
+                                    <p className="overflow-auto" style={{maxHeight: 100}}>{product.description}</p>
                                     <p>
                                         {currency === "usd" ?
                                             `${product.price} USD` :
                                             `${Math.round(product.price / rate * 100) / 100} AZN`
                                         }
                                     </p>
+                                    <Button as={Link} to={`/product/${product.id}`} className="w-100 more">{lang === "en" ? "More" : "Ətraflı"}</Button>
                                 </Col>
                                 <Col className="align-self-center p-0">
                                     <Container fluid>

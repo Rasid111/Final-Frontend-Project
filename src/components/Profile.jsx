@@ -113,7 +113,7 @@ function Profile() {
                             <Link to="/"><img className="w-100 object-fit-contain" src="/icons/home.png" alt="home" /></Link>
                         </div>
                     </Col>
-                    <Col xs={6} className="backgrounded text-center d-flex flex-column align-items-center" style={{ borderRadius: 50 }}>
+                    <Col xs={8} lg={6} className="backgrounded text-center d-flex flex-column align-items-center" style={{ borderRadius: 50 }}>
                         <div className="w-75">
                             <Form onSubmit={(ev) => {
                                 updateHandle(ev);
@@ -183,12 +183,14 @@ function Profile() {
                             </Form>
                         </div>
                     </Col>
-                    <Col xs={{ span: 3, offset: 0 }}>
-                        <div className="backgrounded text-center p-3" style={{ borderRadius: 50 }}>
-                            <Button className="w-100 h-100" variant="" style={{ backgroundColor: "#fff", borderRadius: 255, fontFamily: "Arial Rounded MT Bold", color: "#6c6cd9", fontSize: 20 }} as={Link} to="/wishlist">Your wishlist</Button>
-                            <Button className="w-100 h-100 mt-2" variant="" style={{ backgroundColor: "#fff", borderRadius: 255, fontFamily: "Arial Rounded MT Bold", color: "#6c6cd9", fontSize: 20 }} as={Link} to="/cart">Your cart</Button>
+                    <Col xs={{ span: 12, offset: 1 }} lg={{ span: 3, offset: 0 }} className="d-flex justify-items-center d-lg-block">
+                        <div className="mt-3">
+                            <div className="backgrounded text-center p-3" style={{ borderRadius: 50, minHeight: "100%" }}>
+                                <Button className="w-100 h-100" variant="" style={{ backgroundColor: "#fff", borderRadius: 255, fontFamily: "Arial Rounded MT Bold", color: "#6c6cd9", fontSize: 20 }} as={Link} to="/wishlist">Your wishlist</Button>
+                                <Button className="w-100 h-100 mt-2" variant="" style={{ backgroundColor: "#fff", borderRadius: 255, fontFamily: "Arial Rounded MT Bold", color: "#6c6cd9", fontSize: 20 }} as={Link} to="/cart">Your cart</Button>
+                            </div>
                         </div>
-                        <div className="mt-3" hidden={!profile.is_admin} xs={{ span: 3, offset: 0 }}>
+                        <div className="mt-3 ms-2 ms-lg-0" hidden={!profile.is_admin} xs={{ span: 3, offset: 0 }}>
                             <div className="backgrounded text-center p-3" style={{ borderRadius: 50 }}>
                                 <span style={{ fontFamily: "Arial Rounded MT Bold", color: "#fff", fontSize: 25 }}>
                                     You are admin

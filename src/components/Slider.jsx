@@ -14,7 +14,7 @@ function Slide({ products }) {
                     disableOnInteraction: false,
                 }}
                 modules={[Autoplay]}
-                slidesPerView={1}
+                slidesPerView={2}
                 breakpoints={{
                     768: {
                         slidesPerView: 2,

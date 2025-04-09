@@ -67,7 +67,7 @@ function LoginPage() {
     return (
         <Container className="mt-5">
             <Row>
-                <Col xs={{ span: 3, offset: 0 }} sm={{ span: 2, offset: 1 }} lg={{ span: 1, offset: 2 }}>
+                <Col xs={{ span: 2, offset: 1 }} lg={{ span: 1, offset: 2 }}>
                     <div className="backgrounded">
                         <Link to="/"><img className="w-100 object-fit-contain" src="/icons/home.png" alt="home" /></Link>
                     </div>
@@ -89,14 +89,14 @@ function LoginPage() {
                                 <Form.Control name="password" className="rounded-5 py-3" type="password" />
                             </Form.Group>
 
-                            <Container className="my-5">
+                            <Container className="mb-5 my-2 my-lg-5">
                                 <Row className="justify-content-center">
                                     <Col xs={12} xl={8} className="order-xl-2">
                                         <Button type="submit" variant="">
                                             <img className="object-fit-contain w-100" src="buttons/signin.png" alt="signin" />
                                         </Button>
                                     </Col>
-                                    <Col xs={6} xl={4} className="order-xl-1 mt-3">
+                                    <Col xs={8} xl={4} className="order-xl-1 mt-3">
                                         <div className="d-flex h-100">
                                             <img className="object-fit-contain" style={{ width: "33%" }} src="icons/mailru.png" alt="mail.ru" />
                                             <img className="object-fit-contain mx-1" style={{ width: "33%" }} src="icons/facebook.png" alt="facebook" />
@@ -105,12 +105,12 @@ function LoginPage() {
                                     </Col>
                                 </Row>
                                 <Row className="justify-content-center mt-3 text-center">
-                                    <Col xs={8}>
+                                    <Col xs={12} lg={8}>
                                         <img className="w-100" src="/titles/donthaveanaccount.png" alt="dont have an account?" />
                                     </Col>
                                 </Row>
-                                <Row className="mt-5 justify-content-center text-center">
-                                    <Col xs={8}>
+                                <Row className="mt-1 mt-lg-5 justify-content-center text-center">
+                                    <Col xs={12} lg={8}>
                                         <Link to="/register">
                                             <img className="object-fit-contain w-100" src="buttons/register.png" alt="register" />
                                         </Link>

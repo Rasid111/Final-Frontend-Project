@@ -137,7 +137,7 @@ function Products() {
                 </Container>
             </Form>
             <Container>
-                <Row xs={1} md={2} lg={3} xxl={4} className='g-4 mt-3'>
+                <Row xs={2} lg={3} xxl={4} className='g-4 mt-3'>
                     {!outputProducts ? "..." : outputProducts.map((product, index) =>
                         <Col key={index}>
                             <ProductCard className="border rounded" product={product} />

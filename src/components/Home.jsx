@@ -159,54 +159,45 @@ function Home() {
                     }
                 </Row>
             </Container>
-            <Container className="fluid-section mb-5" fluid>
+            <Container className="fluid-section mb-5 pb-5" fluid>
                 <Row className="justify-content-center text-center">
                     <Col xs={12} md={6} xxl={12} className="title my-3">
                         <img className="object-fit-contain w-100" src="./titles/categories.png" alt="categories" />
                     </Col>
                 </Row>
-                <Row xs={1} md={3} xl={5} className="justify-content-center px-5 mx-5">
-                    <Col>
-                        <div className="w-100 my-3 mb-5 rounded-circle" style={{ backgroundColor: "#fff", aspectRatio: "1 / 1" }}>
-                            <Link id="smartphone" className="overflow-hidden d-flex position-relative rounded-circle justify-content-center w-100 h-100 align-items-center" style={{ backgroundColor: "#fff" }}>
-                                <img onAnimationStart={(ev) => ev.target.classList.toggle("opacity-0")} onAnimationEnd={(ev) => ev.target.classList.toggle("opacity-0")} className="opacity-0 object-fit-contain position-absolute" style={{ width: "5%" }} src="/animation_elements/smartphonebar.png" alt="smartphone" />
-                                <img className="object-fit-contain position-absolute" style={{ width: "62.5%", height: "62.5%" }} src="/icons/categories/smartphone.png" alt="smartphone" />
-                                <img onAnimationStart={(ev) => ev.target.classList.toggle("opacity-0")} onAnimationEnd={(ev) => ev.target.classList.toggle("opacity-0")} className="opacity-0 object-fit-contain position-absolute" style={{ width: "5%" }} src="/animation_elements/smartphonebar.png" alt="smartphone" />
-                            </Link>
-                        </div>
-                    </Col>
-                    <Col>
-                        <div className="w-100 my-3 mb-5 rounded-circle" style={{ backgroundColor: "#fff", aspectRatio: "1 / 1" }}>
-                            <Link id="sport" className="overflow-hidden d-flex position-relative rounded-circle justify-content-center w-100 h-100 align-items-center" style={{ backgroundColor: "#fff" }}>
-                                <img className="object-fit-contain position-absolute" style={{ width: "62.5%", height: "62.5%" }} src="/icons/categories/sport.png" alt="sport" />
-                            </Link>
-                        </div>
-                    </Col>
-                    <Col>
-                        <div className="w-100 my-3 mb-5 rounded-circle" style={{ backgroundColor: "#fff", aspectRatio: "1 / 1" }}>
-                            <Link id="grocery" className="overflow-hidden d-flex position-relative rounded-circle justify-content-center w-100 h-100 align-items-center" style={{ backgroundColor: "#fff" }}>
-                                <img className="object-fit-contain position-absolute" style={{ width: "62.5%", height: "62.5%" }} src="/icons/categories/grocery.png" alt="grocery" />
-                            </Link>
-                        </div>
-                    </Col>
-                    <Col>
-                        <div className="w-100 my-3 mb-5 rounded-circle" style={{ backgroundColor: "#fff", aspectRatio: "1 / 1" }}>
-                            <Link id="beauty" className="overflow-hidden d-flex position-relative rounded-circle justify-content-center w-100 h-100 align-items-center" style={{ backgroundColor: "#fff" }}>
-                                <img className="object-fit-contain position-absolute" style={{ width: "62.5%", height: "62.5%" }} src="/animation_elements/beauty1.png" alt="beauty1" />
-                                <img className="object-fit-contain position-absolute" style={{ width: "62.5%", height: "62.5%" }} src="/animation_elements/beauty2.png" alt="beauty2" />
-                                <img className="object-fit-contain position-absolute" style={{ width: "62.5%", height: "62.5%" }} src="/animation_elements/beauty3.png" alt="beauty3" />
-                            </Link>
-                        </div>
-                    </Col>
-                    <Col>
-                        <div className="w-100 my-3 mb-5 rounded-circle" style={{ backgroundColor: "#fff", aspectRatio: "1 / 1" }}>
-                            <Link id="kitchen" className="overflow-hidden d-flex position-relative rounded-circle justify-content-center w-100 h-100 align-items-center" style={{ backgroundColor: "#fff" }}>
-                                <img className="object-fit-contain position-absolute" style={{ width: "62.5%", height: "62.5%" }} src="/animation_elements/knife.png" alt="kitchen" />
-                                <img className="object-fit-contain position-absolute" style={{ width: "62.5%", height: "62.5%" }} src="/animation_elements/pan.png" alt="kitchen" />
-                            </Link>
-                        </div>
-                    </Col>
-                </Row>
+                <div className="d-flex justify-content-center category-items px-5 mx-5">
+                    <div className="my-3 rounded-circle" style={{ backgroundColor: "#fff", aspectRatio: "1 / 1" }}>
+                        <Link id="smartphone" className="overflow-hidden d-flex position-relative rounded-circle justify-content-center w-100 h-100 align-items-center" style={{ backgroundColor: "#fff" }}>
+                            <img onAnimationStart={(ev) => ev.target.classList.toggle("opacity-0")} onAnimationEnd={(ev) => ev.target.classList.toggle("opacity-0")} className="opacity-0 object-fit-contain position-absolute" style={{ width: "5%" }} src="/animation_elements/smartphonebar.png" alt="smartphone" />
+                            <img className="object-fit-contain position-absolute" style={{ width: "62.5%", height: "62.5%" }} src="/icons/categories/smartphone.png" alt="smartphone" />
+                            <img onAnimationStart={(ev) => ev.target.classList.toggle("opacity-0")} onAnimationEnd={(ev) => ev.target.classList.toggle("opacity-0")} className="opacity-0 object-fit-contain position-absolute" style={{ width: "5%" }} src="/animation_elements/smartphonebar.png" alt="smartphone" />
+                        </Link>
+                    </div>
+                    <div className="my-3 rounded-circle" style={{ backgroundColor: "#fff", aspectRatio: "1 / 1" }}>
+                        <Link id="sport" className="overflow-hidden d-flex position-relative rounded-circle justify-content-center w-100 h-100 align-items-center" style={{ backgroundColor: "#fff" }}>
+                            <img className="object-fit-contain position-absolute" style={{ width: "62.5%", height: "62.5%" }} src="/icons/categories/sport.png" alt="sport" />
+                        </Link>
+                    </div>
+                    <div className="w-100 h-0 w-0 d-block d-lg-none" />
+                    <div className="my-3 rounded-circle" style={{ backgroundColor: "#fff", aspectRatio: "1 / 1" }}>
+                        <Link id="grocery" className="overflow-hidden d-flex position-relative rounded-circle justify-content-center w-100 h-100 align-items-center" style={{ backgroundColor: "#fff" }}>
+                            <img className="object-fit-contain position-absolute" style={{ width: "62.5%", height: "62.5%" }} src="/icons/categories/grocery.png" alt="grocery" />
+                        </Link>
+                    </div>
+                    <div className="my-3 rounded-circle" style={{ backgroundColor: "#fff", aspectRatio: "1 / 1" }}>
+                        <Link id="beauty" className="overflow-hidden d-flex position-relative rounded-circle justify-content-center w-100 h-100 align-items-center" style={{ backgroundColor: "#fff" }}>
+                            <img className="object-fit-contain position-absolute" style={{ width: "62.5%", height: "62.5%" }} src="/animation_elements/beauty1.png" alt="beauty1" />
+                            <img className="object-fit-contain position-absolute" style={{ width: "62.5%", height: "62.5%" }} src="/animation_elements/beauty2.png" alt="beauty2" />
+                            <img className="object-fit-contain position-absolute" style={{ width: "62.5%", height: "62.5%" }} src="/animation_elements/beauty3.png" alt="beauty3" />
+                        </Link>
+                    </div>
+                    <div className="my-3 rounded-circle" style={{ backgroundColor: "#fff", aspectRatio: "1 / 1" }}>
+                        <Link id="kitchen" className="overflow-hidden d-flex position-relative rounded-circle justify-content-center w-100 h-100 align-items-center" style={{ backgroundColor: "#fff" }}>
+                            <img className="object-fit-contain position-absolute" style={{ width: "62.5%", height: "62.5%" }} src="/animation_elements/knife.png" alt="kitchen" />
+                            <img className="object-fit-contain position-absolute" style={{ width: "62.5%", height: "62.5%" }} src="/animation_elements/pan.png" alt="kitchen" />
+                        </Link>
+                    </div>
+                </div>
             </Container>
             <Container className="mt-5">
                 <Row className="justify-content-center text-center wow animate__fadeInRight">
@@ -214,11 +205,11 @@ function Home() {
                         <img className="object-fit-contain w-100" src="./titles/title2.png" alt="title2" />
                     </Col>
                 </Row>
-                <Row md={2} lg={3} xl={4} className='g-4 mt-3 wow'>
+                <Row xs={2} md={2} lg={3} xl={4} className='g-4 mt-3 wow'>
                     {
                         products.length > 0 ? (
                             products.map((product, index) =>
-                                <Col key={index}>
+                                <Col key={index} className={`${index >= 4 ? " d-none" : ""}`}>
                                     <ProductCard data-wow-iteration="infinite" className="wow animate__bounceInUp" product={product} />
                                 </Col>)
                         ) : null
@@ -285,7 +276,7 @@ function Home() {
                         </div>
                     </Col>
                 </Row>
-                <Row className="g-0 rounded-bottom-4" xs={1} md={2} lg={3} xxl={5} style={{ backgroundColor: "#6464C6" }}>
+                <Row className="g-0 rounded-bottom-4" xs={2} md={3} xxl={5} style={{ backgroundColor: "#6464C6" }}>
                     {
                         products.length > 0 ? (
                             products.slice(0, 5).map((product, index) =>
@@ -307,7 +298,7 @@ function Home() {
                 </Row>
             </Container>
             <Container>
-                <Row xs={1} md={2} lg={3} xxl={4}>
+                <Row xs={2} lg={3} xxl={4}>
                     {
                         cars.length > 0 && motorcycles.length > 0 ? (
                             [...cars, ...motorcycles].map((product, index) =>
@@ -319,8 +310,8 @@ function Home() {
                 </Row>
             </Container>
             <Container className="fluid-section my-4" fluid>
-                <Row className="justify-content-center align-center text-white text-center pb-3">
-                    <Col xs={7} md={3} className="for">
+                <Row className="justify-content-center align-center text-white text-center pb-3 targets">
+                    <Col xs={4} md={3} className="for order-md-1 order-3">
                         <h2 className="d-block">for women.</h2>
                         <div>
                             <Link className="d-block h-100">
@@ -330,17 +321,7 @@ function Home() {
                             </Link>
                         </div>
                     </Col>
-                    <Col xs={7} md={3} className="for">
-                        <h2>for men.</h2>
-                        <div>
-                            <Link className="d-block h-100">
-                                <div className="w-100 h-100 rounded-circle p-5 overflow-hidden position-relative">
-                                    <img className="object-fit-contain position-absolute" src="/icons/formen.png" alt="forwomen" />
-                                </div>
-                            </Link>
-                        </div>
-                    </Col>
-                    <Col xs={7} md={3} className="for">
+                    <Col xs={4} md={3} className="for order-md-2 order-1">
                         <h2>for kids.</h2>
                         <div>
                             <Link className="d-block h-100">
@@ -350,10 +331,21 @@ function Home() {
                             </Link>
                         </div>
                     </Col>
+                    <Col xs={12} className="d-md-none order-2"></Col>
+                    <Col xs={4} md={3} className="for order-md-3 order-4">
+                        <h2>for men.</h2>
+                        <div>
+                            <Link className="d-block h-100">
+                                <div className="w-100 h-100 rounded-circle p-5 overflow-hidden position-relative">
+                                    <img className="object-fit-contain position-absolute" src="/icons/formen.png" alt="forwomen" />
+                                </div>
+                            </Link>
+                        </div>
+                    </Col>
                 </Row>
             </Container>
             <Container>
-                <Row  xs={1} md={2} lg={3} xxl={4}>
+                <Row xs={2} lg={3} xxl={4}>
                     {
                         cars.length > 0 && motorcycles.length > 0 ? (
                             [...cars, ...motorcycles].map((product, index) =>
