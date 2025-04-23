@@ -71,9 +71,9 @@ function Cart() {
                             className="w-100"
                             as={Link}
                             to="/checkout"
-                            style={{ backgroundColor: "#6c6cd9" }}
+                            style={{ backgroundColor: colorMode === "light" ? "#6c6cd9" : "#2C387E", border: "none" }}
                         >
-                            Order
+                            {lang === "en" ? "Order" : "Sifariş"}
                         </Button>
                     </Col>
                 </Row>
@@ -87,7 +87,7 @@ function Cart() {
                                 <Col className="mt-5">
                                     <h3>{product.title}</h3>
                                     <h4>{product.brand}</h4>
-                                    <p className="overflow-auto" style={{maxHeight: 100}}>{product.description}</p>
+                                    <p className="overflow-auto" style={{ maxHeight: 100 }}>{product.description}</p>
                                     <p>
                                         {currency === "usd" ?
                                             `${product.price} USD` :

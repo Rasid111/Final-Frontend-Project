@@ -24,13 +24,13 @@ function ProductCard({ className, product, thumbHeight = 300 }) {
     } = useContext(CurrencyContext);
 
     return (
-        <div className={"product-card d-flex flex-column m-3 p-2 rounded-4" + ` ${className}`} style={{ backgroundColor: "white" }}>
+        <div className={"product-card d-flex flex-column m-3 p-2 rounded-4" + ` ${className}`} style={{ backgroundColor: colorMode === "light" ? "white" : "#232358" }} >
             <img className="rounded-3" src={product.thumbnail} alt="thumbnail" style={{ backgroundColor: "rgb(234, 234, 234)" }} />
             <div className="d-flex flex-wrap text-center flex-row justify-items-center">
                 <Container fluid className="my-2 px-0">
                     <Row className="align-items-center justify-content-between h-100 g-1">
                         <Col xs={7}>
-                            <div className="py-2 rounded-3 h-100 text-center" style={{ backgroundColor: "rgb(234, 234, 234)" }}>
+                            <div className="py-2 rounded-3 h-100 text-center" style={{ backgroundColor: colorMode === "light" ? "rgb(234, 234, 234)" : "#5e5e86" }}>
                                 <span className="text-truncate">
                                     {currency === "usd" ?
                                         `${product.price} USD` :
@@ -40,7 +40,7 @@ function ProductCard({ className, product, thumbHeight = 300 }) {
                             </div>
                         </Col>
                         <Col xs={5}>
-                            <div className="py-2 rounded-3 h-100 text-center d-flex align-items-center justify-content-center" style={{ backgroundColor: "rgb(234, 234, 234)" }}>
+                            <div className="py-2 rounded-3 h-100 text-center d-flex align-items-center justify-content-center" style={{ backgroundColor: colorMode === "light" ? "rgb(234, 234, 234)" : "#5e5e86" }}>
                                 <img src="./icons/star.png" alt="star" className="object-fit-contain" style={{ width: 18 }} />
                                 <span>{`${product.rating} / 5`}</span>
                             </div>

@@ -1,8 +1,11 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Button, Col, Container, Modal, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import supabase from "../../utils/supabase";
+import { ColorModeContext } from "../contexts/ColorModeContex";
+import { BsArrowsAngleContract } from "react-icons/bs";
+import { LangContext } from "../contexts/LangContext";
 
 function AdminPanel() {
 
@@ -14,6 +17,8 @@ function AdminPanel() {
             navigate("/login");
         }
     }, [auth]);
+
+    const colorMode = useContext(ColorModeContext)[0];
 
     const [profile, setProfile] = useState({});
 
@@ -64,6 +69,8 @@ function AdminPanel() {
         setUpdate(!update);
         console.log(error);
     }
+    
+    const lang = useContext(LangContext);
 
     return (
         <Container>
@@ -93,26 +100,26 @@ function AdminPanel() {
                         <Col className="backgrounded py-2">
                             <Container>
                                 <Row className="g-2">
-                                    <Col xs={"auto"} lg={1}>
+                                    <Col className="text-center" xs={"auto"} lg={1}>
                                         <span className="styled-text d-block">Login:</span>
                                     </Col>
                                     <Col xs={12} lg={11}>
                                         <span className="styled-text d-block">{account.login}</span>
                                     </Col>
-                                    <Col xs={"auto"} lg={1}>
+                                    <Col className="text-center" xs={"auto"} lg={1}>
                                         <span className="styled-text d-block">Email:</span>
                                     </Col>
                                     <Col xs={12} lg={11}>
                                         <span className="styled-text d-block">{account.email}</span>
                                     </Col>
                                     {account.is_admin ? (
-                                        <Col xs={5} md={4} lg={3} xl={2} className="text-center"><span className="styled-text d-block">Is already Admin</span></Col>
+                                        <Col xs={5} md={4} lg={3} xl={2} className="text-center"><span className="styled-text d-block">{lang === "en" ? "Is already Admin" : "Artıq Admindir"}</span></Col>
                                     ) : (
                                         <Col xs={12}>
                                             <Button variant="" onClick={() => {
                                                 setAccount(account);
                                                 handleShow();
-                                            }} style={{ backgroundColor: "#fff", borderRadius: 255, fontFamily: "Arial Rounded MT Bold", color: "#6c6cd9", fontSize: 20 }}>Make Admin</Button>
+                                            }} style={{ backgroundColor: "#fff", borderRadius: 255, fontFamily: "Arial Rounded MT Bold", color: colorMode === "light" ? "#6c6cd9" : "#070389", fontSize: 20 }}>{lang === "en" ? "Make Admin" : "Admin et"}</Button>
                                         </Col>
                                     )}
                                 </Row>

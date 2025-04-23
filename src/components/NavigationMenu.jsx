@@ -55,7 +55,7 @@ function NavigationMenu() {
                 <Container>
                     <Row>
                         <Col className='h-100 mt-3 ms-2 p-1 rounded-4' xs={2} style={{ backgroundColor: "white" }}>
-                            <Link to="/" className='w-100'><img className='w-100 object-fit-contain' src="/icons/r-light.png" alt="logo" /></Link>
+                            <Link to="/" className='w-100'><img className='w-100 object-fit-contain' src={`/icons/r-${colorMode}.png`} alt="logo" /></Link>
                         </Col>
                     </Row>
                     <Row className='justify-content-between text-center mt-4'>
@@ -84,7 +84,7 @@ function NavigationMenu() {
                                     height: 50,
                                     borderRadius: 255,
                                     fontFamily: "Arial Rounded MT Bold",
-                                    color: "#6c6cd9",
+                                    color: colorMode === "light" ? "#6c6cd9" : "#232358",
                                     fontSize: 20
                                 }}
                                 as={Link}
@@ -106,12 +106,13 @@ function NavigationMenu() {
                                     height: 50,
                                     borderRadius: 255,
                                     fontFamily: "Arial Rounded MT Bold",
-                                    color: "#6c6cd9",
+                                    color: colorMode === "light" ? "#6c6cd9" : "#232358",
                                     fontSize: 20
                                 }}
                                 as={Link}
                                 to="/products">
-                                See Our Products
+                                {lang === "en" ? "See Our Products" : 'Məhsullarımıza Baxın'}
+
                                 <img className='position-absolute arrow object-fit-contain' src="/animation_elements/arrow.png" alt="arrow" />
                             </Button>
                         </Col>
@@ -128,12 +129,12 @@ function NavigationMenu() {
                                     height: 50,
                                     borderRadius: 255,
                                     fontFamily: "Arial Rounded MT Bold",
-                                    color: "#6c6cd9",
+                                    color: colorMode === "light" ? "#6c6cd9" : "#232358",
                                     fontSize: 20
                                 }}
                                 as={Link}
                                 to="/about">
-                                About Us
+                                {lang === "en" ? "About Us" : 'Haqqımızda'}
                                 <img className='position-absolute arrow object-fit-contain' src="/animation_elements/arrow.png" alt="arrow" />
                             </Button>
                         </Col>
@@ -150,7 +151,7 @@ function NavigationMenu() {
                                     height: 50,
                                     borderRadius: 255,
                                     fontFamily: "Arial Rounded MT Bold",
-                                    color: "#6c6cd9",
+                                    color: colorMode === "light" ? "#6c6cd9" : "#232358",
                                     fontSize: 20
                                 }}
                                 as={Link}
@@ -164,10 +165,10 @@ function NavigationMenu() {
             </Offcanvas>
 
 
-            <Container id='navbar' className='my-5 ps-0'>
+            <Container id='navbar' className={`my-5 ps-0 ${colorMode}`}>
                 <Row className='d-flex h-100 align-items-center'>
                     <div className='h-100 logo'>
-                        <Link to="/" className='h-100 w-100'><img className='h-100 w-100 object-fit-contain' src="/icons/r-light.png" alt="logo" /></Link>
+                        <Link to="/" className='h-100 w-100'><img className='h-100 w-100 object-fit-contain' src={`/icons/r-${colorMode}.png`} alt="logo" /></Link>
                     </div>
                     <div className='d-flex align-items-center backgrounded h-100 px-1 navbar-interactables'>
                         <div className='side-menu-button'>
@@ -175,10 +176,10 @@ function NavigationMenu() {
                         </div>
                         <Form className='d-flex nav-search-form' id='searchForm' onSubmit={(ev) => { ev.preventDefault(); handleSearch(); }}>
                             <div className='px-1 input'>
-                                <Form.Control id="search" type="text" onInput={(ev) => { setSearchInput(ev.target.value) }} className='input-form h-100 w-100|'></Form.Control>
+                                <Form.Control id="search" type="text" onInput={(ev) => { setSearchInput(ev.target.value) }} className='input-form h-100 w-100 text-black'></Form.Control>
                             </div>
                             <div className='px-1 button'>
-                                <Button onClick={handleSearch} style={{ fontSize: "24px" }} className="d-block h-100 w-100 btn-light">search.</Button>
+                                <Button onClick={handleSearch} style={{ fontSize: "24px", color: `${colorMode === "dark" ? "#1E1E3F" : ""}` }} className={`d-block h-100 w-100 btn-light`}>{lang === "en" ? "search." : 'axtar.'}</Button>
                             </div>
                         </Form>
                         <div className='d-flex justify-content-evenly nav-links'>

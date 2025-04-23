@@ -6,10 +6,11 @@ import { Link, useNavigate } from "react-router-dom";
 import FormRange from "react-bootstrap/esm/FormRange";
 import Swal from "sweetalert2";
 import supabase from "../../utils/supabase";
+import { ColorModeContext } from "../contexts/ColorModeContex";
 
 
 function RegisterPage() {
-    
+
     const navigate = useNavigate();
 
     const auth = useSelector(state => state.auth.id);
@@ -20,6 +21,7 @@ function RegisterPage() {
     }, [auth]);
 
     const lang = useContext(LangContext)[0];
+    const colorMode = useContext(ColorModeContext)[0];
 
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
@@ -58,7 +60,7 @@ function RegisterPage() {
                         popup: 'swal2-dark',
                     }
                 });
-            } else{
+            } else {
                 navigate("/login");
             }
         }
@@ -93,7 +95,7 @@ function RegisterPage() {
 
                             <Form.Group className="text-center">
                                 <Form.Label className="my-3" style={{ fontFamily: "Arial Rounded MT Bold", color: "#fff", fontSize: 25 }}>
-                                    password.
+                                    {lang === "en" ? "password." : "parol"}
                                 </Form.Label>
                                 <Form.Control name="password" className="rounded-5 py-3" type="password" />
                                 <ul>
@@ -105,7 +107,7 @@ function RegisterPage() {
 
                             <Form.Group className="text-center">
                                 <Form.Label className="my-3" style={{ fontFamily: "Arial Rounded MT Bold", color: "#fff", fontSize: 25 }}>
-                                    password. (confirmation)
+                                    {lang === "en" ? "password. (confirmation)" : "parol (təsdiq)"}
                                 </Form.Label>
                                 <Form.Control name="confirmation" className="rounded-5 py-3" type="password" />
                                 <ul>
@@ -122,8 +124,8 @@ function RegisterPage() {
                                         </div>
                                     </Col>
                                     <Col xs={8}>
-                                        <Button type="submit" variant="">
-                                            <img className="object-fit-contain w-100" src="buttons/register.png" alt="register" />
+                                        <Button type="submit" className="w-100" variant="" style={{ backgroundColor: "#fff", borderRadius: 255, fontFamily: "Arial Rounded MT Bold", color: colorMode === "light" ? "#6c6cd9" : "black", fontSize: 40 }}>
+                                            {lang === "en" ? "sign up" : "qeydiyyat"}
                                         </Button>
                                     </Col>
                                 </Row>
@@ -132,9 +134,9 @@ function RegisterPage() {
                         <Container className="my-5">
                             <Row className="mt-5 justify-content-center text-center">
                                 <Col xs={8}>
-                                    <Link to="/login">
-                                        <img className="object-fit-contain w-100" src="buttons/signin.png" alt="signin" />
-                                    </Link>
+                                    <Button as={Link} to="/login" className="w-100" variant="" style={{ backgroundColor: "#fff", borderRadius: 255, fontFamily: "Arial Rounded MT Bold", color: colorMode === "light" ? "#6c6cd9" : "black", fontSize: 40 }}>
+                                        {lang === "en" ? "sign in" : "daxil olun"}
+                                    </Button>
                                 </Col>
                             </Row>
                         </Container>

@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 
-export const ColorModeContext = createContext(["light", () => {}]);
+export const ColorModeContext = createContext(["light", () => { }]);
 
 export const ColorModeProvider = ({ children }) => {
 
@@ -10,7 +10,9 @@ export const ColorModeProvider = ({ children }) => {
         const localStorageInfo = localStorage.getItem("colorMode");
 
         if (localStorageInfo !== null) {
-            document.querySelector("html").setAttribute("data-bs-theme", localStorageInfo)
+            const html = document.querySelector("html");
+            html.setAttribute("data-bs-theme", localStorageInfo);
+            html.classList = [localStorageInfo];
             setColorMode(localStorageInfo);
         } else {
             localStorage.setItem("colorMode", "light");
@@ -20,7 +22,9 @@ export const ColorModeProvider = ({ children }) => {
 
     function switchColorMode() {
         localStorage.setItem("colorMode", colorMode === "dark" ? "light" : "dark");
-        document.querySelector("html").setAttribute("data-bs-theme", colorMode === "dark" ? "light" : "dark")
+        const html = document.querySelector("html");
+        html.setAttribute("data-bs-theme", colorMode === "dark" ? "light" : "dark");
+        html.classList = [colorMode === "dark" ? "light" : "dark"];
         setColorMode(colorMode === "dark" ? "light" : "dark");
     }
 

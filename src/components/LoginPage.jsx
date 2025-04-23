@@ -7,6 +7,7 @@ import supabase from "../../utils/supabase";
 import { login } from "../tools/slices/authSlice";
 import { clearCart, setCart } from "../tools/slices/cartSlice";
 import Swal from "sweetalert2";
+import { ColorModeContext } from "../contexts/ColorModeContex";
 
 
 function LoginPage() {
@@ -30,6 +31,7 @@ function LoginPage() {
     }, [auth]);
 
     const lang = useContext(LangContext)[0];
+    const colorMode = useContext(ColorModeContext)[0];
 
 
     async function getUser(userData) {
@@ -77,14 +79,14 @@ function LoginPage() {
                         <Form onSubmit={(ev) => { loginHandle(ev) }}>
                             <Form.Group className="text-center">
                                 <Form.Label className="my-3" style={{ fontFamily: "Arial Rounded MT Bold", color: "#fff", fontSize: 50 }}>
-                                    email.
+                                    {lang === "en" ? "email" : "email"}.
                                 </Form.Label>
                                 <Form.Control name="email" className="rounded-5 py-3" type="email" />
                             </Form.Group>
 
                             <Form.Group className="text-center">
                                 <Form.Label className="my-3" style={{ fontFamily: "Arial Rounded MT Bold", color: "#fff", fontSize: 50 }}>
-                                    password.
+                                {lang === "en" ? "password" : "parol"}.
                                 </Form.Label>
                                 <Form.Control name="password" className="rounded-5 py-3" type="password" />
                             </Form.Group>
@@ -92,8 +94,8 @@ function LoginPage() {
                             <Container className="mb-5 my-2 my-lg-5">
                                 <Row className="justify-content-center">
                                     <Col xs={12} xl={8} className="order-xl-2">
-                                        <Button type="submit" variant="">
-                                            <img className="object-fit-contain w-100" src="buttons/signin.png" alt="signin" />
+                                        <Button type="submit" className="w-100" variant="" style={{ backgroundColor: "#fff", borderRadius: 255, fontFamily: "Arial Rounded MT Bold", color: colorMode === "light" ? "#6c6cd9" : "black", fontSize: 40 }}>
+                                            {lang === "en" ? "sign in" : "daxil olun"}
                                         </Button>
                                     </Col>
                                     <Col xs={8} xl={4} className="order-xl-1 mt-3">
@@ -105,15 +107,15 @@ function LoginPage() {
                                     </Col>
                                 </Row>
                                 <Row className="justify-content-center mt-3 text-center">
-                                    <Col xs={12} lg={8}>
-                                        <img className="w-100" src="/titles/donthaveanaccount.png" alt="dont have an account?" />
+                                    <Col xs={12} lg={8} style={{ fontFamily: "Arial Rounded MT Bold", color: "light", fontSize: 30 }}>
+                                        {lang === "en" ? "don't have an account?" : "hesabınız yoxdur?"}
                                     </Col>
                                 </Row>
                                 <Row className="mt-1 mt-lg-5 justify-content-center text-center">
                                     <Col xs={12} lg={8}>
-                                        <Link to="/register">
-                                            <img className="object-fit-contain w-100" src="buttons/register.png" alt="register" />
-                                        </Link>
+                                        <Button as={Link} to="/register" className="w-100" variant="" style={{ backgroundColor: "#fff", borderRadius: 255, fontFamily: "Arial Rounded MT Bold", color: colorMode === "light" ? "#6c6cd9" : "black", fontSize: 40 }}>
+                                            {lang === "en" ? "sign up" : "qeydiyyat"}
+                                        </Button>
                                     </Col>
                                 </Row>
                             </Container>

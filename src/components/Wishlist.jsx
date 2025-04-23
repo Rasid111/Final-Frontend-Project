@@ -1,18 +1,21 @@
 import { useContext, useEffect, useState } from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import supabase from "../../utils/supabase";
 import { LangContext } from "../contexts/LangContext";
 import { ColorModeContext } from "../contexts/ColorModeContex";
 import { CurrencyContext } from "../contexts/CurrencyContext";
 import Swal from "sweetalert2";
+import { addToCart } from "../tools/slices/cartSlice";
 
 function Wishlist() {
     const auth = useSelector(state => state.auth.id);
     const navigate = useNavigate();
     if (!auth)
         navigate("/login");
+
+    const dispatch = useDispatch();
 
     const [profile, setProfile] = useState();
     useEffect(() => {
@@ -114,13 +117,13 @@ function Wishlist() {
                                                                 icon: "success"
                                                             })
                                                         } else {
-                                                            dispatch(addToCart({ id: product.id }))
                                                             Swal.fire({
                                                                 title: "Producted added to Your local cart",
                                                                 icon: "success"
                                                             })
                                                         }
-                                                    }}>Add to cart</Button>
+                                                        dispatch(addToCart({ id: product.id }))
+                                                    }}>{lang === "en" ? "Add to cart" : "Səbətə at"}</Button>
                                                 </Col>
                                                 <Col xs={12} lg={4}>
                                                     <Button className="w-100" variant="danger"
@@ -133,7 +136,7 @@ function Wishlist() {
                                                                 .from("Users")
                                                                 .update({ wishlist: profile.wishlist.filter(id => id !== product.id) })
                                                                 .eq("id", auth);
-                                                        }}>Remove from wishlist</Button>
+                                                        }}>{lang === "en" ? "Remove from wishlist" : "Sil"}</Button>
                                                 </Col>
                                                 <Col xs={12} lg={4}>
                                                     <Button as={Link} to={`/product/${product.id}`} className="w-100 more">{lang === "en" ? "More" : "Ətraflı"}</Button>

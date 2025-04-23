@@ -44,6 +44,7 @@ function Checkout() {
         products.forEach(p => {
             sum += p.quantity * p.price;
         });
+        sum = Math.round(sum * 100) / 100;
         setTotal(sum);
     }, [products]);
     const discount = useRef("");
@@ -67,8 +68,16 @@ function Checkout() {
     return (
         <Container className="backgrounded p-3">
             <Row className="px-2">
-                <Col xs={12} lg={2} style={{ height: 50, fontFamily: "Arial Rounded MT Bold", color: "#6c6cd9", }} className="d-flex align-items-center justify-content-center white-backgrounded">
-                    Total: {total} USD
+                <Col xs={12} lg={2} style={{ height: 50, fontFamily: "Arial Rounded MT Bold", color: colorMode === "light" ? "#6c6cd9" : "black" }} className="d-flex align-items-center justify-content-center white-backgrounded">
+                    {lang === "en" ?
+                        `Total: ${currency === "usd" ?
+                            `${total} USD` :
+                            `${Math.round(total / rate * 100) / 100} AZN`
+                        }` :
+                        `Cəmi: ${currency === "usd" ?
+                            `${total} USD` :
+                            `${Math.round(total / rate * 100) / 100} AZN`
+                        }`}
                 </Col>
             </Row>
             <Row>
@@ -81,26 +90,26 @@ function Checkout() {
                             .update({ cart: [] })
                             .eq("id", auth);
                         Swal.fire({
-                            title: "Products have been ordered",
+                            title: lang === "en" ? "Products have been ordered" : "Məhsullar sifariş olunub",
                             icon: "success",
                         });
                         navigate("/");
                     }}>
                         <Form.Group className="text-center">
                             <Form.Label className="my-1" style={{ fontFamily: "Arial Rounded MT Bold", color: "#fff", fontSize: 25 }}>
-                                card number.
+                                {lang === "en" ? "card number" : "kart nömrəsi"}.
                             </Form.Label>
                             <Form.Control name="cardNumber" required className="rounded-5 py-3" type="text" />
                         </Form.Group>
                         <Form.Group className="text-center">
                             <Form.Label className="my-1" style={{ fontFamily: "Arial Rounded MT Bold", color: "#fff", fontSize: 25 }}>
-                                adress.
+                                {lang === "en" ? "adress" : "ünvan"}.
                             </Form.Label>
                             <Form.Control name="adress" required className="rounded-5 py-3" type="text" />
                         </Form.Group>
                         <Form.Group className="text-center">
                             <Form.Label className="my-1" style={{ fontFamily: "Arial Rounded MT Bold", color: "#fff", fontSize: 25 }}>
-                                discount code.
+                                {lang === "en" ? "discount code" : "endirim kodu"}.
                             </Form.Label>
                             <Form.Control ref={discount} name="discountCode" className="rounded-5 py-3" type="text" />
                         </Form.Group>
@@ -115,8 +124,16 @@ function Checkout() {
                                     console.log(error);
                                 if (data) {
                                     Swal.fire({
-                                        title: "You discount code is valid",
-                                        text: `Your discount is ${data.value}% with total sum ${Math.round(100 * total * (1 - data.value / 100)) / 100} USD`,
+                                        title: lang === "en" ? "You discount code is valid" : "Endirim kodunuz etibarlıdır",
+                                        text: lang === "en" ?
+                                            `Your discount is ${data.value}% with total sum ${currency === "usd" ?
+                                                `${total} USD` :
+                                                `${Math.round(total / rate * 100 * (1 - data.value)) / 100} AZN`
+                                            }` :
+                                            `Endiriminiz ${data.value}% ümumi məbləğ ${currency === "usd" ?
+                                                `${Math.round(total * (1 - data.value / 100) * 100) / 100} USD` :
+                                                `${Math.round(total * (100 - data.value) / rate * 100) / 100} AZN`
+                                            }`,
                                         icon: "success",
                                         customClass: {
                                             popup: 'swal2-dark',
@@ -124,7 +141,7 @@ function Checkout() {
                                     });
                                 } else {
                                     Swal.fire({
-                                        title: "You discount code is invalid",
+                                        title: lang === "en" ? "You discount code is invalid" : "Endirim kodunuz yanlışdır",
                                         icon: "error",
                                         customClass: {
                                             popup: 'swal2-dark',
@@ -133,10 +150,10 @@ function Checkout() {
                                 }
                             }}
                         >
-                            check discount code
+                            {lang === "en" ? "check discount code" : "endirim kodunu yoxlayın"}
                         </Button>
-                        <Button type="submit" className="mt-4 w-100" variant="" style={{ backgroundColor: "#fff", borderRadius: 255, fontFamily: "Arial Rounded MT Bold", color: "#6c6cd9", fontSize: 25 }}>
-                            order.
+                        <Button type="submit" className="mt-4 w-100" variant="" style={{ backgroundColor: "#fff", borderRadius: 255, fontFamily: "Arial Rounded MT Bold", color: colorMode === "light" ? "#6c6cd9" : "black", fontSize: 25 }}>
+                            {lang === "en" ? "order" : "sifariş"}.
                         </Button>
                     </Form>
                 </Col>

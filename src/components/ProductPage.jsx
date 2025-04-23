@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../tools/slices/cartSlice";
 import Swal from "sweetalert2";
 import { RiPolaroidLine } from "react-icons/ri";
+import { GiConsoleController } from "react-icons/gi";
 
 function ProductPage() {
     const auth = useSelector(state => state.auth.id);
@@ -86,11 +87,12 @@ function ProductPage() {
                                             .eq("id", auth)
                                             .single();
                                         const existingProduct = data.cart.find(p => p.id === productInfo.id);
-
                                         if (existingProduct) {
                                             existingProduct.quantity += 1;
                                         } else {
                                             data.cart.push({ id: productInfo.id, quantity: 1 });
+                                            console.log(data);
+
                                         }
                                         await supabase
                                             .from("Users")
@@ -101,13 +103,13 @@ function ProductPage() {
                                             icon: "success"
                                         })
                                     } else {
-                                        dispatch(addToCart({ id: productInfo.id }))
                                         Swal.fire({
                                             title: "Producted added to Your local cart",
                                             icon: "success"
                                         })
                                     }
-                                }} className="w-100 w-xl-100">Add to cart</Button>
+                                    dispatch(addToCart({ id: productInfo.id }))
+                                }} className="w-100 w-xl-100">{lang === "en" ? "Add to cart" : "Səbətə at"}</Button>
                             </Col>
                             <Col xs={12} lg={6}>
                                 <Button
@@ -125,17 +127,17 @@ function ProductPage() {
                                             .eq("id", auth);
                                     }}
                                 >
-                                    Add to wishlist
+                                    {lang === "en" ? "Add to wishlist" : "İstək siyahısına at"}
                                 </Button>
                                 <Button
                                     variant=""
                                     onMouseLeave={(ev) => {
-                                        ev.target.style.backgroundColor = "#6c6cd9";
-                                        ev.target.innerHTML = "Wishlisted";
+                                        ev.target.style.backgroundColor = "#2C387E";
+                                        ev.target.innerHTML = lang === "en" ? "Wishlisted" : "İstək siyahısıdadır";
                                     }}
                                     onMouseEnter={(ev) => {
                                         ev.target.style.backgroundColor = "rgb(211, 1, 1)";
-                                        ev.target.innerHTML = "Remove";
+                                        ev.target.innerHTML = lang === "en" ? "Remove" : "Sil";
                                     }}
                                     hidden={profile && !profile.wishlist.includes(productInfo.id)}
                                     className="w-100 add-to-wishlist-btn"

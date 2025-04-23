@@ -11,6 +11,7 @@ import WOW from "wow.js";
 import "animate.css";
 import supabase from "../../utils/supabase";
 import { Link } from "react-router-dom";
+import { ColorModeContext } from "../contexts/ColorModeContex";
 
 function Login() {
     const [products, setProducts] = useState([]);
@@ -20,6 +21,7 @@ function Login() {
 function Home() {
 
     const lang = useContext(LangContext)[0];
+    const colorMode = useContext(ColorModeContext)[0];
 
     const [topProducts, setTopProducts] = useState([]);
     const [products, setProducts] = useState([]);
@@ -141,8 +143,10 @@ function Home() {
             </Container >
             <Container className="my-5">
                 <Row className="justify-content-center text-center wow animate__fadeInLeft">
-                    <Col xs={12} md={6} xxl={12} className="title my-3">
-                        <img className="object-fit-contain w-100" src="./titles/title1.png" alt="title1" />
+                    <Col xs={12} md={6} xxl={4} className="title my-3 text-center d-flex justify-content-center">
+                        <div className="object-fit-contain w-100 backgrounded text-center d-flex justify-content-center text-white" style={{ borderRadius: 255, fontFamily: "Arial Rounded MT Bold", fontSize: 50, height: 75 }}>
+                            <span>{lang === "en" ? "top selling" : "ən çox satılan"}</span>
+                        </div>
                     </Col>
                 </Row>
                 <Row>
@@ -161,8 +165,10 @@ function Home() {
             </Container>
             <Container className="fluid-section mb-5 pb-5" fluid>
                 <Row className="justify-content-center text-center">
-                    <Col xs={12} md={6} xxl={12} className="title my-3">
-                        <img className="object-fit-contain w-100" src="./titles/categories.png" alt="categories" />
+                    <Col xs={12} md={6} xxl={4} className="title my-3 text-center d-flex justify-content-center">
+                        <div className="object-fit-contain w-100 backgrounded text-center d-flex justify-content-center text-white" style={{ borderRadius: 255, fontFamily: "Arial Rounded MT Bold", fontSize: 50, height: 75, backgroundColor: "white" }}>
+                            <span style={{ color: colorMode === "light" ? "#6c6cd9" : "#232358" }}>{lang === "en" ? "top selling" : "ən çox satılan"}</span>
+                        </div>
                     </Col>
                 </Row>
                 <div className="d-flex justify-content-center category-items px-5 mx-5">
@@ -201,8 +207,10 @@ function Home() {
             </Container>
             <Container className="mt-5">
                 <Row className="justify-content-center text-center wow animate__fadeInRight">
-                    <Col xs={12} md={6} xxl={12} className="title my-3">
-                        <img className="object-fit-contain w-100" src="./titles/title2.png" alt="title2" />
+                    <Col xs={12} md={6} xxl={4} className="title my-3 text-center d-flex justify-content-center">
+                        <div className="object-fit-contain w-100 backgrounded text-center d-flex justify-content-center text-white" style={{ borderRadius: 255, fontFamily: "Arial Rounded MT Bold", fontSize: 50, height: 75 }}>
+                            <span>{lang === "en" ? "recommended" : "tövsiyə olunur"}</span>
+                        </div>
                     </Col>
                 </Row>
                 <Row xs={2} md={2} lg={3} xl={4} className='g-4 mt-3 wow'>
@@ -219,12 +227,12 @@ function Home() {
             <Container className="mt-5 cards-section">
                 <Row xs={1} sm={2} className="g-3 pb-4">
                     <Col>
-                        <div onClick={() => { }} className="overflow-hidden" style={{ backgroundColor: "#6464C6", borderRadius: 50, border: "5px solid white", cursor: "pointer" }}>
+                        <div onClick={() => { }} className="overflow-hidden" style={{ backgroundColor: "#6464C6", borderRadius: 50, border: `5px solid ${colorMode === "light" ? "white" : "white"}`, cursor: "pointer" }}>
                             <img className="zoom-image w-100 object-fit-contain" src="/banners/homeproducts.png" alt="homeproducts" />
                         </div>
                     </Col>
                     <Col id="gamingProducts">
-                        <div onClick={() => { }} className="overflow-hidden position-relative h-100" style={{ backgroundColor: "#fff", borderRadius: 50, border: "5px solid #6464C6", cursor: "pointer" }}>
+                        <div onClick={() => { }} className="overflow-hidden position-relative h-100" style={{ backgroundColor: "#fff", borderRadius: 50, border: `5px solid ${colorMode === "light" ? "#6464C6" : "white"}`, cursor: "pointer" }}>
                             <img className="w-100 position-absolute object-fit-contain" src="/banners/gamingproducts.png" alt="gamingproducts" />
                             <img className="w-100 position-absolute object-fit-contain" src="/animation_elements/gamepad.png" alt="gamingproducts" />
                             <img className="w-100 position-absolute object-fit-contain" src="/animation_elements/wire.png" alt="gamingproducts" />
@@ -232,20 +240,20 @@ function Home() {
                         </div>
                     </Col>
                     <Col id="toys">
-                        <div onClick={() => { }} className="overflow-hidden position-relative h-100 px-4" style={{ backgroundColor: "#fff", borderRadius: 50, border: "8px solid #6464C6", cursor: "pointer" }}>
-                            <img className="w-100 position-absolute object-fit-contain" src="/animation_elements/toys.png" alt="gamingproducts" />
-                            <img className="w-100 position-absolute object-fit-contain" src="/animation_elements/bird.png" alt="gamingproducts" />
-                            <img className="w-100 position-absolute object-fit-contain" src="/animation_elements/bar.png" alt="gamingproducts" />
-                            <img className="w-100 position-absolute object-fit-contain" src="/animation_elements/capsule1.png" alt="gamingproducts" />
-                            <img className="w-100 position-absolute object-fit-contain" src="/animation_elements/capsule2.png" alt="gamingproducts" />
-                            <img className="w-100 position-absolute object-fit-contain" src="/animation_elements/capsule3.png" alt="gamingproducts" />
-                            <img className="w-100 position-absolute object-fit-contain" src="/animation_elements/capsule4.png" alt="gamingproducts" />
+                        <div onClick={() => { }} className="overflow-hidden position-relative h-100 px-4" style={{ backgroundColor: "#fff", borderRadius: 50, border: `8px solid ${colorMode === "light" ? "#6464C6" : "white"}`, cursor: "pointer" }}>
+                            <img className="w-100 position-absolute object-fit-contain" src="/animation_elements/toys.png" alt="toys" />
+                            <img className="w-100 position-absolute object-fit-contain" src="/animation_elements/bird.png" alt="bird" />
+                            <img className="w-100 position-absolute object-fit-contain" src="/animation_elements/bar.png" alt="bar" />
+                            <img className="w-100 position-absolute object-fit-contain" src="/animation_elements/capsule1.png" alt="capsule1" />
+                            <img className="w-100 position-absolute object-fit-contain" src="/animation_elements/capsule2.png" alt="capsule2" />
+                            <img className="w-100 position-absolute object-fit-contain" src="/animation_elements/capsule3.png" alt="capsule3" />
+                            <img className="w-100 position-absolute object-fit-contain" src="/animation_elements/capsule4.png" alt="capsule4" />
                             <div className="size-setter"></div>
                         </div>
                     </Col>
                     <Col id="laptop" className="position-relative">
-                        <div onClick={() => { }} className="overflow-hidden" style={{ backgroundColor: "white", borderRadius: 50, cursor: "pointer" }}>
-                            <img className="w-100 object-fit-contain" src="/banners/laptops.png" alt="laptop" />
+                        <div onClick={() => { }} className="overflow-hidden" style={{ backgroundColor: "#6464C6", borderRadius: 50, cursor: "pointer" }}>
+                            <img className="object-fit-contain w-100" src="/banners/laptops.png" alt="laptop" />
                         </div>
                         <div className="red-dot" />
                     </Col>
@@ -253,14 +261,14 @@ function Home() {
             </Container>
             <Container className="px-0">
                 <Row className="g-0 text-center d-none d-lg-flex">
-                    <Col xs={6} style={{ backgroundColor: "#6464C6", color: "#6464C6" }}>
-                        <div style={{ backgroundColor: "#EAEAEA", borderBottomLeftRadius: 50, borderBottomRightRadius: 50, fontFamily: "Arial Rounded MT Bold", fontSize: 70 }}>
-                            top selling from
+                    <Col xs={6} style={{ backgroundColor: colorMode === "light" ? "#6464C6" : "white", color: colorMode === "light" ? "#6464C6" : "white" }}>
+                        <div style={{ backgroundColor: colorMode === "light" ? "#EAEAEA" : "#2C387E", borderBottomLeftRadius: 50, borderBottomRightRadius: 50, fontFamily: "Arial Rounded MT Bold", fontSize: 70 }}>
+                            {lang === "en" ? "top selling from" : "bu kateqoriyalardan"}
                         </div>
                     </Col>
-                    <Col xs={6} style={{ backgroundColor: "#EAEAEA", color: "#EAEAEA" }}>
-                        <div style={{ backgroundColor: "#6464C6", borderTopLeftRadius: 50, borderTopRightRadius: 50, fontFamily: "Arial Rounded MT Bold", fontSize: 70 }}>
-                            this categories
+                    <Col xs={6} style={{ backgroundColor: colorMode === "light" ? "#EAEAEA" : "#2C387E", color: colorMode === "light" ? "#EAEAEA" : "#2C387E" }}>
+                        <div style={{ backgroundColor: colorMode === "light" ? "#6464C6" : "white", borderTopLeftRadius: 50, borderTopRightRadius: 50, fontFamily: "Arial Rounded MT Bold", fontSize: 70 }}>
+                            {lang === "en" ? "this categories" : "ən çox satılan məhsullar"}
                         </div>
                     </Col>
                 </Row>
@@ -276,7 +284,7 @@ function Home() {
                         </div>
                     </Col>
                 </Row>
-                <Row className="g-0 rounded-bottom-4" xs={2} md={3} xxl={5} style={{ backgroundColor: "#6464C6" }}>
+                <Row className="g-0 rounded-bottom-4" xs={2} md={3} xxl={5} style={{ backgroundColor: colorMode === "light" ? "#6464C6" : "white" }}>
                     {
                         products.length > 0 ? (
                             products.slice(0, 5).map((product, index) =>
@@ -293,7 +301,7 @@ function Home() {
                         <img id="car" className={`${isVisible ? "scrolled " : ""}position-absolute object-fit-cover`} src="/animation_elements/car.png" alt="car" />
                     </Col>
                     <Col xs={8} className="align-self-center">
-                        <h1 className="text-white" style={{ fontFamily: "Century Gothic", fontSize: 75 }}>Explore available vehicles</h1>
+                        <h1 className="text-white" style={{ fontFamily: "Century Gothic", fontSize: 75 }}>{lang === "en" ? "Explore available vehicles" : "Mövcud nəqliyyat vasitələri"}</h1>
                     </Col>
                 </Row>
             </Container>
@@ -312,8 +320,8 @@ function Home() {
             <Container className="fluid-section my-4" fluid>
                 <Row className="justify-content-center align-center text-white text-center pb-3 targets">
                     <Col xs={4} md={3} className="for order-md-1 order-3">
-                        <h2 className="d-block">for women.</h2>
-                        <div>
+                        <h2 className="d-block">{lang === "en" ? "for women" : "qadınlar üçün"}.</h2>
+                        <div id="forWomen">
                             <Link className="d-block h-100">
                                 <div className="w-100 h-100 rounded-circle p-5 overflow-hidden position-relative">
                                     <img className="object-fit-contain position-absolute" src="/icons/forwomen.png" alt="forwomen" />
@@ -322,8 +330,8 @@ function Home() {
                         </div>
                     </Col>
                     <Col xs={4} md={3} className="for order-md-2 order-1">
-                        <h2>for kids.</h2>
-                        <div>
+                    <h2 className="d-block">{lang === "en" ? "for kids" : "uşaqlar üçün"}.</h2>
+                        <div id="forKids">
                             <Link className="d-block h-100">
                                 <div className="w-100 h-100 rounded-circle p-5 overflow-hidden position-relative">
                                     <img className="object-fit-contain position-absolute" src="/icons/forkids.png" alt="forwomen" />
@@ -333,8 +341,8 @@ function Home() {
                     </Col>
                     <Col xs={12} className="d-md-none order-2"></Col>
                     <Col xs={4} md={3} className="for order-md-3 order-4">
-                        <h2>for men.</h2>
-                        <div>
+                    <h2 className="d-block">{lang === "en" ? "for men" : "kişilər üçün"}.</h2>
+                        <div id="forMen">
                             <Link className="d-block h-100">
                                 <div className="w-100 h-100 rounded-circle p-5 overflow-hidden position-relative">
                                     <img className="object-fit-contain position-absolute" src="/icons/formen.png" alt="forwomen" />
