@@ -107,7 +107,7 @@ function LoginPage() {
                                     </Col>
                                 </Row>
                                 <Row className="justify-content-center mt-3 text-center">
-                                    <Col xs={12} lg={8} style={{ fontFamily: "Arial Rounded MT Bold", color: "light", fontSize: 30 }}>
+                                    <Col xs={12} lg={8} style={{ fontFamily: "Arial Rounded MT Bold", color: "white", fontSize: 30 }}>
                                         {lang === "en" ? "don't have an account?" : "hesabınız yoxdur?"}
                                     </Col>
                                 </Row>

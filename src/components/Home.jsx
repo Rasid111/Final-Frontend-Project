@@ -167,7 +167,7 @@ function Home() {
                 <Row className="justify-content-center text-center">
                     <Col xs={12} md={6} xxl={4} className="title my-3 text-center d-flex justify-content-center">
                         <div className="object-fit-contain w-100 backgrounded text-center d-flex justify-content-center text-white" style={{ borderRadius: 255, fontFamily: "Arial Rounded MT Bold", fontSize: 50, height: 75, backgroundColor: "white" }}>
-                            <span style={{ color: colorMode === "light" ? "#6c6cd9" : "#232358" }}>{lang === "en" ? "top selling" : "ən çox satılan"}</span>
+                            <span style={{ color: colorMode === "light" ? "#6c6cd9" : "#232358" }}>{lang === "en" ? "categories" : "kateqoriyalar"}</span>
                         </div>
                     </Col>
                 </Row>

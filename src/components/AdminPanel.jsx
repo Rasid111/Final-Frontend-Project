@@ -70,7 +70,7 @@ function AdminPanel() {
         console.log(error);
     }
     
-    const lang = useContext(LangContext);
+    const lang = useContext(LangContext)[0];
 
     return (
         <Container>

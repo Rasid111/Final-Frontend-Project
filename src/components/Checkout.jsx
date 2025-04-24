@@ -127,8 +127,8 @@ function Checkout() {
                                         title: lang === "en" ? "You discount code is valid" : "Endirim kodunuz etibarlıdır",
                                         text: lang === "en" ?
                                             `Your discount is ${data.value}% with total sum ${currency === "usd" ?
-                                                `${total} USD` :
-                                                `${Math.round(total / rate * 100 * (1 - data.value)) / 100} AZN`
+                                                `${Math.round(total * (1 - data.value / 100) * 100) / 100} USD` :
+                                                `${Math.round(total * (100 - data.value) / rate * 100) / 100} AZN`
                                             }` :
                                             `Endiriminiz ${data.value}% ümumi məbləğ ${currency === "usd" ?
                                                 `${Math.round(total * (1 - data.value / 100) * 100) / 100} USD` :

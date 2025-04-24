@@ -111,7 +111,7 @@ function ProductPage() {
                                     dispatch(addToCart({ id: productInfo.id }))
                                 }} className="w-100 w-xl-100">{lang === "en" ? "Add to cart" : "Səbətə at"}</Button>
                             </Col>
-                            <Col xs={12} lg={6}>
+                            <Col xs={12} lg={6} hidden={auth === null}>
                                 <Button
                                     variant=""
                                     hidden={profile && profile.wishlist.includes(productInfo.id)}
