@@ -11,7 +11,7 @@ import Footer from "./components/Footer";
 import './scss/style.scss';
 import Dashboard from "./components/Dashboard";
 import NotFoundPage from "./components/NotFoundPage";
-import Profile from "./components/profile";
+import Profile from "./components/Profile";
 import AdminPanel from "./components/AdminPanel";
 import Wishlist from "./components/Wishlist";
 import Checkout from "./components/Checkout";
